@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import "./Tray.css";
 
-const Tray = ({ groupNameList, toggleFunc, UpdateGroupId }) => {
+const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   //  const [isOpen, setIsOpen] = useState(false);
 
   const handleMultipleClicks = (event) => {
-   // console.log(event.target.id);
+   console.log(event.target.id);
     UpdateGroupId(event.target.id);
     toggleFunc();
   };
 
+  console.log(groupNameList, filteredAreas,'groupNameList');
+  
   return (
     <div>
       {groupNameList && (
@@ -23,13 +25,14 @@ const Tray = ({ groupNameList, toggleFunc, UpdateGroupId }) => {
                 className="tray-trigger-close-button"
                 onClick={toggleFunc}
               >
+               Close 
                 <svg
                   aria-hidden="true"
                   focusable="false"
-                  viewBox="0 0 24 24"
+                  viewBox="0 0 25 25"
                   role="img"
-                  width="24px"
-                  height="24px"
+                  width="25px"
+                  height="25px"
                   fill="none"
                 >
                   <path
@@ -44,42 +47,36 @@ const Tray = ({ groupNameList, toggleFunc, UpdateGroupId }) => {
             <div className="tray-mc-content">
               <div className="tray-mc-list-wrapper">
                 {/* class="headline-3 css-4j0u2k" */}
-                <h1 className="mc-list-title">
-                  COMPONENTS
-                  <span
-                    className="mc-list-count"
-                    data-bm-component-id="mc-list-count"
-                  >
-                    {groupNameList.length}
-                  </span>
-                </h1>
+                <div className="mc-list-title">
+                  Select Colors
+                </div>
                 <div className="tray-mc-grid">
                   {groupNameList.map((groupName, i) => {
-                    {
-                      /* Grid headings */
-                    }
                     return (
                       <div
                         className="heading"
-                        id={groupName}
+                        id={groupName.name}
                       >
                         <div
                           style={{
                             display: "flex",
-                            flexDirection: "row",
+                            flexDirection: "column",
                             alignItems: "center",
                             flexGrow: 1,
                             justifyContent: "flex-start",
                           }}
                           onClick={handleMultipleClicks}
-                          id={groupName}
+                          id={groupName.id}
                         >
-                          <div className="tray-mc-list-item-selection" id={groupName}></div>
-                          <span id={groupName}>{groupName}</span>
-                        </div>
+                          <img id={groupName.id} style={{width: '60px', height: '63px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
+                          {/* <div className="tray-mc-list-item-selection" id={groupName.name}></div> */}
+                          <div className="slabel">
+                           <span id={groupName.name} style={{fontSize: '9px'}}>{groupName.name}</span> 
+                          </div>
+                          </div>
                       </div>
                     );
-                  })}
+                  })}     
                 </div>
               </div>
             </div>

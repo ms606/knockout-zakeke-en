@@ -155,8 +155,6 @@ export class T {
 		let string = str;
 		if (this.translations?.dynamics) {
 			const keys = Array.from(this.translations?.dynamics.keys());
-			console.log(this.translations,'this translations');
-			
 			for (let key of keys) {
 				if (key.toLowerCase() === str.toLowerCase()) {
 					if (this.translations.dynamics.get(key)) string = this.translations.dynamics.get(key) as string;

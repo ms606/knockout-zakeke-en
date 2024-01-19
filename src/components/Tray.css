@@ -1,14 +1,16 @@
 .full-tray {
+    background: linear-gradient(to right, rgba(10, 70, 140, 0.9), rgb(41, 56, 132));
+    padding-left: 18px;
+    transition: all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
     left: 0px;
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
+    width: 335px;
+    height: 578px;
+    /* position: absolute; */
     bottom: 0px;
     z-index: 0;
     mix-blend-mode: normal;
     /* backdrop-filter: blur(10px);
     background: rgba(0, 0, 0, 0.4); */
-    height: 504px;
     /* transform-origin: 50% 50% 0px; */
 }
 
@@ -22,26 +24,29 @@
 }
 
 .tray-mc-header {
-    position: absolute;
-    top: 41px;
-    position: absolute;
+    /* position: absolute; */
+    top: 15px;
+    right: 0px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: start;
     width: 100%;
-    right: 60px;
+    height: 36px;
+    /* right: 60px; */
 }
 
 .tray-trigger-close-button {
-    right: 60px;
     padding: 0px;
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    border: 1px solid rgb(229, 229, 229);
+    width: 84px;
+    height: 36px;
+    border-radius: 4%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: tomato;
+    font-family: 'Saira', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
     position: absolute;
     z-index: 3;
 }
@@ -59,11 +64,11 @@
     left: 0;
     width: 100%;
     height: 504px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    /* background-color: #fff; */
+    /* border: 1px solid #ccc; */
     border-radius: 4px;
-    padding: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding-top: 26px;
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,7 +77,8 @@
   .tray-mc-grid {
     font-family: 'Inter';
     display: flex;
-    align-items: center;
+    gap: 13px;
+    /* flex-direction: row; */
     flex-wrap: wrap;
     background: 0 0;
   }
@@ -83,18 +89,22 @@
     height: 100%;
     font-size: 16px;
     text-align: left;
-    overflow-y: scroll;
+    /* overflow-y: scroll;
     position: absolute;
-    padding: 50px 30px 0px;
+    padding: 50px 30px 0px; */
     background-color: transparent;
-    padding: 50px 60px 50px 168px;
+    /* padding: 50px 60px 50px 168px; */
   }
 
   .mc-list-title {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 1.2;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    line-height: 22px;
     margin-bottom: 19px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
   
   .mc-list-count {
@@ -103,14 +113,15 @@
   }
 
   .heading {
-    background-color: #fff;
-    padding: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px 5px 0px 0px;
+    color: #fff;
+    /* background-color: #fff; */
     text-align: center;
     align-items: center;
-    margin: 2px;
-    height: 58px;
+    /* height: 75px; */
     border: none;
-    width: 31%;
+    width: 64px;
     text-align: left;
     cursor: pointer;
     display: flex;
@@ -124,4 +135,24 @@
     margin: 0px 16px 0px 0px;
     border-radius: 100%;
     border: 1px solid rgb(14 2 2);
+  }
+  
+  .slabel {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: 400;
+    display: table-cell;
+    position: relative;
+    height: 44px;
+    vertical-align: middle;
+    text-align: center;
+    font-style: italic;
+    padding-top: 5px;
+    border-radius: 0px 0px 5px 5px;
+    margin: 0px auto;
+  }
+
+  .heading:hover {
+    background-color: #fff;
   }

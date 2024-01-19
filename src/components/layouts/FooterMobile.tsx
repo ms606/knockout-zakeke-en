@@ -131,7 +131,7 @@ const FooterMobile = () => {
 
 		const findSizeIndex = groups.findIndex((obj) => obj.name.toLowerCase() === 'marime');
 		const isSizeNotSelected = groups[findSizeIndex]?.attributes[0].options[0].selected === true;
-		console.log(isSizeNotSelected,'isSizeNotSelected');
+		
 		if (cartMessage && cartMessage.visible && !isDraftEditor && !isEditorMode && !isSizeNotSelected)
 			showDialog(
 				'question',

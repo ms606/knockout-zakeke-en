@@ -12,7 +12,6 @@ import useStore from "../Store";
 import LayoutMobile from './LayoutMobile';
 import FooterMobile from "./layouts/FooterMobile";
 
-
 // const Layout = styled.div`
 //     display: grid;
 //     grid-template-columns: auto;
@@ -72,7 +71,6 @@ const App: FunctionComponent<{}> = () => {
   const trayPreviewOpenButton3DFunc = (
     selectedTrayPreviewOpenButton3D: any
   ) => {
-    // console.log(selectedTrayPreviewOpenButton3D,'han bhae');
     selectTrayPreviewOpenButton3D(selectedTrayPreviewOpenButton3D);
   };
 
@@ -115,6 +113,7 @@ const App: FunctionComponent<{}> = () => {
           {!isMobile && (
             <Layout>
               <div
+                id='threec'
                 style={{
                   display: "grid",
                   alignItems: "center",

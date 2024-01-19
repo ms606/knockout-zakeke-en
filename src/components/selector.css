@@ -37,7 +37,7 @@
 
   .gimg {
     width: 48px;
-    height: 49px;
+    height: 48px;
     background-color: #eee;
     float: right;
     background-size: 48px 48px;
@@ -47,9 +47,6 @@
     border-left: none;
     z-index: 1;
   }
-
-
-
   
   .tray-header {
     display: flex;
@@ -92,12 +89,12 @@
 
   .arrd{
     width: 24px;
-    height: 64px;
+    height: 48px;
     vertical-align: top;
     background-size: 16px 16px;
     background-repeat: no-repeat;
     background-position: center;
-    display: inline-block;
+    display: flex;
     margin-left: 7px;
     background-color: #7ccb00;
     background: radial-gradient(circle farthest-side, #7ccb00 25%, #4dc000);
@@ -129,7 +126,8 @@
     border-right: none;
     box-sizing: border-box;
     padding: 7px 10px 7px 10px;
-    line-height: 14px;
+    border-radius: 0 3px 3px 0;
+    /* line-height: 14px; */
     background-color: rgba(255, 255, 255, 0.25);
     color: #00458c;
     border-color: #6dcff6;
