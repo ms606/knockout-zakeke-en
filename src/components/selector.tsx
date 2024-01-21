@@ -56,6 +56,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     zoomIn,
     zoomOut,
     items,
+    getOnlineScreenshot
   } = useZakeke();
   
   const { setIsLoading, isMobile } = useStore();
@@ -260,10 +261,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedAttribute, attributes, activeColorOption]);
 
   useEffect(() => {
-    // if (selectedGroup) {
-    //   const camera = selectedGroup.cameraLocationId;
-    //   if (camera) setCamera(camera);
-    // }
+    if (selectedGroup) {
+      const camera = selectedGroup.cameraLocationId;
+      if (camera) setCamera(camera);
+    }
     // setCamera(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupId]);
@@ -301,6 +302,60 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         }
     }
   };
+
+  async function downloadImage(url:any) {
+    try {
+      // Replace the URL with your actual image URL
+      const imageUrl = url;
+  
+      // Fetch the image as a blob
+      const response = await fetch(imageUrl);//, { responseType: 'blob' });
+      const imageBlob = await response.blob();
+  
+      // Create a Blob URL
+      const blobUrl = URL.createObjectURL(imageBlob);
+  
+      // Create an anchor element
+      const link = document.createElement('a');
+      link.href = blobUrl;
+  
+      // Set the download attribute with the desired file name
+      link.download = 'yourImage.jpg';
+  
+      // Append the anchor element to the document
+      document.body.appendChild(link);
+  
+      // Trigger a click on the anchor element
+      link.click();
+  
+      // Remove the anchor element and revoke the Blob URL
+      document.body.removeChild(link);
+      URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Error downloading image:', error);
+    }
+  }
+
+
+  const handleScreenShotClick = async () => {
+
+		try {
+      const url = await getOnlineScreenshot(800,800);
+      console.log(url.originalUrl);
+      if (url) downloadImage(url.originalUrl)
+    
+			// setIsLoading(true);
+			// setPdfIsLoading(true);
+			// const url = await getPDF();
+			// showDialog('pdf', <PdfDialog url={url} onCloseClick={() => closeDialog('pdf')} />);
+		} catch (ex) {
+			console.error(ex);
+			// showError(T._('Failed PDF generation', 'Composer'));
+		} finally {
+			// setPdfIsLoading(false);
+		// 	setIsLoading(false);
+		}
+	};
 
   const handleRightClick = () => {
     selectColorName("");
@@ -373,7 +428,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       <div className="top-nav">
         <div className="body-3" id="product-info">
           <span>{productName}</span>
-          <span>LEI {price}</span>
+          {/* <span>LEI {price}</span> */}
+        </div>
+
+        <div className="top-right-controls">
+        <div id="savepic" data-hasqtip="98" title="" aria-describedby="qtip-98" onClick={() => handleScreenShotClick()}>
+          <i className="fa fa-camera" style={{color: 'rgb(54, 179, 237)'}}></i>
+        </div>
+         
         </div>
       </div>
 
@@ -421,7 +483,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           {/* {groups[currentIndex].name === "MODALITATE IMPRIMARE" && (!hasTypeZero) ? null : ( */}
 
             {/* Closed on request of Paul */}
-            <MenuTriggerButton width={width} toggleTray={toggleTray} />
+            {/* <MenuTriggerButton width={width} toggleTray={toggleTray} /> */}
 
           <div className="tray-header">
             <TrayPreviewOpenButton
@@ -453,7 +515,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     width: "100%",
                   }}
                 >
-                  <div className="active-marketing-component-name">
+                  <div className="active-marketing-component-name" onClick={()=> toggleTray()}>
                     <span
                       style={{
                         whiteSpace: "nowrap",

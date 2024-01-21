@@ -152,7 +152,20 @@
     border-radius: 0px 0px 5px 5px;
     margin: 0px auto;
   }
+  
+  .tray-mc-grid:hover {
+    color: black !important;
+  }
 
   .heading:hover {
     background-color: #fff;
+    color: black !important;
+  }
+
+  .sitems {
+    color: black !important; 
+  }
+  
+  .slabel:hover {
+    color: black !important; 
   }

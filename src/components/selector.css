@@ -1,9 +1,11 @@
    :root {
     --colorBtnPrimary: #297ca3;
+    --podium-cds-typography-heading-strong: 900 1rem/1.5 'Inter';
     --podium-cds-typography-body1-strong: 500 1rem/1.5 'Inter';
     --podium-cds-typography-body2: 400 .875rem/1.5 'Inter';
     --podium-cds-typography-body3: 800 1.4rem/1.5 'Inter';
     --podium-cds-typography-body3-small: 100 1rem/3.5 'Inter';
+
   }
 
   body {
@@ -15,10 +17,12 @@
   }
 
   .body-3{
-    font: var(--podium-cds-typography-body3);
+    font: var(--podium-cds-typography-heading-strong);
   }
    
   .top-nav {
+    display: flex;
+    justify-content: space-between;
     font: var(--podium-cds-typography-body2);
     background-color: transparent;
     position: absolute;
@@ -31,9 +35,26 @@
     display: flex;
     flex-direction: column;
     padding: 0px 30px;
-    font-weight: 500;
     max-width: 568px;
+    color: #004071;
+    font-weight: 600;
+    font-family: 'Saira', sans-serif;
   }
+
+  #savepic {
+    float: right;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    margin-left: 10px;
+    color: rgb(54, 179, 237);
+    line-height: 32px;
+    box-shadow: rgba(0, 64, 113, 0.1) 0px 3px 6px;
+    font-size: 12px;
+    background: white;
+    border-radius: 20px;
+  }
+
 
   .gimg {
     width: 48px;

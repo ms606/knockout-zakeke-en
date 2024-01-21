@@ -58,6 +58,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                         id={groupName.name}
                       >
                         <div
+                          className="sitems"
                           style={{
                             display: "flex",
                             flexDirection: "column",
