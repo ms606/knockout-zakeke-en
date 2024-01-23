@@ -60,7 +60,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   } = useZakeke();
   
   const { setIsLoading, isMobile } = useStore();
-// console.log(groups,'gsddfdalfkdaklsjfdjadsfjdslj');
+//  console.log(useZakeke(),'gsddfdalfkdaklsjfdjadsfjdslj');
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -261,11 +261,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedAttribute, attributes, activeColorOption]);
 
   useEffect(() => {
-    if (selectedGroup) {
-      const camera = selectedGroup.cameraLocationId;
-      if (camera) setCamera(camera);
-    }
-    // setCamera(false)
+    setCamera('2324', false)
+    
+    // if (selectedGroup) {
+    //   const camera = selectedGroup.cameraLocationId;
+    //   if (camera) setCamera(camera);
+    // }
+
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupId]);
 
@@ -386,16 +389,16 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const groupIdFromFunc = (data: number) => {
-    console.log(data,groups,'filteredArrayfilteredArray');
+    // console.log(data,groups,'filteredArrayfilteredArray');
     
     const filteredArray = groups.filter((group) => group.id == data);
-    console.log(filteredArray,'filteredArray');
+    // console.log(filteredArray,'filteredArray');
 
     const filteredArrayId = groups.filter((i: any, index: number) => {
       return i.id == data;
     });
 
-    console.log(filteredArray,filteredArrayId);
+    // console.log(filteredArray,filteredArrayId);
     
     if (filteredArrayId.length > 0) {
       const foundItem = filteredArrayId[0];
@@ -486,12 +489,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
             {/* <MenuTriggerButton width={width} toggleTray={toggleTray} /> */}
 
           <div className="tray-header">
-            <TrayPreviewOpenButton
+            {/* <TrayPreviewOpenButton
               width={width}
               trayPreviewOpenButton={trayPreviewOpenButton}
               selectedTrayPreviewOpenButton={selectedTrayPreviewOpenButton}
               selectTrayPreviewOpenButton={selectTrayPreviewOpenButton}
-            />
+            /> */}
 
             <div
               style={{
@@ -660,12 +663,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                 selected={option.selected}
                               />
                             )}
-
-                            <div style={{ position: "absolute", top: "120%" }}>
+                            {/* Shows the color name but we dont need it now  */}
+                            {/* <div style={{ position: "absolute", top: "120%" }}>
                               {option.id === selectedOptionId
                                 ? option.name
                                 : ""}
-                            </div>
+                            </div> */}
                           </ListItemColor>
                         );
                       })}
@@ -678,15 +681,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         </div>
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
-            <div className="mc-prev" onClick={handleLeftClick}>
+            <div id='gprev' className="mc-prev" onClick={handleLeftClick}>
               Back
-              {/* <AngleLeftSolid /> */}
             </div>
           {/* </button> */}
           {/* <button className="next-customization" onClick={handleRightClick}> */}
-            <div className="mc-next" onClick={handleRightClick}>
+            <div id='gnext' className="mc-next" onClick={handleRightClick}>
               Next
-              {/* <AngleRightSolid /> */}
             </div>
           {/* </button> */}
         </div>

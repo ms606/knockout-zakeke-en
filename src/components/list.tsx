@@ -121,7 +121,6 @@ export const ListItemColor = styled.li<{ selected?: boolean, selectedColor?: any
         content: '';
         position: absolute;
         bottom: 20%;
-        /* Additional styling for the :before pseudo-element can be added here */
     };
 
     &:after {
@@ -157,11 +156,33 @@ export const ListItemImageNoCarousel = styled.img<{ selected?: any }>`
     height: 24px;
     object-fit: contain;
     margin: 2px;
-    border: 1px solid rgb(229, 229, 229);
+    border: 1px solid #fff;
     
+    &:hover {
+        width: 26px;
+        height: 26px;
+        box-shadow: 1px 2px lightgray;  
+    }
+
+    &:after {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        display: block;
+        // content: " ";
+        top: 0px;
+        left: 0px;
+        content: 'yes';
+        color: #fff;
+        // background-image: url(./img/colselected3.svg);
+        background-repeat: no-repeat;
+        background-position: right bottom;
+    }
+
     @media screen and (max-width: 568px) {
-    width: 30px;
-    height: 30px;
-    margin: 0px 8px;
+      width: 30px;
+      height: 30px;
+      margin: 0px 8px;
     }
 `

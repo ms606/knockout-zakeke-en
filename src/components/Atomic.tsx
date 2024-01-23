@@ -30,18 +30,47 @@ export const Icon = styled.div<{ hoverable?: boolean }>`
 `;
 
 export const TextArea = styled.textarea`
-	background-color: transparent;
-	padding: 10px 20px;
+	background-color: #fff;
+	padding: 6px 9px;
 	color: #414042;
 	font-size: 15px;
-	border: 1px black solid;
-	width: 100%;
-	min-height: 100px;
+	border: 1px #fff solid;
+	width: 38%;
+	height: 36px;
 	font-family: Inter, sans-serif;
 	outline: none;
 	resize: none;
+	overflow: hidden !important;
 	placeholder: 'Input your text here';
 
+	&::placeholder {
+		font: 10px;
+		color: #999999;
+		placeholder: 'Input your text here';
+	  }
+	&:hover {
+		border: 1px black solid;
+	}
+
+	&:focus {
+		border: 1px black solid;
+		outline: none;
+	}
+`;
+
+export const FontTextArea = styled.div`
+	width: calc(100% - 66px);
+	appearance: none;
+	height: 32px;
+	font-size: 14px;
+	line-height: 14px;
+	margin-bottom: 5px;
+	box-shadow: none;
+	border-width: initial;
+	border-style: none;
+	border-color: initial;
+	border-image: initial;
+	border-radius: 3px;
 	&::placeholder {
 		color: #999999;
 		font-style: italic;
@@ -56,6 +85,7 @@ export const TextArea = styled.textarea`
 		outline: none;
 	}
 `;
+
 
 export const Row = styled.div`
 	margin-bottom: 10px;

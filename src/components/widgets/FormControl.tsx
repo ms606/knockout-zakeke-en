@@ -10,8 +10,9 @@ const FormControlLabel = styled.div`
 
 const FormControlContainer = styled.div<{ rightComponent?: any }>`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: start;
+  align-items: flex-start;
   grid-gap: 5px;
   margin-bottom: 10px;
 `;
@@ -23,10 +24,10 @@ export const FormControl: FC<{
 }> = ({ label, rightComponent, children }) => {
   return (
     <FormControlContainer>
-      <FormControlLabel>
-        <span>{label}</span>
-        {rightComponent}
-      </FormControlLabel>
+      {/* <FormControlLabel> */}
+        {/* <span>{label}</span> */}
+        {/* {rightComponent} */}
+      {/* </FormControlLabel> */}
       {children}
     </FormControlContainer>
   );

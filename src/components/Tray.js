@@ -10,7 +10,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
     toggleFunc();
   };
 
-  console.log(groupNameList, filteredAreas,'groupNameList');
+  //console.log(groupNameList, filteredAreas,'groupNameList');
   
   return (
     <div>

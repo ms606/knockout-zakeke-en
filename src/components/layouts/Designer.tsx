@@ -190,6 +190,20 @@ const CopyrightCheckbox = styled.input`
 
 const CopyrightMandatoryMessage = styled.div``;
 
+// interface EditTextItem {
+//   guid: string,
+//   name: string,
+//   text: string,
+//   fillColor: string,
+//   fontFamily: string,
+//   fontWeight: string,
+//   fontSize: number,
+//   isTextOnPath: boolean;
+//   constraints: { [key: string]: any } | null,
+//   placeholder: string,
+//   backgroundColor: string
+// }
+
 const Designer: FC<{
   onCloseClick?: () => void;
   togglePersonalize?: () => void;
@@ -222,8 +236,39 @@ const Designer: FC<{
     eventMessages,
     setCopyrightMessageAccepted,
     getCopyrightMessageAccepted,
-    publicTranslations
+    publicTranslations,
+    fonts,
+    defaultColor 
   } = useZakeke();
+
+  interface EditTextItem_1 {
+    guid: string,
+    name: string,
+    text: string,
+    fillColor: string,
+    fontFamily: string,
+    fontWeight: string,
+    fontSize: number,
+    isTextOnPath: boolean;
+    constraints: { [key: string]: any } | null,
+    placeholder: string,
+    backgroundColor: string
+}
+
+   const [item, setItem] = useState<EditTextItem_1>({
+      guid: '',
+      name: '',
+      text: "",
+      fillColor: defaultColor,
+      fontFamily: fonts[0].name,
+      fontSize: 48,
+      fontWeight: 'normal normal',
+      isTextOnPath: false,
+      constraints: null,  
+      placeholder: 'Input your text here',
+      backgroundColor: 'rgb(235, 237, 242)'
+  })
+
 
   const dynamicVals = publicTranslations?.dynamics;
   
@@ -384,6 +429,8 @@ const Designer: FC<{
   };
 
   const handleAddTextClick = () => {
+
+
     showDialog(
       "add-text",
       <AddTextDialog
@@ -516,6 +563,7 @@ const Designer: FC<{
         setItemColor(item.guid, value as string);
         break;
       case "font-family":
+        console.log(item.guid);
         setItemFontFamily(item.guid, value as string);
         break;
       case "text-path":
