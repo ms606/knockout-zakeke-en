@@ -244,7 +244,6 @@ const FooterMobile = () => {
 	};
 	const handleBackClick = () => {
 		if (selectedAttributeId) {
-			// console.log('selectedAttributeId');
 			setSelectedAttributeId(null);
 
 			const selectedCurrentGroup = groups.find((x) => x.id === selectedGroupId);
@@ -258,7 +257,6 @@ const FooterMobile = () => {
 				setSelectedGroupId(null);
 			}
 		} else if (selectedTemplateGroupId) {
-			// console.log('selectedTemplateGroupId');
 			setSelectedTemplateGroupId(null);
 
 			const selectedCurrentGroup = groups.find((x) => x.id === selectedGroupId);

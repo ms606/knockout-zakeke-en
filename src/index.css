@@ -58,11 +58,12 @@ html,body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  padding-top: 52px;  
-  width: 33%;
+  /* padding-top: 52px;   */
+  width: 250px;
+  height: 265px;
   left: 0px;
-  bottom: 30%;
-  background-color: rgb(255, 255, 255);
+  top: calc(35% - 015px);
+  /* background-color: rgb(255, 255, 255); */
 }
 
 .animate-wrapper {
@@ -72,7 +73,6 @@ html,body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
   padding-top: 1px;  
   width: 100%;
 }

@@ -9,7 +9,7 @@ export const List = styled.ul`
     margin-bottom: 17px; 
     border-radius: 50px;
     white-space: nowrap;
-    // justify-content: center;
+    justify-content: end;
 
     flex-wrap: wrap;
     align-items: flex-start;
@@ -28,15 +28,15 @@ export const List = styled.ul`
 export const ListItem = styled.li<{ selected?: boolean }>`
     display: flex;
     flex-direction: column;    
-    font: 500 1.1rem/1.5 'Inter';
+    font: 300 1.1rem/1.5 'Inter';
     align-items: center;
     text-align: center;
     justify-content: center;
     padding: 0px 10px;    
     cursor: pointer;
     margin: 0 10px;
-    width: 152px;
-    height: 36px;
+    width: 92px;
+    height: 16px;
     border-color: ${props => props.selected ? 'black' : '#DDD'};
     white-space: nowrap;
 

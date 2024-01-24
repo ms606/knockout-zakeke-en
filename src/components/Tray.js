@@ -5,13 +5,10 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   //  const [isOpen, setIsOpen] = useState(false);
 
   const handleMultipleClicks = (event) => {
-   console.log(event.target.id);
     UpdateGroupId(event.target.id);
     toggleFunc();
   };
-
-  //console.log(groupNameList, filteredAreas,'groupNameList');
-  
+ 
   return (
     <div>
       {groupNameList && (

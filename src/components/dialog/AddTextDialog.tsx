@@ -21,8 +21,6 @@ interface EditTextItem {
 }
 
 const AddTextDialog: FC<{ onClose: () => void, onConfirm: (item: EditTextItem) => void }> = ({ onClose, onConfirm }) => {
-    // console.log('inside add text to dialog');
-    
     const { fonts, defaultColor } = useZakeke();
 
     const [item, setItem] = useState<EditTextItem>({

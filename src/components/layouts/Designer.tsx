@@ -430,7 +430,6 @@ const Designer: FC<{
 
   const handleAddTextClick = () => {
 
-
     showDialog(
       "add-text",
       <AddTextDialog
@@ -563,7 +562,6 @@ const Designer: FC<{
         setItemColor(item.guid, value as string);
         break;
       case "font-family":
-        console.log(item.guid);
         setItemFontFamily(item.guid, value as string);
         break;
       case "text-path":

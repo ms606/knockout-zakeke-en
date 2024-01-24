@@ -1,6 +1,6 @@
    :root {
     --colorBtnPrimary: #297ca3;
-    --podium-cds-typography-heading-strong: 900 1rem/1.5 'Inter';
+    --podium-cds-typography-heading-strong: 900 1.9rem 'Inter';
     --podium-cds-typography-body1-strong: 500 1rem/1.5 'Inter';
     --podium-cds-typography-body2: 400 .875rem/1.5 'Inter';
     --podium-cds-typography-body3: 800 1.4rem/1.5 'Inter';
@@ -32,9 +32,8 @@
   }
 
   #product-info { 
-    display: flex;
-    flex-direction: column;
-    padding: 0px 30px;
+    /* padding: 0px 30px; */
+    padding-bottom: 20px;
     max-width: 568px;
     color: #004071;
     font-weight: 600;
@@ -58,7 +57,7 @@
 
   .gimg {
     width: 48px;
-    height: 48px;
+    height: 49px;
     background-color: #eee;
     float: right;
     background-size: 48px 48px;
@@ -74,9 +73,9 @@
     justify-content: space-between;
     font-family: "Helvetica Now Text";
     height: 40px;
-    position: absolute;
+    /* position: absolute; */
     width: 100%;
-    top: 28px;
+    /* top: 28px; */
   } 
 
   .tray-header-1 {
@@ -91,16 +90,15 @@
   
   .active-marketing-component-name {
     display: flex;
-    padding: 0px 20px;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     font-size: 18px;
     font-size: 18px;
     line-height: 18px;
-    padding-left: 0px;
     color: #004071;
     font-weight: 600;
     font-family: 'Saira', sans-serif;
+    cursor: pointer;
   }
 
   .active-marketing-component-index{
@@ -110,7 +108,7 @@
 
   .arrd{
     width: 24px;
-    height: 48px;
+    height: 49px;
     vertical-align: top;
     background-size: 16px 16px;
     background-repeat: no-repeat;
@@ -123,6 +121,10 @@
     padding-right: 2px;
     position: relative;
     overflow: hidden;
+  }
+
+  .arrd svg{
+    transform: translate3d(0px, 0px, 0px) rotate(-90deg);   
   }
 
   .previous-customization {

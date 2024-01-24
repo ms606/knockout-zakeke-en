@@ -58,8 +58,7 @@ const ProgressBar = ({ bgColor, completed }) => {
   const dynamicVals = publicTranslations?.dynamics;
   return (
     <div>
-      <LoadingLabel>
-        {/* {console.log(T.d('Loading..'),'esfdfsfdssfds');} */}
+      <LoadingLabel>        
         {dynamicVals?.get('Loading...')}
        
         {/* {isSceneLoading ? T._('Loading your product...', 'Composer') : T._('Loading complete.', 'Composer')} */}

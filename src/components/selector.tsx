@@ -213,7 +213,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
       if (selectedStep){
         if (activeColorOption === 'fluorescent'){
-          console.log(selectedStep.attributes[3].id,'sdfdsfsdfs');
+          // console.log(selectedStep.attributes[3].id,'sdfdsfsdfs');
           selectAttribute(selectedStep.attributes[3].id);
           // selectStep(selectedStep.attributes[1].id);
           
@@ -238,7 +238,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // Select attribute first time
   useEffect(() => {
    
-    console.log(selectedGroup, selectedStep, selectedAttribute,'Select attribute first time');
+    // console.log(selectedGroup, selectedStep, selectedAttribute,'Select attribute first time');
 
     if (!selectedAttribute && attributes.length > 0) selectAttribute(attributes[0].id);
 
@@ -261,12 +261,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   }, [selectedAttribute, attributes, activeColorOption]);
 
   useEffect(() => {
-    setCamera('2324', false)
+    // setCamera('2324', false)
     
-    // if (selectedGroup) {
-    //   const camera = selectedGroup.cameraLocationId;
-    //   if (camera) setCamera(camera);
-    // }
+    if (selectedGroup) {
+      const camera = selectedGroup.cameraLocationId;
+      if (camera) setCamera(camera);
+    }
 
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -344,7 +344,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
 		try {
       const url = await getOnlineScreenshot(800,800);
-      console.log(url.originalUrl);
+      // console.log(url.originalUrl);
       if (url) downloadImage(url.originalUrl)
     
 			// setIsLoading(true);
@@ -419,9 +419,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const containerStyles = {
-    overflow: "auto",
+    // overflow: "auto",
     width: "100%",
-    height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
+    // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
 
   let groupNameText = makeFirstLetterCaps(groups[currentIndex]?.name);
@@ -430,7 +430,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     <>
       <div className="top-nav">
         <div className="body-3" id="product-info">
-          <span>{productName}</span>
+          {productName}
           {/* <span>LEI {price}</span> */}
         </div>
 
@@ -480,8 +480,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       )}
 
       <div className="animate-wrapper-0">
-        {/* Personalize A */}
-
+     
         <div style={containerStyles}>
           {/* {groups[currentIndex].name === "MODALITATE IMPRIMARE" && (!hasTypeZero) ? null : ( */}
 
@@ -499,13 +498,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
             <div
               style={{
                 display: "flex",
-                width: "420px",
-                top: "50%",
-                left: "50%",
+                width: "100%",
                 height: "auto",
                 margin: "0px auto",
-                position: "absolute",
-                transform: "translate(-50%, -50%)",
                 alignItems: "center",
                 justifyContent: "center",
               }}
@@ -513,8 +508,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               <div className="tray-header-1">
                 <div
                   style={{
-                    position: "absolute",
-                    padding: "0px",
+                    // position: "absolute",
+                    // padding: "0px",
                     width: "100%",
                   }}
                 >
@@ -525,6 +520,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         textOverflow: "ellipsis",
                         overflow: "hidden",
                         lineHeight: "28px",
+                        paddingRight: '15px'
                       }}
                     >
                       {groupNameText}
@@ -608,7 +604,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               )}
 
             {!selectedTrayPreviewOpenButton && (
-              <div style={{ width: "58%" }}>
+              <div style={{ width: "100%", 
+                  background:  '0% 0% / 4px 4px rgba(255, 255, 255, 0.5)',
+    borderRadius: '0px 0px 3px 3px',
+    padding: '10px 10px 5px',
+    borderTop: 'none'
+    
+    }}>
                 
                 {width > 400 && (
                   <List>
