@@ -58,12 +58,10 @@ html,body {
   justify-content: center;
   align-items: center;
   position: absolute;
-  /* padding-top: 52px;   */
   width: 250px;
   height: 265px;
   left: 0px;
   top: calc(35% - 015px);
-  /* background-color: rgb(255, 255, 255); */
 }
 
 .animate-wrapper {
