@@ -170,3 +170,13 @@
   .slabel:hover {
     color: black !important; 
   }
+
+  @media screen and (max-width: 400px) {
+    .full-tray {
+      width: 100%;
+    }
+
+    .heading {
+      width: 76px;
+    }
+  }

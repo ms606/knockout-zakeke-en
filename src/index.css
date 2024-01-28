@@ -60,12 +60,12 @@ html,body {
   position: absolute;
   width: 250px;
   height: 265px;
-  left: 0px;
+  left: 30px;
   top: calc(35% - 015px);
 }
 
 .animate-wrapper {
-  height: 200px;
+  /* height: 200px; */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -168,6 +168,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: right;
+  top: 10px;
 }
 
 
@@ -178,15 +179,25 @@ button:focus {
     }
 
   .animate-wrapper-0 {
+    width: 100%;
+    padding: 0px 20px;
     border-radius: 18px 18px 0px 0px;
     bottom: 2em;
-    height: 40%;
+    /* height: 40%; */
+    left: 0px;
+    top: calc(55% - 015px);
     }  
 
   .animate-wrapper {
     height: 175px;
     padding-top: 0px;
     }
+  
+  .gbuts{
+    padding-right: 22px;
+    position: absolute;
+  }  
+    
 
   }
   

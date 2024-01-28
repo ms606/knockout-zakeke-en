@@ -1,34 +1,37 @@
 import "./selector.css";
 import React, { FunctionComponent, useEffect, useMemo, useState } from "react";
-import styled, { css } from "styled-components";
-import { ReactComponent as SearchPlusSolid } from "../assets/icons/search-plus-solid.svg";
-import { ReactComponent as SearchMinusSolid } from "../assets/icons/search-minus-solid.svg";
 import { useZakeke } from "zakeke-configurator-react";
-import { List, ListItem, ListItemColor, ListItemImageNoCarousel } from "./list";
+import {
+  List,
+  ListX,
+  ListItem,
+  ListItemX,
+  ListItemX_,
+  ListItemColor,
+  ListItemImage,
+  ListItemImageX,
+  ListItemImageNoCarousel,
+} from "./list";
 import { PreviewContainer, BlurOverlay } from "./previewContainer";
 import Tray from "./Tray";
-import TrayPreviewOpenButton from "./TrayPreviewOpenButton";
-import MenuTriggerButton from "./MenuTriggerButton";
+
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import Designer from "./layouts/Designer";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
-import { createPortal } from "react-dom";
 import useStore from "../Store";
 import { makeFirstLetterCaps, T } from "../Helpers";
 import Footer from "./layouts/Footer";
 import FooterMobile from "./layouts/FooterMobile";
+
+import "./selectors/colsgrid.css";
+import { ColorMenuSeleciton } from "./selectors/ColorMenuSelection";
+
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { ReactComponent as AngleLeftSolid } from "../assets/icons/angle-left-solid.svg";
-import { ReactComponent as AngleRightSolid } from "../assets/icons/angle-right-solid.svg";
-
-import './selectors/colsgrid.css'
-import { ColorMenuSeleciton } from "./selectors/ColorMenuSelection";
-
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -56,15 +59,16 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     zoomIn,
     zoomOut,
     items,
-    getOnlineScreenshot
+    getOnlineScreenshot,
   } = useZakeke();
-  
+
   const { setIsLoading, isMobile } = useStore();
-//  console.log(useZakeke(),'gsddfdalfkdaklsjfdjadsfjdslj');
+  //console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);
+  const [selectedStepName, selectStepName] = useState<string | null>(null);
   const [selectedAttributeId, selectAttribute] = useState<number | null>(null);
   const [selectedOptionId, selectOptionId] = useState<number | null>(null);
   const [selectedOptionName, selectOptionName] = useState<string | null>(null);
@@ -88,14 +92,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedTrayPreviewOpenButton, selectTrayPreviewOpenButton] =
     useState<boolean>(false);
 
+  // Selection of colours
+  const [activeColorOption, setActiveColorOption] = useState("");
 
-  // Selection of colours 
-  const [activeColorOption, setActiveColorOption] = useState('');
+  const updateActiveColorOption = (label: any) => {
+    setActiveColorOption(label);
+  };
 
-  const updateActiveColorOption = (label:any) => {
-    setActiveColorOption(label)
-  }
-  
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [width, setWidth] = useState(window.innerWidth);
@@ -108,9 +111,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedPersonalize, setSelectedPersonalize] = useState<any | null>(
     false
   );
-  
 
-  // Filter logos and signature for tray 
+  // Filter logos and signature for tray
   const filteredAreas = null;
   // product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 
@@ -118,11 +120,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const attributes = useMemo(
     () => (selectedStep || selectedGroup)?.attributes ?? [],
     [selectedGroup, selectedStep]
-    );
-    
-    const selectedAttribute = attributes.find(
-      (attribute) => attribute.id === selectedAttributeId
-    );
+  );
+
+  const selectedAttribute = attributes.find(
+    (attribute) => attribute.id === selectedAttributeId
+  );
 
   let indexToRemove = groups.findIndex((obj) => obj.id === -1);
   if (indexToRemove !== -1) {
@@ -181,7 +183,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const dialogsPortal = document.getElementById("dialogs-portal");
 
-
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -211,22 +212,27 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
       if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
-      if (selectedStep){
-        if (activeColorOption === 'fluorescent'){
-          // console.log(selectedStep.attributes[3].id,'sdfdsfsdfs');
+      if (selectedStep) {
+        if (activeColorOption === "fluorescent") {
           selectAttribute(selectedStep.attributes[3].id);
-          // selectStep(selectedStep.attributes[1].id);
-          
         }
-      };
-      
+      }
+
       if (templates.length > 0) setTemplate(templates[0].id);
     }
 
     if (groups.length > 0) {
-      var groupRec: { id: number, name: string, imageUrl: string | null | undefined}[] = [];
+      var groupRec: {
+        id: number;
+        name: string;
+        imageUrl: string | null | undefined;
+      }[] = [];
       groups.map((group) => {
-        groupRec.push({id: group.id, name: group.name, imageUrl: group.imageUrl});
+        groupRec.push({
+          id: group.id,
+          name: group.name,
+          imageUrl: group.imageUrl,
+        });
       });
       selectGroupList(groupRec);
     }
@@ -234,45 +240,67 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroup, groups]);
 
-
   // Select attribute first time
   useEffect(() => {
-   
-    // console.log(selectedGroup, selectedStep, selectedAttribute,'Select attribute first time');
+    console.log(
+      selectedGroup,
+      selectedStep,
+      selectedAttribute,
+      "Select attribute first time"
+    );
 
-    if (!selectedAttribute && attributes.length > 0) selectAttribute(attributes[0].id);
+    if (!selectedAttribute && attributes.length > 0)
+      selectAttribute(attributes[0].id);
 
-      if (selectedStep){
-        if (activeColorOption === 'plain'){
-          selectAttribute(selectedStep.attributes[0].id);          
+    if (selectedStep) {
+      if (activeColorOption === "plain") {
+        selectAttribute(selectedStep.attributes[0].id);
+        if (selectedGroup) {
+          selectStep(selectedGroup.steps[0].id);
+          selectStepName(selectedGroup?.steps[0].name);
         }
-        if (activeColorOption === 'metallic'){
-          selectAttribute(selectedStep.attributes[1].id);          
+      }
+      if (activeColorOption === "metallic") {
+        selectAttribute(selectedStep.attributes[1].id);
+        if (selectedGroup) {
+          selectStep(selectedGroup.steps[0].id);
+          selectStepName(selectedGroup?.steps[0].name);
         }
-        if (activeColorOption === 'matte'){
-          selectAttribute(selectedStep.attributes[2].id);          
+      }
+      if (activeColorOption === "matte") {
+        selectAttribute(selectedStep.attributes[2].id);
+        if (selectedGroup) {
+          selectStep(selectedGroup.steps[0].id);
+          selectStepName(selectedGroup?.steps[0].name);
         }
-        if (activeColorOption === 'fluorescent'){
-          selectAttribute(selectedStep.attributes[3].id);          
+      }
+      if (activeColorOption === "fluorescent") {
+        selectAttribute(selectedStep.attributes[3].id);
+        if (selectedGroup) {
+          selectStep(selectedGroup.steps[0].id);
+          selectStepName(selectedGroup?.steps[0].name);
         }
-      };
+      }
+      if (activeColorOption === "knockX") {
+        //selectGroup(selectedGroup?.steps[1].id)
+        if (selectedGroup) {
+          selectStep(selectedGroup.steps[1].id);
+          selectStepName(selectedGroup?.steps[1].name);
+        }
+        // selectAttribute(selectedStep.attributes[3].id);
+      }
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAttribute, attributes, activeColorOption]);
 
   useEffect(() => {
-    // setCamera('2324', false)
-    
     if (selectedGroup) {
       const camera = selectedGroup.cameraLocationId;
       if (camera) setCamera(camera);
     }
-
-    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupId]);
-
-  
 
   if (isSceneLoading || !groups || groups.length === 0)
     return (
@@ -291,8 +319,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // -- -- attributes
   // -- -- -- options
 
-
-
   const handleLeftClick = () => {
     selectColorName("");
     setCurrentIndex((currentIndex - 1 + groups.length) % groups.length);
@@ -306,59 +332,57 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
   };
 
-  async function downloadImage(url:any) {
+  async function downloadImage(url: any) {
     try {
       // Replace the URL with your actual image URL
       const imageUrl = url;
-  
+
       // Fetch the image as a blob
-      const response = await fetch(imageUrl);//, { responseType: 'blob' });
+      const response = await fetch(imageUrl); //, { responseType: 'blob' });
       const imageBlob = await response.blob();
-  
+
       // Create a Blob URL
       const blobUrl = URL.createObjectURL(imageBlob);
-  
+
       // Create an anchor element
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = blobUrl;
-  
+
       // Set the download attribute with the desired file name
-      link.download = 'yourImage.jpg';
-  
+      link.download = "yourImage.jpg";
+
       // Append the anchor element to the document
       document.body.appendChild(link);
-  
+
       // Trigger a click on the anchor element
       link.click();
-  
+
       // Remove the anchor element and revoke the Blob URL
       document.body.removeChild(link);
       URL.revokeObjectURL(blobUrl);
     } catch (error) {
-      console.error('Error downloading image:', error);
+      console.error("Error downloading image:", error);
     }
   }
 
-
   const handleScreenShotClick = async () => {
-
-		try {
-      const url = await getOnlineScreenshot(800,800);
+    try {
+      const url = await getOnlineScreenshot(800, 800);
       // console.log(url.originalUrl);
-      if (url) downloadImage(url.originalUrl)
-    
-			// setIsLoading(true);
-			// setPdfIsLoading(true);
-			// const url = await getPDF();
-			// showDialog('pdf', <PdfDialog url={url} onCloseClick={() => closeDialog('pdf')} />);
-		} catch (ex) {
-			console.error(ex);
-			// showError(T._('Failed PDF generation', 'Composer'));
-		} finally {
-			// setPdfIsLoading(false);
-		// 	setIsLoading(false);
-		}
-	};
+      if (url) downloadImage(url.originalUrl);
+
+      // setIsLoading(true);
+      // setPdfIsLoading(true);
+      // const url = await getPDF();
+      // showDialog('pdf', <PdfDialog url={url} onCloseClick={() => closeDialog('pdf')} />);
+    } catch (ex) {
+      console.error(ex);
+      // showError(T._('Failed PDF generation', 'Composer'));
+    } finally {
+      // setPdfIsLoading(false);
+      // 	setIsLoading(false);
+    }
+  };
 
   const handleRightClick = () => {
     selectColorName("");
@@ -390,7 +414,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const groupIdFromFunc = (data: number) => {
     // console.log(data,groups,'filteredArrayfilteredArray');
-    
+
     const filteredArray = groups.filter((group) => group.id == data);
     // console.log(filteredArray,'filteredArray');
 
@@ -398,8 +422,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       return i.id == data;
     });
 
-    // console.log(filteredArray,filteredArrayId);
-    
+   console.log(filteredArray,filteredArrayId);
+
     if (filteredArrayId.length > 0) {
       const foundItem = filteredArrayId[0];
       const foundItemIndex = groups.indexOf(foundItem);
@@ -407,11 +431,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
 
     // console.log(filteredArray,'filteredArray');
-    
+
     // selectGroup(data);
     // selectGroupIdFromTray(data);
     selectGroup(filteredArray[0].id);
-     selectGroupIdFromTray(filteredArray[0].id);
+    selectGroupIdFromTray(filteredArray[0].id);
   };
 
   const togglePersonalize = () => {
@@ -435,14 +459,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         </div>
 
         <div className="top-right-controls">
-        <div id="savepic" data-hasqtip="98" title="" aria-describedby="qtip-98" onClick={() => handleScreenShotClick()}>
-          <i className="fa fa-camera" style={{color: 'rgb(54, 179, 237)'}}></i>
-        </div>
-         
+          <div
+            id="savepic"
+            data-hasqtip="98"
+            title=""
+            aria-describedby="qtip-98"
+            onClick={() => handleScreenShotClick()}
+          >
+            <i
+              className="fa fa-camera"
+              style={{ color: "rgb(54, 179, 237)" }}
+            ></i>
+          </div>
         </div>
       </div>
 
-  
       {/* Personalize A */}
       {!isMobile && (
         <div
@@ -476,16 +507,15 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           ) : (
             ""
           )}
-        </div>    
+        </div>
       )}
 
       <div className="animate-wrapper-0">
-     
         <div style={containerStyles}>
           {/* {groups[currentIndex].name === "MODALITATE IMPRIMARE" && (!hasTypeZero) ? null : ( */}
 
-            {/* Closed on request of Paul */}
-            {/* <MenuTriggerButton width={width} toggleTray={toggleTray} /> */}
+          {/* Closed on request of Paul */}
+          {/* <MenuTriggerButton width={width} toggleTray={toggleTray} /> */}
 
           <div className="tray-header">
             {/* <TrayPreviewOpenButton
@@ -513,18 +543,20 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     width: "100%",
                   }}
                 >
-                  <div className="active-marketing-component-name" onClick={()=> toggleTray()}>
+                  <div
+                    className="active-marketing-component-name"
+                    onClick={() => toggleTray()}
+                  >
                     <span
                       style={{
                         whiteSpace: "nowrap",
                         textOverflow: "ellipsis",
                         overflow: "hidden",
                         lineHeight: "28px",
-                        paddingRight: '15px'
+                        paddingRight: "10px",
                       }}
                     >
                       {groupNameText}
-                
                     </span>
                     <div className="arrd">
                       <svg
@@ -535,7 +567,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         x="0px"
                         y="0px"
                         viewBox="0 0 36 36"
-                      //  style="enable-background:new 0 0 36 36;"
+                        //  style="enable-background:new 0 0 36 36;"
                         // xml:space="preserve"
                       >
                         <path
@@ -559,10 +591,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                 </div>
               </div>
             </div>
-
           </div>
           <br />
-
 
           <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
             {isTrayOpen && !selectedTrayPreviewOpenButton && (
@@ -574,7 +604,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               />
             )}
 
-           <ColorMenuSeleciton updateActiveColorOption={updateActiveColorOption} activeColorOption={activeColorOption}/>
+            <ColorMenuSeleciton
+              updateActiveColorOption={updateActiveColorOption}
+              activeColorOption={activeColorOption}
+            />
 
             {/* <div className="colsgrid">
               <div data-sel="plain" className="active">Plain</div>
@@ -583,8 +616,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               <div data-sel="fluorescent" className="">Fluoro</div>
             </div> */}
 
-
-            {selectedGroup &&
+            {/* {selectedGroup &&
               !selectedTrayPreviewOpenButton &&
               selectedGroup.steps.length > 0 &&
               !isTrayOpen && (
@@ -593,7 +625,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     return (
                       <ListItem
                         key={step.id}
-                        onClick={() => selectStep(step.id)}
+                        onClick={() => {
+                          selectStep(step.id);
+                          selectStepName(step.name);
+                        }}
                         selected={selectedStep === step}
                       >
                         {step.name}
@@ -601,18 +636,20 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     );
                   })}
                 </List>
-              )}
+              )} */}    
 
             {!selectedTrayPreviewOpenButton && (
-              <div style={{ width: "100%", 
-                  background:  '0% 0% / 4px 4px rgba(255, 255, 255, 0.5)',
-    borderRadius: '0px 0px 3px 3px',
-    padding: '10px 10px 5px',
-    borderTop: 'none'
-    
-    }}>
-                
-                {width > 400 && (
+              <div
+                style={{
+                  width: "100%",
+                  background: "0% 0% / 4px 4px rgba(255, 255, 255, 0.5)",
+                  borderRadius: "0px 0px 3px 3px",
+                  padding: "10px 10px 5px",
+                  borderTop: "none",
+                  boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px"
+                }}
+              >
+                {selectedStepName != "KNOCK-X" && (
                   <List>
                     {!selectedTrayPreviewOpenButton &&
                       selectedAttribute &&
@@ -622,15 +659,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           <ListItemColor
                             key={option.id}
                             onClick={() => {
-                            //  console.log(selectedAttribute, option, option.id);
-
                               {
                                 if (
                                   option.name === "BRODAT" ||
                                   option.name === "TIPARIT" ||
                                   option.name === "PRINTAT"
                                 ) {
-                
                                   const indexForGroupTip = groups.findIndex(
                                     (obj) => obj.name === "MODALITATE IMPRIMARE"
                                   );
@@ -674,23 +708,78 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           </ListItemColor>
                         );
                       })}
-                  
                   </List>
                 )}
+
+                <div>
+                  {/* <h1>Patters</h1> */}
+
+                  {selectedStepName === "KNOCK-X" ? (
+                    <div>
+                      <div className="knockXlabel">SELECT DESIGN THEME</div>
+                      <Swiper
+                        spaceBetween={1}
+                        slidesPerView={2}
+                        navigation={true}
+                        centeredSlides={true}
+                        // modules={[Navigation]}
+                        //onSlideChange={() => console.log('slide change')}
+                        //onSwiper={(swiper) => console.log(swiper)}
+                      >
+                        {attributes.map((attribute) => {
+                          return (
+                            <SwiperSlide>
+                              <ListItemX
+                                key={attribute.id}
+                                onClick={() => selectAttribute(attribute.id)}
+                                selected={selectedAttribute === attribute}
+                              >
+                                <div className="scaler"></div>
+                                {attribute.name}
+                              </ListItemX>
+                            </SwiperSlide>
+                          );
+                        })}
+                      </Swiper>
+
+                      <br />
+                      <div className="knockXlabel">SELECT COLOR THEME</div>
+                      <ListX>
+                        {selectedAttribute &&
+                          selectedAttribute.options.map((option) => {
+                            return (
+                              <ListItemX_
+                                key={option.id}
+                                onClick={() => selectOption(option.id)}
+                                selected={option.selected}
+                              >
+                                {option.imageUrl && (
+                                  <ListItemImageX src={option.imageUrl} />
+                                )}
+                                {/* {option.name} */}
+                              </ListItemX_>
+                            );
+                          })}
+                      </ListX>
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
             )}
           </div>
         </div>
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
-            <div id='gprev' className="mc-prev" onClick={handleLeftClick}>
-              Back
-            </div>
+          <div id="gprev" className="mc-prev" onClick={handleLeftClick}>
+            Back
+          </div>
           {/* </button> */}
           {/* <button className="next-customization" onClick={handleRightClick}> */}
-            <div id='gnext' className="mc-next" onClick={handleRightClick}>
-              Next
-            </div>
+          <div id="gnext" className="mc-next" onClick={handleRightClick}>
+            Next
+          </div>
           {/* </button> */}
         </div>
       </div>
