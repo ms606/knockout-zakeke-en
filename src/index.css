@@ -42,10 +42,10 @@ html,body {
   border: 0;
 }
 
-.active-marketing-component-name {
+/* .active-marketing-component-name {
   font-size: 18px;
   font-weight: 500;
-}
+} */
 
 .personalize {
   background-color: white;
@@ -196,6 +196,8 @@ button:focus {
   .gbuts{
     padding-right: 22px;
     position: absolute;
+    width: auto;
+    right: 0px;
   }  
     
 

@@ -63,7 +63,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   } = useZakeke();
 
   const { setIsLoading, isMobile } = useStore();
-  //console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
+  console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -242,12 +242,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // Select attribute first time
   useEffect(() => {
-    console.log(
-      selectedGroup,
-      selectedStep,
-      selectedAttribute,
-      "Select attribute first time"
-    );
+    // console.log(
+    //   selectedGroup,
+    //   selectedStep,
+    //   selectedAttribute,
+    //   "Select attribute first time"
+    // );
 
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
@@ -525,21 +525,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               selectTrayPreviewOpenButton={selectTrayPreviewOpenButton}
             /> */}
 
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                height: "auto",
-                margin: "0px auto",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+            <div className='guide'>
               <div className="tray-header-1">
                 <div
                   style={{
-                    // position: "absolute",
-                    // padding: "0px",
                     width: "100%",
                   }}
                 >
@@ -547,17 +536,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     className="active-marketing-component-name"
                     onClick={() => toggleTray()}
                   >
-                    <span
-                      style={{
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        overflow: "hidden",
-                        lineHeight: "28px",
-                        paddingRight: "10px",
-                      }}
-                    >
-                      {groupNameText}
-                    </span>
+                   <div className="selectiontype">
+                   
+                        {groupNameText}
+                   
+                   </div> 
+                    
                     <div className="arrd">
                       <svg
                         version="1.1"
@@ -604,17 +588,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               />
             )}
 
-            <ColorMenuSeleciton
+            {!isTrayOpen && !selectedTrayPreviewOpenButton && (   
+            <ColorMenuSeleciton              
               updateActiveColorOption={updateActiveColorOption}
               activeColorOption={activeColorOption}
             />
+            )} 
 
-            {/* <div className="colsgrid">
-              <div data-sel="plain" className="active">Plain</div>
-              <div data-sel="metallic" className="">Metallic</div>
-              <div data-sel="matte" className="">Matte</div>
-              <div data-sel="fluorescent" className="">Fluoro</div>
-            </div> */}
+           
 
             {/* {selectedGroup &&
               !selectedTrayPreviewOpenButton &&
@@ -646,7 +627,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   borderRadius: "0px 0px 3px 3px",
                   padding: "10px 10px 5px",
                   borderTop: "none",
-                  boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px"
+                  boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px",
+                  // display: !isTrayOpen ? "none" : "block",
                 }}
               >
                 {selectedStepName != "KNOCK-X" && (

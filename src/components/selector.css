@@ -78,6 +78,15 @@
     /* top: 28px; */
   } 
 
+  .guide {
+    display: flex;
+    width: 100%;
+    height: auto;
+    margin: 0px auto;
+    align-items: center;
+    justify-content: center;
+  }
+
   .tray-header-1 {
     display: flex;
     position: relative;
@@ -99,6 +108,14 @@
     font-weight: 600;
     font-family: 'Saira', sans-serif;
     cursor: pointer;
+  }
+
+  .selectiontype {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 28px;
+    padding-right: 10px;
   }
 
   .active-marketing-component-index{
@@ -227,8 +244,6 @@
     border-radius: 24px;
     padding: 6px 18px 6px 16px;
     border: 1px solid rgb(229, 229, 229);
-    
-    
     
     outline: none;
     background: none rgb(255, 255, 255);
@@ -412,6 +427,10 @@
     height: '30px';
   }
 
+  .guide {
+    display: block;
+  }
+
   .tray-header-1 {
     max-width: 250px;
   }
@@ -419,7 +438,16 @@
   .active-marketing-component-name {
     padding: 0px 15px;
     font-family: 'Inter', sans-serif;
-    font-size: 88%;
+    font-size: 80%;
+    justify-content: start;
+  }
+
+  .selectiontype {
+    width: 70px;
+    height: 50px;
+    white-space: normal;
+    line-height: normal;
+
   }
 
   .active-marketing-component-index {

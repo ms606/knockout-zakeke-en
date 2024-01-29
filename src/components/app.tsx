@@ -93,7 +93,7 @@ const App: FunctionComponent<{}> = () => {
           {/* {isMobile && <LayoutMobile />}  */}
           {isMobile && (
             <Layout>
-              <div style={{ backgroundColor: "rgb(249 246 248)" , width: "100%", border: "0px solid", height: "57%"}}>
+              <div style={{ background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" , width: "100%", border: "0px solid", height: "57%"}}>
                 <div
                   className="ThreeDRenderer"
                   style={
@@ -101,8 +101,9 @@ const App: FunctionComponent<{}> = () => {
                       ? { width: "20vw", height: "20vh" }
                       : { 
                         aspectRatio: "1 / 1",
-                        width: "93%",  position: "absolute", top: "0em", bottom: "0", left: "3%",
-                        backgroundColor: "rgb(249 246 248)" }}
+                        width: "100%",  position: "absolute", top: "0em", bottom: "0", 
+                        // left: "3%",
+                        background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" }}
                 >
                  <ZakekeViewer />
                 </div>
@@ -120,7 +121,7 @@ const App: FunctionComponent<{}> = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   // gridArea: "1 / 2 / 12 / 1",
-                  backgroundColor: "rgb(249 246 248)",
+                  background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))",
                 }}
               >
                 <div
