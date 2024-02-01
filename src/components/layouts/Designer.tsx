@@ -81,7 +81,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   user-select: none;
   width: 100%;
   padding: 30px 30px 70px 30px;
-  background-color: rgb(235, 237, 242);
+  // background-color: rgb(235, 237, 242);
   height: 23em;
   overflow-y: auto;
   font-family: Inter, sans-serif;
@@ -113,23 +113,25 @@ const Area = styled.div<{ selected?: boolean }>`
   flex-direction: center;
   justify-content: space-around;
   align-items: left;
-  min-height: 47px;
-  min-width: 70px;
-  width: 100%;
+  height: 60px;
+  min-width: 34px;
+  width: 34%;
   cursor: pointer;
-  padding: 1px 40px;
+  padding: 1px 34x;
   text-align: center;
   margin: 0;
   margin-bottom: 18px;
   color: black;
-  
+
+  word-break: break-all;
+  overflow-wrap: break-word;
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0px;
   word-spacing: 1px;
 
   border: 1px solid #297CA3;
-  font-size: 15px;
+  font-size: 10px;
   border-radius: 4px;
   background-color: white;
   color: #297CA3;
@@ -277,7 +279,8 @@ const Designer: FC<{
 
   const filteredAreas =
     product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
-
+  console.log(filteredAreas,'filteredAreas');
+  
     
   let finalVisibleAreas: ProductArea[] = [];
 
@@ -592,6 +595,8 @@ const Designer: FC<{
     );
   };
 
+  console.log(templates,'templates');
+  
   return (
     <>
       {!moveElements && (
@@ -615,48 +620,7 @@ const Designer: FC<{
 
           {/* Areas */}
           {!isMobile && finalVisibleAreas.length > 1 && (
-            <CarouselContainer
-              slidesToScroll={1}
-              speed={50}
-              slidesToShow={slidesToShow}
-              slideIndex={selectedCarouselSlide}
-              afterSlide={setSelectedCarouselSlide}
-              renderBottomCenterControls={() => <span />}
-              renderCenterRightControls={() => {
-                if (
-                  selectedCarouselSlide !==
-                  (finalVisibleAreas.length - slidesToShow > 0
-                    ? finalVisibleAreas.length - slidesToShow
-                    : selectedCarouselSlide)
-                )
-                  return (
-                    <ArrowRight
-                      onClick={() =>
-                        setSelectedCarouselSlide(selectedCarouselSlide + 1)
-                      }
-                    >
-                      <ArrowRightIconStyled>
-                        <ArrowRightIcon />
-                      </ArrowRightIconStyled>
-                    </ArrowRight>
-                  );
-              }}
-              renderCenterLeftControls={() => {
-                if (selectedCarouselSlide !== 0)
-                  return (
-                    <ArrowLeft
-                      onClick={() =>
-                        setSelectedCarouselSlide(selectedCarouselSlide - 1)
-                      }
-                    >
-                      <ArrowLeftIconStyled>
-                        <ArrowLeftIcon />
-                      </ArrowLeftIconStyled>
-                    </ArrowLeft>
-                  );
-              }}
-            >
-              {finalVisibleAreas.map((area) => (
+              finalVisibleAreas.map((area:any) => (
                 <Area
                   key={area.id}
                   selected={actualAreaId === area.id}
@@ -664,9 +628,8 @@ const Designer: FC<{
                 >
                   {area.name}
                 </Area>
-              ))}
-            </CarouselContainer>
-          )}
+              ))
+           )}
 
           {isMobile && translatedTemplates.length > 1 && (
             <SelectContainer>

@@ -20,7 +20,8 @@
     color: white;
     text-shadow: rgba(0, 105, 184, 0.75) 0px 2px 3px;
     border-color: rgba(0, 64, 113, 0.05);
-    background: radial-gradient(circle, rgb(109, 207, 246), rgb(54, 193, 245), rgb(54, 179, 237)) !important;
+    /* background: radial-gradient(circle, rgb(109, 207, 246), rgb(54, 193, 245), rgb(54, 179, 237)) !important; */
+    background: radial-gradient(circle, rgb(109 117 246), rgb(54 148 184), rgb(54, 179, 237)) !important;
 }
 
 .colsgrid > div {
@@ -44,6 +45,8 @@
 @media screen and (max-width: 400px){
     .colsgrid {
         width: 100%;
+        /* position: fixed; */
+        top: 60%;
     }
 
 }

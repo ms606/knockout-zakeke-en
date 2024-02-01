@@ -101,7 +101,7 @@ const App: FunctionComponent<{}> = () => {
                       ? { width: "20vw", height: "20vh" }
                       : { 
                         aspectRatio: "1 / 1",
-                        width: "100%",  position: "absolute", top: "0em", bottom: "0", 
+                        width: "100%",  position: "absolute", top: "1em", bottom: "0", 
                         // left: "3%",
                         background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" }}
                 >

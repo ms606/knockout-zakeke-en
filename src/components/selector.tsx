@@ -63,7 +63,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   } = useZakeke();
 
   const { setIsLoading, isMobile } = useStore();
-  console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
+  //console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -104,6 +104,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [width, setWidth] = useState(window.innerWidth);
 
   const selectedGroup = groups.find((group) => group.id === selectedGroupId);
+
   const selectedStep = selectedGroup
     ? selectedGroup.steps.find((step) => step.id === selectedStepId)
     : null;
@@ -111,6 +112,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedPersonalize, setSelectedPersonalize] = useState<any | null>(
     false
   );
+
 
   // Filter logos and signature for tray
   const filteredAreas = null;
@@ -126,48 +128,40 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (attribute) => attribute.id === selectedAttributeId
   );
 
-  let indexToRemove = groups.findIndex((obj) => obj.id === -1);
-  if (indexToRemove !== -1) {
-    groups.splice(indexToRemove, 1);
-  }
+  // removed test  
+  // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+  // if (indexToRemove !== -1) {
+  //   groups.splice(indexToRemove, 1);
+  // }
 
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
 
-    // console.log(itemAvailable, "itemAvailable", hasTypeZero);
-    if (items && !itemAvailable) {
-      // console.log("a");
+    // removed test
+    // if (items && !itemAvailable) {
 
-      //console.log(currentIndex, hasTypeZero,groups, groupToSave,'stats');
-      //  console.log(groups[groups.length -1], items, hasTypeZero);
-
-      if (groups[groups.length - 1]?.name === "MODALITATE IMPRIMARE") {
-        setStitchTypeGroup(groups[groups.length - 1]);
-      }
-
-      if (
-        hasTypeZero == false ||
-        items.filter((item) => item.type === 0).length === 0
-      ) {
-        const indexToDel = groups.findIndex(
-          (obj) => obj.name === "MODALITATE IMPRIMARE"
-        );
-        // console.log(indexToDel, 'index to delete');
-
-        // if (hasTypeZero == false && indexToDel > 0) groups?.splice(groups.length -1, 1);
-        for (let i = 0; i < groups.length; i++) {
-          // if (hasTypeZero){
-          // console.log(selectedOptionName,'selectedOptionId');
-          if (
-            selectedOptionName !== "PRINTAT" &&
-            selectedOptionName !== "BRODAT"
-          ) {
-            if (groups[i]?.name === "MODALITATE IMPRIMARE") groups.splice(i, 1);
-          }
-          //  }
-        }
-      }
-    }
+    //   if (groups[groups.length - 1]?.name === "MODALITATE IMPRIMARE") {
+    //     setStitchTypeGroup(groups[groups.length - 1]);
+    //   }
+    //   // removed test
+    //   if (
+    //     hasTypeZero == false ||
+    //     items.filter((item) => item.type === 0).length === 0
+    //   ) {
+    //     const indexToDel = groups.findIndex(
+    //       (obj) => obj.name === "MODALITATE IMPRIMARE"
+    //     );
+       
+    //     for (let i = 0; i < groups.length; i++) {
+    //       if (
+    //         selectedOptionName !== "PRINTAT" &&
+    //         selectedOptionName !== "BRODAT"
+    //       ) {
+    //         if (groups[i]?.name === "MODALITATE IMPRIMARE") groups.splice(i, 1);
+    //       }
+    //     }
+    //   }
+    // }
 
     if (items && itemAvailable) {
       if (items.filter((item) => item.type === 1)) {
@@ -210,6 +204,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     if (!selectedGroup && groups.length > 0) {
       selectGroup(groups[0].id);
 
+      setActiveColorOption('plain');
+
       if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
       if (selectedStep) {
@@ -248,34 +244,36 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //   selectedAttribute,
     //   "Select attribute first time"
     // );
+console.log(selectedGroup, selectedStep);
 
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
 
-    if (selectedStep) {
+   if(selectedGroup)  { 
+    if (selectedGroup?.steps?.length > 0 ) {
       if (activeColorOption === "plain") {
-        selectAttribute(selectedStep.attributes[0].id);
+        selectAttribute(selectedGroup.steps[0].attributes[0].id);
         if (selectedGroup) {
           selectStep(selectedGroup.steps[0].id);
           selectStepName(selectedGroup?.steps[0].name);
         }
       }
       if (activeColorOption === "metallic") {
-        selectAttribute(selectedStep.attributes[1].id);
+        selectAttribute(selectedGroup.steps[0].attributes[1].id);
         if (selectedGroup) {
           selectStep(selectedGroup.steps[0].id);
           selectStepName(selectedGroup?.steps[0].name);
         }
       }
       if (activeColorOption === "matte") {
-        selectAttribute(selectedStep.attributes[2].id);
+        selectAttribute(selectedGroup.steps[0].attributes[2].id);
         if (selectedGroup) {
           selectStep(selectedGroup.steps[0].id);
           selectStepName(selectedGroup?.steps[0].name);
         }
       }
       if (activeColorOption === "fluorescent") {
-        selectAttribute(selectedStep.attributes[3].id);
+        selectAttribute(selectedGroup.steps[0].attributes[3].id);
         if (selectedGroup) {
           selectStep(selectedGroup.steps[0].id);
           selectStepName(selectedGroup?.steps[0].name);
@@ -290,6 +288,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         // selectAttribute(selectedStep.attributes[3].id);
       }
     }
+  }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAttribute, attributes, activeColorOption]);
@@ -323,6 +322,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex((currentIndex - 1 + groups.length) % groups.length);
     selectGroup(groups[(currentIndex - 1 + groups.length) % groups.length].id);
+    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0].id)
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -388,6 +388,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex((currentIndex + 1) % groups.length);
     selectGroup(groups[(currentIndex + 1) % groups.length].id);
+    if (selectedGroup?.steps) selectStep(groups[(currentIndex + 1) % groups.length].steps[0].id)
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -628,7 +629,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   padding: "10px 10px 5px",
                   borderTop: "none",
                   boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px",
-                  // display: !isTrayOpen ? "none" : "block",
+                  display: isTrayOpen ? "none" : "block",
                 }}
               >
                 {selectedStepName != "KNOCK-X" && (

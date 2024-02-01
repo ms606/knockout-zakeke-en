@@ -68,10 +68,9 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                           onClick={handleMultipleClicks}
                           id={groupName.id}
                         >
-                          <img id={groupName.id} style={{width: '76px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
-                          {/* <div className="tray-mc-list-item-selection" id={groupName.name}></div> */}
-                          <div className="slabel">
-                           <span id={groupName.name} style={{fontSize: '9px'}}>{groupName.name}</span> 
+                          <img id={groupName.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
+                          <div id={groupName.id} className="slabel">
+                           <span id={groupName.id} style={{fontSize: '9px'}}>{groupName.name}</span> 
                           </div>
                           </div>
                       </div>

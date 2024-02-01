@@ -5,12 +5,10 @@ export const List = styled.ul`
     margin: 0;
     padding: 0;
     display: flex;
-    // align-items: center;
     margin-bottom: 17px; 
     border-radius: 50px;
     white-space: nowrap;
     justify-content: end;
-
     flex-wrap: wrap;
     align-items: flex-start;
 }
@@ -153,9 +151,6 @@ export const ListItemColor = styled.li<{
   }
 
   &:after {
-    // content: "${(props) => {
-      return props.selected ? props.selectedColor : "";
-    }}";
     position: absolute;
     bottom: 7%;
   }
@@ -191,12 +186,6 @@ export const ListItemImageNoCarousel = styled.img<{ selected?: any }>`
   margin: 2px;
   border: 1px solid #fff;
 
-  &:hover {
-    width: 26px;
-    height: 26px;
-    box-shadow: 1px 2px lightgray;
-  }
-
   &:after {
     position: absolute;
     width: 100%;
@@ -216,6 +205,7 @@ export const ListItemImageNoCarousel = styled.img<{ selected?: any }>`
   @media screen and (max-width: 568px) {
     width: 39px;
     height: 22px;
+    border: 1px solid rgb(201 197 197);
     object-fit: fill;
   }
 `;
