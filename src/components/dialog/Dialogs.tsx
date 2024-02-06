@@ -48,7 +48,7 @@ const DialogWindowContainer = styled.div`
 	padding: 20px;
 	background-color: rgb(235, 237, 242);;
 	border-radius: 5px;
-	flex-basis: 600px;
+	flex-basis: 300px;
 	display: flex;
 	flex-direction: column;
 	position: relative;

@@ -35,13 +35,29 @@ export const TextArea = styled.textarea`
 	color: #414042;
 	font-size: 15px;
 	border: 1px #fff solid;
-	width: 38%;
-	height: 36px;
+	// width: 38%;
+	// height: 36px;
 	font-family: Inter, sans-serif;
 	outline: none;
 	resize: none;
 	overflow: hidden !important;
 	placeholder: 'Input your text here';
+
+
+
+	width: calc(100% - 66px);
+    appearance: none;
+    height: 32px;
+    font-size: 14px;
+    line-height: 14px;
+    margin-bottom: 5px;
+    box-shadow: none;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 3px; 
+
 
 	&::placeholder {
 		font: 10px;

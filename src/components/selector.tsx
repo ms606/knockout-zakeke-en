@@ -485,7 +485,7 @@ console.log(selectedGroup, selectedStep);
             right: "1%",
             cursor: "pointer",
             marginLeft: "20px",
-            width: "30vw",
+            width: "270px",
           }}
         >
           <div

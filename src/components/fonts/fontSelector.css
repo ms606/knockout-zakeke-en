@@ -1,6 +1,6 @@
 .fselector {
     position: fixed;
-    /* right: -400px; */
+    right: 0px;
     top: 0px;
     width: 100%;
     max-width: 400px;
@@ -19,6 +19,9 @@
     background: linear-gradient(to right, rgb(124, 203, 0), rgb(77, 192, 0));
 }
 
+.fsclose{
+    position: fixed !important;
+}
 .ilclose, .cclose, .qsclose, .fsclose {
     position: absolute;
     font-size: 13px;

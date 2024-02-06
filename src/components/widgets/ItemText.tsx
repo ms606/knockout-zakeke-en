@@ -108,9 +108,9 @@ const TextColorsContainer = styled.div<{ isDefaultPalette?: boolean }>`
     !props.isDefaultPalette &&
     `
     grid-template-columns: repeat(auto-fill,minmax(20px,1fr));
-    grid-gap: 7px;`};
-  /* grid-template-columns: repeat(auto-fill,minmax(20px,1fr)); */
-    width: 979%;
+    grid-gap: 7px;
+    `};
+    width: 250px;
 `;
 
 const OptionContainer = styled(components.Option)`

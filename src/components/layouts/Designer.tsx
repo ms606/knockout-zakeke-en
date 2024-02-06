@@ -78,10 +78,11 @@ const MoveElementButton = styled(Button)`
 const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   display: flex;
   flex-flow: column;
+  // flex-wrap: wrap;
   user-select: none;
   width: 100%;
-  padding: 30px 30px 70px 30px;
-  // background-color: rgb(235, 237, 242);
+  // padding: 15px 15px 30px;
+  padding: 10px 10px;
   height: 23em;
   overflow-y: auto;
   font-family: Inter, sans-serif;
@@ -279,8 +280,6 @@ const Designer: FC<{
 
   const filteredAreas =
     product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
-  console.log(filteredAreas,'filteredAreas');
-  
     
   let finalVisibleAreas: ProductArea[] = [];
 
@@ -289,6 +288,8 @@ const Designer: FC<{
   let translatedTemplates = templates.map((template) => {
     return { id: template.id, name: template.name, areas: template.areas };
   });
+
+  console.log(translatedTemplates,'translatedTemplates');
 
   let translatedCurrentTemplate = {
     id: currentTemplate?.id,
@@ -334,7 +335,10 @@ const Designer: FC<{
   let currentTemplateArea = currentTemplate!.areas.find(
     (x) => x.id === actualAreaId
   );
+
+  // itemFiltered has the values of all the texts or images loaded to the product
   let itemsFiltered = items.filter((item) => item.areaId === actualAreaId);
+  
   const allStaticElements = !itemsFiltered.some((item) => {
     return (
       !item.constraints ||
@@ -402,6 +406,9 @@ const Designer: FC<{
     return fileFormats;
   }
 
+  // console.log(addItemText,itemsFiltered,currentTemplateArea,'aaaaaa');
+  //console.log(addItemText,'ssssaaaa')
+
   const isItemEditable = (item: Item, templateArea?: TemplateArea) => {
     if (!item.constraints) return false;
 
@@ -433,16 +440,35 @@ const Designer: FC<{
 
   const handleAddTextClick = () => {
 
-    showDialog(
-      "add-text",
-      <AddTextDialog
-        onClose={() => closeDialog("add-text")}
-        onConfirm={(item) => {
-          addItemText(item, actualAreaId);
-          closeDialog("add-text");
-        }}
-      />
-    );
+    const itemText ={
+      guid: '',
+      name: '',
+      text: "Enter your name",
+      fillColor: defaultColor,
+      fontFamily: fonts[0].name,
+      fontSize: 48,
+      fontWeight: 'normal normal',
+      isTextOnPath: false,
+      constraints: null,  
+      placeholder: 'Input your text here',
+      backgroundColor: 'rgb(235, 237, 242)'
+  }
+
+    console.log(itemText,actualAreaId,'add text');
+    addItemText(itemText, actualAreaId);
+
+    // showDialog(
+    //   "add-text",
+    //   <AddTextDialog
+    //     onClose={() => closeDialog("add-text")}
+    //     onConfirm={(item) => {
+    //       // console.log(item,actualAreaId,'add text');
+          
+    //       addItemText(item, actualAreaId);
+    //       closeDialog("add-text");
+    //     }}
+    //   />
+    // );
   };
 
   const handleAddImageFromGalleryClick = async () => {
@@ -595,7 +621,7 @@ const Designer: FC<{
     );
   };
 
-  console.log(templates,'templates');
+  // console.log(isItemEditable,'isItemEditable');
   
   return (
     <>
@@ -719,6 +745,12 @@ const Designer: FC<{
 
           {(showAddTextButton || showUploadButton || showGalleryButton) && (
             <UploadButtons>
+
+
+{/* console.log(itemsFiltered,currentTemplateArea,'aaaaaa'); */}
+
+      
+              <>  
               {showAddTextButton && (
                 <Button isFullWidth onClick={handleAddTextClick}>
                   <Icon>
@@ -727,6 +759,8 @@ const Designer: FC<{
                   <span>{T._("Adaugă Text", "Composer")}</span>
                 </Button>
               )}
+              </>
+          
 
               {showGalleryButton && (
                 <Button isFullWidth onClick={handleAddImageFromGalleryClick}>

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import "./Tray.css";
+import DesignerHelper from './tray/DesignerHelper';
 
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   //  const [isOpen, setIsOpen] = useState(false);
 
+  const templates =  DesignerHelper();
+  console.log(templates,'items');
   const handleMultipleClicks = (event) => {
 
     console.log(event, 'eventtttt');
@@ -79,6 +82,45 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                 </div>
               </div>
             </div>
+
+            {/* LOGOS */}
+            <div className="tray-mc-content">
+              <div className="tray-mc-list-wrapper">
+                {/* class="headline-3 css-4j0u2k" */}
+                <div className="mc-list-title">
+                  Select Logos
+                </div>
+                <div className="tray-mc-grid">
+                  {templates.map((template, i) => {
+                    return (
+                      <div
+                        className="heading"
+                        id={template.id}
+                      >
+                        <div
+                          className="sitems"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            flexGrow: 1,
+                            justifyContent: "flex-start",
+                          }}
+                          onClick={handleMultipleClicks}
+                          id={template.id}
+                        >
+                          {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
+                          <div id={template.id} className="slabel">
+                           <span id={template.id} style={{fontSize: '9px'}}>{template.name}</span> 
+                          </div>
+                          </div>
+                      </div>
+                    );
+                  })}     
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
