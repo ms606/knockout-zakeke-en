@@ -125,7 +125,7 @@ export function DesignerHelper() {
   // const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
 
   const filteredAreas =
-    product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+    product?.areas.filter(() => isAreaVisible(area.id)) ?? [];
     
   let finalVisibleAreas = [];
 
@@ -137,6 +137,7 @@ export function DesignerHelper() {
 
   console.log(translatedTemplates, filteredAreas,'translatedTemplates');
 
+  
   return filteredAreas;
 
 //   let translatedCurrentTemplate = {
