@@ -69,7 +69,6 @@ const AddTextDialog: FC<{ onClose: () => void, onConfirm: (item: EditTextItem) =
             case 'placeholder':    
                 newItem.placeholder = value as string;
         }
-
         setItem(newItem);
     }
 

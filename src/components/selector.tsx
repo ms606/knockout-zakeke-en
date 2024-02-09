@@ -17,6 +17,7 @@ import Tray from "./Tray";
 
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import Designer from "./layouts/Designer";
+import DesignerSignature from "./layouts/DesignerSignature";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
 import useStore from "../Store";
 import { makeFirstLetterCaps, T } from "../Helpers";
@@ -44,20 +45,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 }) => {
   const {
     isSceneLoading,
-    loadComposition,
-    isAddToCartLoading,
-    isAreaVisible,
-    price,
     groups,
-    product,
     selectOption,
-    addToCart,
     templates,
     setTemplate,
     setCamera,
     productName,
-    zoomIn,
-    zoomOut,
     items,
     getOnlineScreenshot,
   } = useZakeke();
@@ -82,6 +75,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // Open tray for menu
   const [isTrayOpen, setIsTrayOpen] = useState<any | null>(false);
+  const [selectedTrayType, setSelectedTrayType] = useState<any | null>("");
 
   // Get the id of the selected group from the tray
   const [selectedGroupIdFromTray, selectGroupIdFromTray] = useState<
@@ -113,7 +107,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     false
   );
 
-
   // Filter logos and signature for tray
   const filteredAreas = null;
   // product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
@@ -128,7 +121,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (attribute) => attribute.id === selectedAttributeId
   );
 
-  // removed test  
+  // removed test
   // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
   // if (indexToRemove !== -1) {
   //   groups.splice(indexToRemove, 1);
@@ -151,7 +144,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //     const indexToDel = groups.findIndex(
     //       (obj) => obj.name === "MODALITATE IMPRIMARE"
     //     );
-       
+
     //     for (let i = 0; i < groups.length; i++) {
     //       if (
     //         selectedOptionName !== "PRINTAT" &&
@@ -204,7 +197,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     if (!selectedGroup && groups.length > 0) {
       selectGroup(groups[0].id);
 
-      setActiveColorOption('plain');
+      setActiveColorOption("plain");
 
       if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
@@ -244,51 +237,51 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //   selectedAttribute,
     //   "Select attribute first time"
     // );
-console.log(selectedGroup, selectedStep);
+    console.log(selectedGroup, selectedStep);
 
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
 
-   if(selectedGroup)  { 
-    if (selectedGroup?.steps?.length > 0 ) {
-      if (activeColorOption === "plain") {
-        selectAttribute(selectedGroup.steps[0].attributes[0].id);
-        if (selectedGroup) {
-          selectStep(selectedGroup.steps[0].id);
-          selectStepName(selectedGroup?.steps[0].name);
+    if (selectedGroup) {
+      if (selectedGroup?.steps?.length > 0) {
+        if (activeColorOption === "plain") {
+          selectAttribute(selectedGroup.steps[0].attributes[0].id);
+          if (selectedGroup) {
+            selectStep(selectedGroup.steps[0].id);
+            selectStepName(selectedGroup?.steps[0].name);
+          }
         }
-      }
-      if (activeColorOption === "metallic") {
-        selectAttribute(selectedGroup.steps[0].attributes[1].id);
-        if (selectedGroup) {
-          selectStep(selectedGroup.steps[0].id);
-          selectStepName(selectedGroup?.steps[0].name);
+        if (activeColorOption === "metallic") {
+          selectAttribute(selectedGroup.steps[0].attributes[1].id);
+          if (selectedGroup) {
+            selectStep(selectedGroup.steps[0].id);
+            selectStepName(selectedGroup?.steps[0].name);
+          }
         }
-      }
-      if (activeColorOption === "matte") {
-        selectAttribute(selectedGroup.steps[0].attributes[2].id);
-        if (selectedGroup) {
-          selectStep(selectedGroup.steps[0].id);
-          selectStepName(selectedGroup?.steps[0].name);
+        if (activeColorOption === "matte") {
+          selectAttribute(selectedGroup.steps[0].attributes[2].id);
+          if (selectedGroup) {
+            selectStep(selectedGroup.steps[0].id);
+            selectStepName(selectedGroup?.steps[0].name);
+          }
         }
-      }
-      if (activeColorOption === "fluorescent") {
-        selectAttribute(selectedGroup.steps[0].attributes[3].id);
-        if (selectedGroup) {
-          selectStep(selectedGroup.steps[0].id);
-          selectStepName(selectedGroup?.steps[0].name);
+        if (activeColorOption === "fluorescent") {
+          selectAttribute(selectedGroup.steps[0].attributes[3].id);
+          if (selectedGroup) {
+            selectStep(selectedGroup.steps[0].id);
+            selectStepName(selectedGroup?.steps[0].name);
+          }
         }
-      }
-      if (activeColorOption === "knockX") {
-        //selectGroup(selectedGroup?.steps[1].id)
-        if (selectedGroup) {
-          selectStep(selectedGroup.steps[1].id);
-          selectStepName(selectedGroup?.steps[1].name);
+        if (activeColorOption === "knockX") {
+          //selectGroup(selectedGroup?.steps[1].id)
+          if (selectedGroup) {
+            selectStep(selectedGroup.steps[1].id);
+            selectStepName(selectedGroup?.steps[1].name);
+          }
+          // selectAttribute(selectedStep.attributes[3].id);
         }
-        // selectAttribute(selectedStep.attributes[3].id);
       }
     }
-  }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAttribute, attributes, activeColorOption]);
@@ -322,7 +315,7 @@ console.log(selectedGroup, selectedStep);
     selectColorName("");
     setCurrentIndex((currentIndex - 1 + groups.length) % groups.length);
     selectGroup(groups[(currentIndex - 1 + groups.length) % groups.length].id);
-    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0].id)
+    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0].id);
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -388,7 +381,8 @@ console.log(selectedGroup, selectedStep);
     selectColorName("");
     setCurrentIndex((currentIndex + 1) % groups.length);
     selectGroup(groups[(currentIndex + 1) % groups.length].id);
-    if (selectedGroup?.steps) selectStep(groups[(currentIndex + 1) % groups.length].steps[0].id)
+    if (selectedGroup?.steps)
+      selectStep(groups[(currentIndex + 1) % groups.length].steps[0].id);
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -398,12 +392,17 @@ console.log(selectedGroup, selectedStep);
     }
   };
 
-  const toggleTray = () => {
+  const toggleTray = (trayName: string) => {
     if (selectedTrayPreviewOpenButton) {
       selectTrayPreviewOpenButton(!selectedTrayPreviewOpenButton);
     }
     // trayPreviewOpenButton();
     setIsTrayOpen(!isTrayOpen);
+
+    // set what tray type is selected e.g. colors, signature, logo
+    setSelectedTrayType(trayName);
+
+    console.log(trayName);
   };
 
   const trayPreviewOpenButton = () => {
@@ -414,16 +413,22 @@ console.log(selectedGroup, selectedStep);
   };
 
   const groupIdFromFunc = (data: number) => {
-    // console.log(data,groups,'filteredArrayfilteredArray');
+    // console.log(data, groups, "filteredArrayfilteredArray");
 
-    const filteredArray = groups.filter((group) => group.id == data);
+    let filteredArray;
+
+    filteredArray = groups.filter((group) => {
+      if (group?.id) {
+        group.id == data;
+      }
+    });
     // console.log(filteredArray,'filteredArray');
 
     const filteredArrayId = groups.filter((i: any, index: number) => {
       return i.id == data;
     });
 
-   console.log(filteredArray,filteredArrayId);
+    console.log(filteredArray, filteredArrayId);
 
     if (filteredArrayId.length > 0) {
       const foundItem = filteredArrayId[0];
@@ -435,8 +440,10 @@ console.log(selectedGroup, selectedStep);
 
     // selectGroup(data);
     // selectGroupIdFromTray(data);
-    selectGroup(filteredArray[0].id);
-    selectGroupIdFromTray(filteredArray[0].id);
+    if(filteredArray[0]?.id){
+      selectGroup(filteredArray[0].id);
+      selectGroupIdFromTray(filteredArray[0].id);
+    }
   };
 
   const togglePersonalize = () => {
@@ -526,7 +533,7 @@ console.log(selectedGroup, selectedStep);
               selectTrayPreviewOpenButton={selectTrayPreviewOpenButton}
             /> */}
 
-            <div className='guide'>
+            <div className="guide">
               <div className="tray-header-1">
                 <div
                   style={{
@@ -535,14 +542,10 @@ console.log(selectedGroup, selectedStep);
                 >
                   <div
                     className="active-marketing-component-name"
-                    onClick={() => toggleTray()}
+                    onClick={() => toggleTray("null")}
                   >
-                   <div className="selectiontype">
-                   
-                        {groupNameText}
-                   
-                   </div> 
-                    
+                    <div className="selectiontype">{groupNameText}</div>
+
                     <div className="arrd">
                       <svg
                         version="1.1"
@@ -579,7 +582,9 @@ console.log(selectedGroup, selectedStep);
           </div>
           <br />
 
-          <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
+          { (selectedTrayType === "" || selectedTrayType === "null"  || selectedTrayType === 'colors') && 
+
+            <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
             {isTrayOpen && !selectedTrayPreviewOpenButton && (
               <Tray
                 groupNameList={selectedGroupList}
@@ -589,36 +594,12 @@ console.log(selectedGroup, selectedStep);
               />
             )}
 
-            {!isTrayOpen && !selectedTrayPreviewOpenButton && (   
-            <ColorMenuSeleciton              
-              updateActiveColorOption={updateActiveColorOption}
-              activeColorOption={activeColorOption}
-            />
-            )} 
-
-           
-
-            {/* {selectedGroup &&
-              !selectedTrayPreviewOpenButton &&
-              selectedGroup.steps.length > 0 &&
-              !isTrayOpen && (
-                <List>
-                  {selectedGroup.steps.map((step) => {
-                    return (
-                      <ListItem
-                        key={step.id}
-                        onClick={() => {
-                          selectStep(step.id);
-                          selectStepName(step.name);
-                        }}
-                        selected={selectedStep === step}
-                      >
-                        {step.name}
-                      </ListItem>
-                    );
-                  })}
-                </List>
-              )} */}    
+            {!isTrayOpen && !selectedTrayPreviewOpenButton && (
+              <ColorMenuSeleciton
+                updateActiveColorOption={updateActiveColorOption}
+                activeColorOption={activeColorOption}
+              />
+            )}
 
             {!selectedTrayPreviewOpenButton && (
               <div
@@ -751,7 +732,7 @@ console.log(selectedGroup, selectedStep);
                 </div>
               </div>
             )}
-          </div>
+          </div>}
         </div>
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
@@ -765,6 +746,10 @@ console.log(selectedGroup, selectedStep);
           </div>
           {/* </button> */}
         </div>
+
+        {selectedTrayType === "signature" && (
+          <DesignerSignature togglePersonalize={togglePersonalize} />
+        )}
       </div>
     </>
   );

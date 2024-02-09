@@ -161,9 +161,18 @@
   .heading:hover {
     background-color: #fff;
     color: black !important;
+    box-shadow: rgb(100 211 255 / 73%) 0px 0px 30px 6px !important;
+  }
+
+  .tray-image {
+    color: black !important;
   }
 
   .sitems {
+    color: black !important; 
+  }
+
+  .sitems:hover {
     color: black !important; 
   }
 

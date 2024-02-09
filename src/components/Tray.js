@@ -1,19 +1,57 @@
 import React, { useState } from "react";
 import "./Tray.css";
-import DesignerHelper from './tray/DesignerHelper';
+import {DesignerHelper, DesignerSignature} from './tray/DesignerHelper';
+import {
+  Image,
+  ImageItem,
+  Item,
+  ProductArea,
+  TemplateArea,
+  TextItem,
+  ZakekeDesigner,
+  useZakeke,
+} from "zakeke-configurator-react";
 
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   //  const [isOpen, setIsOpen] = useState(false);
 
-  const templates =  DesignerHelper();
-  console.log(templates,'items');
+
+  const {
+    setItemTextOnPath,
+    addItemText,
+    fonts,
+    defaultColor 
+  } = useZakeke();
+
+  const templates =  DesignerSignature();
+  // console.log(templates,'items');
   const handleMultipleClicks = (event) => {
 
     console.log(event, 'eventtttt');
     UpdateGroupId(event.target.id);
-    toggleFunc();
+    toggleFunc('colors');
   };
+
+ const handleTextItem = (actualAreaId) => {
+   const itemText ={
+     guid: '',
+     name: '',
+     text: "Enter your name",
+     fillColor: defaultColor,
+     fontFamily: fonts[0].name,
+     fontSize: 48,
+     fontWeight: 'normal normal',
+     isTextOnPath: false,
+     constraints: null,  
+     placeholder: 'Input your text here',
+     backgroundColor: 'rgb(235, 237, 242)'
+ }
  
+   console.log(itemText,actualAreaId,'add text');
+   addItemText(itemText, actualAreaId);
+   toggleFunc('signature');
+ }
+
   return (
     <div>
       {groupNameList && (
@@ -71,7 +109,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                           onClick={handleMultipleClicks}
                           id={groupName.id}
                         >
-                          <img id={groupName.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
+                          <img className="tray-image" id={groupName.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
                           <div id={groupName.id} className="slabel">
                            <span id={groupName.id} style={{fontSize: '9px'}}>{groupName.name}</span> 
                           </div>
@@ -106,7 +144,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                             flexGrow: 1,
                             justifyContent: "flex-start",
                           }}
-                          onClick={handleMultipleClicks}
+                          onClick={() => handleTextItem(template.id)}
                           id={template.id}
                         >
                           {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}

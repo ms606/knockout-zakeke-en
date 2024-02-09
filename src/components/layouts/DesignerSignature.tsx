@@ -91,14 +91,14 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   ${(props) =>
     props.isMobile &&
     `
-        position:fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        z-index:11;
-        background-color:#ffffff;
-        overflow-y:scroll;
+        // position:fixed;
+        // top:0;
+        // left:0;
+        // width:100%;
+        // height:100%;
+        // z-index:11;
+        // background-color:#ffffff;
+        // overflow-y:scroll;
     `}
 `;
 
@@ -176,38 +176,7 @@ const SingleValueContainer = styled(components.SingleValue)`
   }
 `;
 
-const CopyrightMessage = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const CopyrightMandatoryMessageContainer = styled.div`
-  display: grid;
-  grid-template-columns: 20px auto;
-  grid-gap: 5px;
-`;
-
-const CopyrightCheckbox = styled.input`
-  width: 13px;
-`;
-
-const CopyrightMandatoryMessage = styled.div``;
-
-// interface EditTextItem {
-//   guid: string,
-//   name: string,
-//   text: string,
-//   fillColor: string,
-//   fontFamily: string,
-//   fontWeight: string,
-//   fontSize: number,
-//   isTextOnPath: boolean;
-//   constraints: { [key: string]: any } | null,
-//   placeholder: string,
-//   backgroundColor: string
-// }
-
-const Designer: FC<{
+const DesignerSignature: FC<{
   onCloseClick?: () => void;
   togglePersonalize?: () => void;
 }> = ({ onCloseClick, togglePersonalize }) => {
@@ -224,8 +193,6 @@ const Designer: FC<{
     setTemplate,
     setCamera,
     removeItem,
-    setItemImageFromFile,
-    setItemImage,
     setItemText,
     setItemItalic,
     setItemBold,
@@ -233,12 +200,6 @@ const Designer: FC<{
     setItemFontFamily,
     setItemTextOnPath,
     addItemText,
-    addItemImage,
-    createImage,
-    getTemplateUploadRestrictictions,
-    eventMessages,
-    setCopyrightMessageAccepted,
-    getCopyrightMessageAccepted,
     publicTranslations,
     fonts,
     defaultColor 
@@ -336,7 +297,7 @@ const Designer: FC<{
     (x) => x.id === actualAreaId
   );
 
-  // itemFiltered has the values of all the texts or images loaded to the product
+
   let itemsFiltered = items.filter((item) => item.areaId === actualAreaId);
   
   const allStaticElements = !itemsFiltered.some((item) => {
@@ -353,21 +314,6 @@ const Designer: FC<{
     !currentTemplateArea ||
     (currentTemplateArea.canAddImage &&
       currentTemplateArea.uploadRestrictions.isUserImageAllowed);
-  const showGalleryButton =
-    !currentTemplateArea ||
-    (currentTemplateArea.canAddImage &&
-      !currentTemplateArea.disableSellerImages);
-
-  const supportedFileFormats = getSupportedUploadFileFormats(
-    currentTemplate!.id,
-    actualAreaId
-  ).join(", ");
-
-  const [copyrightMandatoryCheckbox, setCopyrightMandatoryCheckbox] = useState(
-    getCopyrightMessageAccepted()
-  );
-  const copyrightMessage =
-    eventMessages && eventMessages.find((message) => message.eventID === 8);
 
   const slidesToShow = window.innerWidth <= 1600 ? 3 : 4;
 
@@ -389,26 +335,7 @@ const Designer: FC<{
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalVisibleAreas]);
 
-  function getSupportedUploadFileFormats(templateId: number, areaId: number) {
-    const restrictions = getTemplateUploadRestrictictions(templateId, areaId);
-    const fileFormats: string[] = [];
-
-    if (restrictions.isJpgAllowed) fileFormats.push(".jpg", ".jpeg");
-
-    if (restrictions.isPngAllowed) fileFormats.push(".png");
-
-    if (restrictions.isSvgAllowed) fileFormats.push(".svg");
-
-    if (restrictions.isEpsAllowed) fileFormats.push(".eps");
-
-    if (restrictions.isPdfAllowed) fileFormats.push(".pdf");
-
-    return fileFormats;
-  }
-
-  // console.log(addItemText,itemsFiltered,currentTemplateArea,'aaaaaa');
-  //console.log(addItemText,'ssssaaaa')
-
+  
   const isItemEditable = (item: Item, templateArea?: TemplateArea) => {
     if (!item.constraints) return false;
 
@@ -457,112 +384,14 @@ const Designer: FC<{
     console.log(itemText,actualAreaId,'add text');
     addItemText(itemText, actualAreaId);
 
-    // showDialog(
-    //   "add-text",
-    //   <AddTextDialog
-    //     onClose={() => closeDialog("add-text")}
-    //     onConfirm={(item) => {
-    //       // console.log(item,actualAreaId,'add text');
-          
-    //       addItemText(item, actualAreaId);
-    //       closeDialog("add-text");
-    //     }}
-    //   />
-    // );
   };
 
-  const handleAddImageFromGalleryClick = async () => {
-    showDialog(
-      "add-image",
-      <ImagesGalleryDialog
-        onClose={() => closeDialog("add-image")}
-        onImageSelected={(image: { imageID: number }) => {
-          addItemImage(image.imageID, actualAreaId);
-          closeDialog("add-image");
-        }}
-      />
-    );
-  };
-
-  const handleUploadImageClick = async (
-    addItemImage: (guid: any, imageId: number) => Promise<void>,
-    createImage: (
-      file: File,
-      progress?: (percentage: number) => void
-    ) => Promise<Image>
-  ) => {
-    if (currentTemplate && actualAreaId) {
-      const fileFormats = getSupportedUploadFileFormats(
-        currentTemplate.id,
-        actualAreaId
-      );
-      let input = document.createElement("input");
-      input.setAttribute("accept", fileFormats.join(","));
-      input.setAttribute("type", "file");
-      input.addEventListener("change", async (e) => {
-        const files = (e.currentTarget as HTMLInputElement).files;
-        if (files && files.length > 0 && actualAreaId) {
-          setIsLoading(true);
-          try {
-            const image = await createImage(files[0], (progress: number) =>
-              console.log(progress)
-            );
-            addItemImage(image.imageID, actualAreaId);
-            input.remove();
-          } catch (ex) {
-            console.error(ex);
-            showDialog(
-              "error",
-              <ErrorDialog
-                error={"Failed uploading image."}
-                onCloseClick={() => closeDialog("error")}
-              />
-            );
-          } finally {
-            setIsLoading(false);
-          }
-        }
-      });
-      document.body.appendChild(input);
-      input.click();
-    }
-  };
 
   const handleItemRemoved = (guid: string) => {
     removeItem(guid);
   };
 
-  const handleItemImageChange = async (item: EditImageItem, file: File) => {
-    try {
-      setIsLoading(true);
-      await setItemImageFromFile(item.guid, file);
-    } catch (ex) {
-      console.error(ex);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleItemImageGallery = async (item: EditImageItem) => {
-    showDialog(
-      "add-image",
-      <ImagesGalleryDialog
-        onClose={() => closeDialog("add-image")}
-        onImageSelected={async (image) => {
-          closeDialog("add-image");
-          try {
-            setIsLoading(true);
-            await setItemImage(item.guid, image.imageID);
-          } catch (ex) {
-            console.error(ex);
-          } finally {
-            setIsLoading(false);
-          }
-        }}
-      />
-    );
-  };
-
+ 
   const handleItemPropChange = (
     item: EditTextItem | EditImageItem,
     prop: string,
@@ -571,12 +400,6 @@ const Designer: FC<{
     switch (prop) {
       case "remove":
         handleItemRemoved(item.guid);
-        break;
-      case "image-upload":
-        handleItemImageChange(item as EditImageItem, value as File);
-        break;
-      case "image-gallery":
-        handleItemImageGallery(item as EditImageItem);
         break;
       case "text":
         setItemText(item.guid, value as string);
@@ -620,15 +443,13 @@ const Designer: FC<{
       </SingleValueContainer>
     );
   };
-
-  // console.log(isItemEditable,'isItemEditable');
   
   return (
     <>
       {!moveElements && (
         <DesignerContainer isMobile={isMobile}>
           {/* Templates */}
-          {!isMobile && templates.length > 1 && (
+          {/* {!isMobile && templates.length > 1 && (
             <TemplatesContainer>
               {templates.map((template) => (
                 <Template
@@ -642,7 +463,7 @@ const Designer: FC<{
                 </Template>
               ))}
             </TemplatesContainer>
-          )}
+          )} */}
 
           {/* Areas */}
           {!isMobile && finalVisibleAreas.length > 1 && (
@@ -682,34 +503,35 @@ const Designer: FC<{
             </SelectContainer>
           )}
           {isMobile && translatedAreas.length > 1 && (
-            <SelectContainer>
-              {/* <span>{T._("Customizable Areas", "Composer")}</span> */}
-              <span>{dynamicVals?.get('Customizable Areas')}</span>              
-              <Select
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    width: '100% !important',
-                    display: 'flex !important',
-                    alignItems: 'center !important',
-                    justifyContent: 'center !important',
-                  }),
-                }}
-                isSearchable={false}
-                options={translatedAreas}
-                menuPosition="fixed"
-                components={{
-                  Option: SelectOption,
-                  SingleValue: SelectSingleValue,
-                }}
-                value={[translatedAreas!.find((x) => x.id === actualAreaId)]}
-                onChange={(area: any) => setActualAreaId(area.id)}
-              />
-            </SelectContainer>
+            // <SelectContainer>
+            //   {/* <span>{T._("Customizable Areas", "Composer")}</span> */}
+            //   <span>{dynamicVals?.get('Customizable Areas')}</span>              
+            //   <Select
+            //     styles={{
+            //       control: (base) => ({
+            //         ...base,
+            //         width: '100% !important',
+            //         display: 'flex !important',
+            //         alignItems: 'center !important',
+            //         justifyContent: 'center !important',
+            //       }),
+            //     }}
+            //     isSearchable={false}
+            //     options={translatedAreas}
+            //     menuPosition="fixed"
+            //     components={{
+            //       Option: SelectOption,
+            //       SingleValue: SelectSingleValue,
+            //     }}
+            //     value={[translatedAreas!.find((x) => x.id === actualAreaId)]}
+            //     onChange={(area: any) => setActualAreaId(area.id)}
+            //   />
+            // </SelectContainer>
+            <></>
           )}
 
           {itemsFiltered.length === 0 &&
-            !(showAddTextButton || showUploadButton || showGalleryButton) && (
+            !(showAddTextButton || showUploadButton) && (
               <Center>{"No customizable items"}</Center>
             )}
 
@@ -721,35 +543,12 @@ const Designer: FC<{
                   handleItemPropChange={handleItemPropChange}
                   item={item as TextItem}
                 />
-              );
-            else if (
-              item.type === 1 &&
-              isItemEditable(item, currentTemplateArea)
-            )
-              return (
-                <ItemImage
-                  uploadImgDisabled={
-                    copyrightMessage && copyrightMessage.additionalData.enabled
-                      ? !copyrightMandatoryCheckbox
-                      : false
-                  }
-                  key={item.guid}
-                  handleItemPropChange={handleItemPropChange}
-                  item={item as ImageItem}
-                  currentTemplateArea={currentTemplateArea!}
-                />
-              );
-
+              );            
             return null;
           })}
 
-          {(showAddTextButton || showUploadButton || showGalleryButton) && (
+          {(showAddTextButton || showUploadButton) && (
             <UploadButtons>
-
-
-{/* console.log(itemsFiltered,currentTemplateArea,'aaaaaa'); */}
-
-      
               <>  
               {showAddTextButton && (
                 <Button isFullWidth onClick={handleAddTextClick}>
@@ -759,87 +558,7 @@ const Designer: FC<{
                   <span>{T._("Adaugă Text", "Composer")}</span>
                 </Button>
               )}
-              </>
-          
-
-              {showGalleryButton && (
-                <Button isFullWidth onClick={handleAddImageFromGalleryClick}>
-                  <Icon>
-                    <Add />
-                  </Icon>
-                  <span>{T._("Adaugă Logo", "Composer")}</span>
-                </Button>
-              )}
-
-              {showUploadButton && (
-                <>
-                  <Button
-                    disabled={
-                      copyrightMessage &&
-                      copyrightMessage.additionalData.enabled
-                        ? !copyrightMandatoryCheckbox
-                        : false
-                    }
-                    isFullWidth
-                    onClick={() =>
-                      handleUploadImageClick(addItemImage, createImage)
-                    }
-                  >
-                    <Icon>
-                      <Add />
-                    </Icon>
-                    <span>
-                      <span>
-                        {itemsFiltered.some(
-                          (item) =>
-                            item.type === 1 &&
-                            isItemEditable(item, currentTemplateArea)
-                        )
-                          ? T._("Upload another image", "Composer")
-                          : dynamicVals?.get('Upload image') // T._("Upload image", "Composer")
-                          }{" "}
-                      </span>
-                    </span>
-                  </Button>
-                </>
-              )}
-              <SupportedFormatsList>
-                {T._("Supported file formats:", "Composer") +
-                  " " +
-                  supportedFileFormats}
-              </SupportedFormatsList>
-
-              {copyrightMessage && copyrightMessage.visible && (
-                <CopyrightMessage>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: copyrightMessage.description,
-                    }}
-                  />
-                  {copyrightMessage &&
-                    copyrightMessage.additionalData.enabled && (
-                      <CopyrightMandatoryMessageContainer>
-                        <CopyrightCheckbox
-                          type="checkbox"
-                          defaultChecked={copyrightMandatoryCheckbox}
-                          onClick={() => {
-                            setCopyrightMessageAccepted(
-                              !copyrightMandatoryCheckbox
-                            );
-                            setCopyrightMandatoryCheckbox(
-                              !copyrightMandatoryCheckbox
-                            );
-                          }}
-                        />
-                        <CopyrightMandatoryMessage
-                          dangerouslySetInnerHTML={{
-                            __html: copyrightMessage.additionalData.message,
-                          }}
-                        />
-                      </CopyrightMandatoryMessageContainer>
-                    )}
-                </CopyrightMessage>
-              )}
+              </>              
             </UploadButtons>
           )}
           {itemsFiltered.length > 0 && !allStaticElements && (
@@ -868,15 +587,7 @@ const Designer: FC<{
         >
          
           <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />
-         
-          {/* <IconsAndDesignerContainer> */}
-            {/* <ZoomIconIn hoverable onClick={() => customizerRef.current.zoomIn()}>
-							<SearchPlusSolid />
-						</ZoomIconIn>
-						<ZoomIconOut hoverable onClick={() => customizerRef.current.zoomOut()}>
-							<SearchMinusSolid />
-						</ZoomIconOut> */}
-          {/* </IconsAndDesignerContainer> */}
+                   
          <div style={{position: "relative", top: "26px"}}>
          <Button isFullWidth primary onClick={() => setMoveElements(false)}>
             <span>{"OK"} </span>
@@ -888,4 +599,4 @@ const Designer: FC<{
   );
 };
 
-export default Designer;
+export default DesignerSignature;
