@@ -156,13 +156,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //   }
     // }
 
-    if (items && itemAvailable) {
-      if (items.filter((item) => item.type === 1)) {
-        if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
-          groups.push(stitchTypeGroup);
-        }
-      }
-    }
+    // if (items && itemAvailable) {
+    //   if (items.filter((item) => item.type === 1)) {
+    //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
+    //       groups.push(stitchTypeGroup);
+    //     }
+    //   }
+    // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }
@@ -237,7 +237,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //   selectedAttribute,
     //   "Select attribute first time"
     // );
-    console.log(selectedGroup, selectedStep);
+   // console.log(selectedGroup, selectedStep);
 
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
@@ -315,7 +315,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex((currentIndex - 1 + groups.length) % groups.length);
     selectGroup(groups[(currentIndex - 1 + groups.length) % groups.length].id);
-    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0].id);
+    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -379,10 +379,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const handleRightClick = () => {
     selectColorName("");
+   
     setCurrentIndex((currentIndex + 1) % groups.length);
     selectGroup(groups[(currentIndex + 1) % groups.length].id);
     if (selectedGroup?.steps)
-      selectStep(groups[(currentIndex + 1) % groups.length].steps[0].id);
+      selectStep(groups[(currentIndex + 1) % groups.length].steps[0]?.id);
 
     if (items.filter((item) => item.type === 0).length === 0) {
       if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -393,6 +394,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const toggleTray = (trayName: string) => {
+    
     if (selectedTrayPreviewOpenButton) {
       selectTrayPreviewOpenButton(!selectedTrayPreviewOpenButton);
     }
@@ -402,7 +404,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // set what tray type is selected e.g. colors, signature, logo
     setSelectedTrayType(trayName);
 
-    console.log(trayName);
+    // console.log(trayName);
   };
 
   const trayPreviewOpenButton = () => {
@@ -412,23 +414,25 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     trayPreviewOpenButton3DFunc(selectedTrayPreviewOpenButton);
   };
 
+  // After selection of the element from the tray
   const groupIdFromFunc = (data: number) => {
     // console.log(data, groups, "filteredArrayfilteredArray");
 
     let filteredArray;
 
+    groups.filter(element => {
+      return element
+    })
+    
     filteredArray = groups.filter((group) => {
       if (group?.id) {
         group.id == data;
       }
     });
-    // console.log(filteredArray,'filteredArray');
 
     const filteredArrayId = groups.filter((i: any, index: number) => {
       return i.id == data;
     });
-
-    console.log(filteredArray, filteredArrayId);
 
     if (filteredArrayId.length > 0) {
       const foundItem = filteredArrayId[0];

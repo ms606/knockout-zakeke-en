@@ -59,9 +59,10 @@ html,body {
   align-items: center;
   position: absolute;
   width: 250px;
-  height: 265px;
+  /* height: 265px; */
+  height: 500px;
   left: 30px;
-  top: calc(35% - 015px);
+  top: calc(29% - 015px);
 }
 
 .animate-wrapper {

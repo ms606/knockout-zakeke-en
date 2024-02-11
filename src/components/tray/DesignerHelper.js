@@ -133,7 +133,7 @@ export function DesignerHelper() {
     return { id: template.id, name: template.name, areas: template.areas };
   });
 
-  console.log(translatedTemplates, filteredAreas, "translatedTemplates");
+  // console.log(translatedTemplates, filteredAreas, "translatedTemplates");
 
   return filteredAreas;
 
@@ -625,11 +625,11 @@ export function DesignerSignature() {
    
 
     const found = filterSignatureAreas.some(item2 => item2.id === x.id)
-    console.log(found);
+    // console.log(found);
     if (found) signatureIdAreas.push(x)
   })
 
-  console.log(filterSignatureAreas, signatureIdAreas,'signature');
+  // console.log(filterSignatureAreas, signatureIdAreas,'signature');
   // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
 
   return signatureIdAreas;

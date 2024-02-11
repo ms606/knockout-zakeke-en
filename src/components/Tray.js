@@ -25,9 +25,11 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
 
   const templates =  DesignerSignature();
   // console.log(templates,'items');
+
+
   const handleMultipleClicks = (event) => {
 
-    console.log(event, 'eventtttt');
+     console.log(event, 'eventtttt');
     UpdateGroupId(event.target.id);
     toggleFunc('colors');
   };
@@ -126,7 +128,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
               <div className="tray-mc-list-wrapper">
                 {/* class="headline-3 css-4j0u2k" */}
                 <div className="mc-list-title">
-                  Select Logos
+                  Select Signature
                 </div>
                 <div className="tray-mc-grid">
                   {templates.map((template, i) => {

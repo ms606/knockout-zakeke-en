@@ -89,8 +89,8 @@ const ColorsContainer = styled.div`
 `;
 
 const SinglePaletteItem = styled.div<{ color: string; selected: boolean }>`
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   background-color: ${(props) => props.color};
   border: 1px lightgray solid;
   cursor: pointer;
@@ -122,7 +122,7 @@ const OptionContainer = styled(components.Option)`
 
   img {
     max-width: 100%;
-    height: 24px;
+    height: 22px;
     object-fit: contain;
   }
 `;
@@ -130,7 +130,7 @@ const OptionContainer = styled(components.Option)`
 const SingleValueContainer = styled(components.SingleValue)`
   img {
     max-width: 100%;
-    height: 24px;
+    height: 22px;
     object-fit: contain;
   }
 `;

@@ -102,6 +102,12 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
     `}
 `;
 
+const DesignerContainerHeader = styled.div<{}>`
+    display: flex;
+    flex-flow: row;
+`;
+
+
 const UploadButtons = styled.div`
   display: flex;
   flex-direction: column;
@@ -466,6 +472,7 @@ const DesignerSignature: FC<{
           )} */}
 
           {/* Areas */}
+          <DesignerContainerHeader>
           {!isMobile && finalVisibleAreas.length > 1 && (
               finalVisibleAreas.map((area:any) => (
                 <Area
@@ -477,6 +484,8 @@ const DesignerSignature: FC<{
                 </Area>
               ))
            )}
+          </DesignerContainerHeader>
+          
 
           {isMobile && translatedTemplates.length > 1 && (
             <SelectContainer>
@@ -534,6 +543,7 @@ const DesignerSignature: FC<{
             !(showAddTextButton || showUploadButton) && (
               <Center>{"No customizable items"}</Center>
             )}
+
 
           {itemsFiltered.map((item) => {
             if (item.type === 0 && isItemEditable(item, currentTemplateArea))
