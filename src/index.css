@@ -62,7 +62,7 @@ html,body {
   /* height: 265px; */
   height: 500px;
   left: 30px;
-  top: calc(29% - 015px);
+  top: calc(23% - 015px);
 }
 
 .animate-wrapper {
@@ -169,7 +169,7 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: right;
-  top: 10px;
+  top: 44px;
 }
 
 

@@ -64,7 +64,7 @@
     top: 100%;
     left: 0;
     width: 100%;
-    height: 504px;
+    height: 474px;
     /* background-color: #fff; */
     /* border: 1px solid #ccc; */
     border-radius: 4px;
@@ -73,6 +73,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+
+  .signature {
+    height: 204px !important;
+  }
+
+  .tray-mc-content > .logos {
+    height: 204px !important;  
   }
   
   .tray-mc-grid {
@@ -121,8 +130,9 @@
     text-align: center;
     align-items: center;
     /* height: 75px; */
+    width: 70px;
     border: none;
-    width: 68.750px;
+      
     text-align: left;
     cursor: pointer;
     display: flex;

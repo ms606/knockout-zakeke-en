@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Tray.css";
-import {DesignerHelper, DesignerSignature} from './tray/DesignerHelper';
+import {DesignerHelper, DesignerSignature, DesignerLogo} from './tray/DesignerHelper';
 import {
   Image,
   ImageItem,
@@ -15,7 +15,6 @@ import {
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   //  const [isOpen, setIsOpen] = useState(false);
 
-
   const {
     setItemTextOnPath,
     addItemText,
@@ -24,12 +23,12 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
   } = useZakeke();
 
   const templates =  DesignerSignature();
+  const templatesLogo =  DesignerLogo();
   // console.log(templates,'items');
 
 
   const handleMultipleClicks = (event) => {
-
-     console.log(event, 'eventtttt');
+    console.log(event, 'eventtttt');
     UpdateGroupId(event.target.id);
     toggleFunc('colors');
   };
@@ -52,6 +51,11 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
    console.log(itemText,actualAreaId,'add text');
    addItemText(itemText, actualAreaId);
    toggleFunc('signature');
+ }
+
+ const handleImageItem = (actualAreaId) => {
+  toggleFunc('logos');
+
  }
 
   return (
@@ -123,8 +127,8 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
               </div>
             </div>
 
-            {/* LOGOS */}
-            <div className="tray-mc-content">
+            {/* SIGNATURE */}
+            <div className="tray-mc-content signature">
               <div className="tray-mc-list-wrapper">
                 {/* class="headline-3 css-4j0u2k" */}
                 <div className="mc-list-title">
@@ -160,6 +164,45 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                 </div>
               </div>
             </div>
+
+
+            {/* LOGOS */}
+            <div className="tray-mc-content logos">
+            <div className="tray-mc-list-wrapper">
+              {/* class="headline-3 css-4j0u2k" */}
+              <div className="mc-list-title">
+                Select Logos
+              </div>
+              <div className="tray-mc-grid">
+                {templatesLogo.map((template, i) => {
+                  return (
+                    <div
+                      className="heading"
+                      id={template.id}
+                    >
+                      <div
+                        className="sitems"
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          flexGrow: 1,
+                          justifyContent: "flex-start",
+                        }}
+                        onClick={() => handleImageItem(template.id)}
+                        id={template.id}
+                      >
+                        {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
+                        <div id={template.id} className="slabel">
+                          <span id={template.id} style={{fontSize: '9px'}}>{template.name}</span> 
+                        </div>
+                        </div>
+                    </div>
+                  );
+                })}     
+              </div>
+            </div>
+          </div>
 
           </div>
         </div>

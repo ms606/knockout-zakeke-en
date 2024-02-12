@@ -18,6 +18,7 @@ import Tray from "./Tray";
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import Designer from "./layouts/Designer";
 import DesignerSignature from "./layouts/DesignerSignature";
+import DesignerLogo from "./layouts/DesignerLogo";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
 import useStore from "../Store";
 import { makeFirstLetterCaps, T } from "../Helpers";
@@ -737,6 +738,15 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
               </div>
             )}
           </div>}
+
+          {selectedTrayType === "signature" && (
+          <DesignerSignature togglePersonalize={togglePersonalize} />
+        )}
+
+        {selectedTrayType === "logos" && (
+          <DesignerLogo togglePersonalize={togglePersonalize} />
+        )}
+        
         </div>
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
@@ -751,9 +761,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           {/* </button> */}
         </div>
 
-        {selectedTrayType === "signature" && (
-          <DesignerSignature togglePersonalize={togglePersonalize} />
-        )}
+        
       </div>
     </>
   );

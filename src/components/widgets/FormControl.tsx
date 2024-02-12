@@ -2,10 +2,10 @@ import React, { FC } from "react";
 import styled from "styled-components";
 
 const FormControlLabel = styled.div`
-  padding: 10px 0px;
+  padding: 0px 0px;
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 3px;
 `;
 
 const FormControlContainer = styled.div<{ rightComponent?: any }>`
@@ -24,10 +24,10 @@ export const FormControl: FC<{
 }> = ({ label, rightComponent, children }) => {
   return (
     <FormControlContainer>
-      {/* <FormControlLabel> */}
-        {/* <span>{label}</span> */}
-        {/* {rightComponent} */}
-      {/* </FormControlLabel> */}
+      <FormControlLabel>
+        <span>{label}</span>
+        {rightComponent}
+      </FormControlLabel>
       {children}
     </FormControlContainer>
   );

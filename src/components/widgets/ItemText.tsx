@@ -92,7 +92,7 @@ const SinglePaletteItem = styled.div<{ color: string; selected: boolean }>`
   width: 22px;
   height: 22px;
   background-color: ${(props) => props.color};
-  border: 1px lightgray solid;
+  border: 1px white solid;
   cursor: pointer;
 
   ${(props) => props.selected && `border: 1px black solid;`}
@@ -110,7 +110,7 @@ const TextColorsContainer = styled.div<{ isDefaultPalette?: boolean }>`
     grid-template-columns: repeat(auto-fill,minmax(20px,1fr));
     grid-gap: 7px;
     `};
-    width: 250px;
+    width: 220px;
 `;
 
 const OptionContainer = styled(components.Option)`
@@ -292,7 +292,7 @@ const ItemText: FC<{
         {(!disableTextColors ||
           !(disableTextColors && textColors.length === 1)) && (
          <div style={{width: '21%'}}>
-          <FormControl label="Color">
+          <FormControl label="">
             <ColorsContainer>
               {!disableTextColors && (
                 <ColorPickerContainer>
