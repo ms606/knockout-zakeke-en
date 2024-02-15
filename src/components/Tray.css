@@ -77,7 +77,7 @@
 
 
   .signature {
-    height: 204px !important;
+    height: 130px !important;
   }
 
   .tray-mc-content > .logos {
@@ -130,7 +130,7 @@
     text-align: center;
     align-items: center;
     /* height: 75px; */
-    width: 70px;
+    width: 69px;
     border: none;
       
     text-align: left;

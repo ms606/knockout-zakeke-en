@@ -185,6 +185,66 @@ export const Button = styled.button<{
 	}
 `;
 
+export const Button_N = styled.div<{
+	primary?: boolean;
+	outline?: boolean;
+	selected?: boolean;
+	disabled?: boolean;
+	isFullWidth?: boolean;
+	uppercase?: boolean;
+}>`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 7px 15px;
+	width: 100px;
+	background-color: ${(props) => (props.primary ? '#297ca3' : 'white')};
+	color: ${(props) => (props.outline ? 'black' : props.primary ? 'white' : '#297CA3')};
+	text-align: center;
+	text-transform: ${(props) => (props.uppercase ? 'uppercase' : 'none')};
+	border: ${(props) => (props.outline ? '1px solid #297CA3' : '1px solid #297CA3')};
+	cursor: ${(props) => (!props.disabled ? 'pointer' : 'auto')};
+	border-radius: 4px;
+	font-size: 12px;
+	line-height: 16px;
+    font-weight: 500;
+	height: 35px;
+  ${(props) =>
+		props.selected &&
+		`
+    border: 1px solid black;
+  `}
+
+  ${(props) =>
+		!props.disabled &&
+		`
+      &:hover {
+        background-color: ${props.outline ? 'white' : props.primary ? '#297ca3' : '#297ca3'};
+        border: ${props.outline ? '1px solid black' : '1px solid #4b6074'};
+        color: ${props.outline ? 'black' : 'white'};
+      }
+  `}
+
+  ${(props) =>
+		props.disabled &&
+		`
+      background-color: lightgray;
+      border: 1px solid gray;
+      color: #313c46;
+  `}
+
+  ${Icon} + span {
+		margin-left: 10px;
+	}
+
+	span {
+		display: flex;
+		text-align: center;
+		justify-content: center;
+		align-items: center;
+	}
+`;
+
 export const Columns = styled.div<{ columns: number }>`
 	width: 100%;
 	display: grid;

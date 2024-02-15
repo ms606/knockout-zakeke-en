@@ -30,6 +30,7 @@ import {
   ArrowRight,
   ArrowRightIconStyled,
   Button,
+  Button_N,
   CarouselContainer,
   CloseEditorButton,
   Icon,
@@ -70,7 +71,7 @@ const ZoomIconOut = styled(ZoomOutIcon)`
   left: 0px;
 `;
 
-const MoveElementButton = styled(Button)`
+const MoveElementButton = styled(Button_N)`
   /* position: absolute;
 	bottom: 0; */
 `;
@@ -87,6 +88,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   overflow-y: auto;
   font-family: Inter, sans-serif;
   border-radius: 23px;
+  overflow-x: hidden;
 
   ${(props) =>
     props.isMobile &&
@@ -388,7 +390,7 @@ const DesignerSignature: FC<{
       backgroundColor: 'rgb(235, 237, 242)'
   }
 
-    console.log(itemText,actualAreaId,'add text');
+    // console.log(itemText,actualAreaId,'add text');
     addItemText(itemText, actualAreaId);
 
   };
@@ -562,12 +564,12 @@ const DesignerSignature: FC<{
             <UploadButtons>
               <>  
               {showAddTextButton && (
-                <Button isFullWidth onClick={handleAddTextClick}>
+                <Button_N isFullWidth onClick={handleAddTextClick}>
                   <Icon>
                     <Add />
                   </Icon>
-                  <span>{T._("Adaugă Text", "Composer")}</span>
-                </Button>
+                  <span>{T._("Text", "Composer")}</span>
+                </Button_N>
               )}
               </>              
             </UploadButtons>

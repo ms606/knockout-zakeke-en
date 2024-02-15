@@ -30,6 +30,7 @@ import {
   ArrowRight,
   ArrowRightIconStyled,
   Button,
+  Button_N,
   CarouselContainer,
   CloseEditorButton,
   Icon,
@@ -70,9 +71,10 @@ const ZoomIconOut = styled(ZoomOutIcon)`
   left: 0px;
 `;
 
-const MoveElementButton = styled(Button)`
+const MoveElementButton = styled(Button_N)`
   /* position: absolute;
-	bottom: 0; */
+  font-size: 40px;
+  bottom: 0; */
 `;
 
 const DesignerContainer = styled.div<{ isMobile?: boolean }>`
@@ -87,6 +89,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   overflow-y: auto;
   font-family: Inter, sans-serif;
   border-radius: 23px;
+  overflow-x: hidden;
 
   ${(props) =>
     props.isMobile &&
@@ -108,8 +111,9 @@ const DesignerContainerHeader = styled.div<{}>`
 `;
 
 const UploadButtons = styled.div`
+  justify-content: center;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   grid-gap: 5px;
   margin: 20px 0px;
 `;
@@ -351,8 +355,8 @@ const DesignerLogo: FC<{
       item.constraints.canResize
     );
   });
-  const showAddTextButton =
-    !currentTemplateArea || currentTemplateArea.canAddText;
+  // const showAddTextButton =
+  //   !currentTemplateArea || currentTemplateArea.canAddText;
   const showUploadButton =
     !currentTemplateArea ||
     (currentTemplateArea.canAddImage &&
@@ -431,14 +435,14 @@ const DesignerLogo: FC<{
     if (!isPrintable) return false;
 
     let common = canEdit || canMove || canRotate || canResize || canDelete;
-    let text = canChangeFontColor || canChangeFontFamily || canChangeFontWeight;
+    // let text = canChangeFontColor || canChangeFontFamily || canChangeFontWeight;
     let image =
       canEdit ||
       (templateArea &&
         (templateArea.uploadRestrictions.isUserImageAllowed ||
           !templateArea.disableSellerImages));
 
-    if (item.type === 0) return common || text;
+    if (item.type === 0) return common //|| text;
     else return common || image;
   };
 
@@ -715,7 +719,7 @@ const DesignerLogo: FC<{
           )}
 
           {itemsFiltered.length === 0 &&
-            !(showAddTextButton || showUploadButton || showGalleryButton) && (
+            !(showUploadButton || showGalleryButton) && (
               <Center>{"No customizable items"}</Center>
             )}
 
@@ -749,37 +753,21 @@ const DesignerLogo: FC<{
             return null;
           })}
 
-          {(showAddTextButton || showUploadButton || showGalleryButton) && (
+          {(showUploadButton || showGalleryButton) && (
+           <> 
             <UploadButtons>
-
-
-{/* console.log(itemsFiltered,currentTemplateArea,'aaaaaa'); */}
-
-      
-              <>  
-              {showAddTextButton && (
-                <Button isFullWidth onClick={handleAddTextClick}>
-                  <Icon>
-                    <Add />
-                  </Icon>
-                  <span>{T._("Adaugă Text", "Composer")}</span>
-                </Button>
-              )}
-              </>
-          
-
               {showGalleryButton && (
-                <Button isFullWidth onClick={handleAddImageFromGalleryClick}>
-                  <Icon>
+                <Button_N isFullWidth onClick={handleAddImageFromGalleryClick}>
+                  {/* <Icon>
                     <Add />
-                  </Icon>
-                  <span>{T._("Adaugă Logo", "Composer")}</span>
-                </Button>
+                  </Icon> */}
+                  <span>{T._("Logo", "Composer")}</span>
+                </Button_N>
               )}
 
               {showUploadButton && (
                 <>
-                  <Button
+                  <Button_N
                     disabled={
                       copyrightMessage &&
                       copyrightMessage.additionalData.enabled
@@ -791,30 +779,26 @@ const DesignerLogo: FC<{
                       handleUploadImageClick(addItemImage, createImage)
                     }
                   >
-                    <Icon>
+                    {/* <Icon>
                       <Add />
-                    </Icon>
-                    <span> Add Image <span>
+                    </Icon> */}
+                    <span> <span>
                         {itemsFiltered.some(
                           (item) =>
                             item.type === 1 &&
                             isItemEditable(item, currentTemplateArea)
                         )
                           ? T._("Upload another image", "Composer")
-                          : dynamicVals?.get('Upload image') // T._("Upload image", "Composer")
+                          : T._("Image", "Composer")
                           }{" "}
                       </span>
                     </span>
-                  </Button>
+                  </Button_N>
                 </>
               )}
-              <SupportedFormatsList>
-                {T._("Supported file formats:", "Composer") +
-                  " " +
-                  supportedFileFormats}
-              </SupportedFormatsList>
+             
 
-              {copyrightMessage && copyrightMessage.visible && (
+              {/* {copyrightMessage && copyrightMessage.visible && (
                 <CopyrightMessage>
                   <div
                     dangerouslySetInnerHTML={{
@@ -844,8 +828,14 @@ const DesignerLogo: FC<{
                       </CopyrightMandatoryMessageContainer>
                     )}
                 </CopyrightMessage>
-              )}
+              )} */}
             </UploadButtons>
+             <SupportedFormatsList>
+             {T._("Supported file formats:", "Composer") +
+               " " +
+               supportedFileFormats}
+           </SupportedFormatsList>
+           </>
           )}
           {itemsFiltered.length > 0 && !allStaticElements && (
             <MoveElementButton

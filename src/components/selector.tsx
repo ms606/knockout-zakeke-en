@@ -35,6 +35,12 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
+import {
+  DesignerHelper,
+  DesignerSignature as DesignerSignature_,
+  DesignerLogo as DesignerLogo_,
+} from "./tray/DesignerHelper";
+
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
 interface TrayPreviewOpenButton3DProps {
@@ -49,6 +55,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     groups,
     selectOption,
     templates,
+    product,
     setTemplate,
     setCamera,
     productName,
@@ -56,8 +63,66 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     getOnlineScreenshot,
   } = useZakeke();
 
+  
+  if (!isSceneLoading && templates){
+    const templatesSignature = DesignerSignature_();
+      //  const templatesLogo = DesignerLogo_();
+
+  let groupTemplatesSignature = groups;
+
+  templatesSignature?.map((x) => {
+    groupTemplatesSignature.push({
+      'id': x.id,
+      'guid': x.cameraLocationID,
+      'name': x.name,
+      'enabled': true,
+      'attributes': [],
+      'steps': [],
+      'cameraLocationId': x.cameraLocationID,
+      'displayOrder': 3,
+      'direction': 0,
+      'attributesAlwaysOpened': false,
+      'imageUrl': "",
+      'templateGroups': [],
+    });
+  });
+
+      console.log(
+        isSceneLoading,
+        groups,
+        templatesSignature,
+        // templatesLogo,
+        groupTemplatesSignature,
+        "gsddfdalfkdaklsjfdjadsfjdslj"
+      );
+      }
+
+  // let grouptTemplatesSignature = groups;
+
+  // templatesSignature.map((x) => {
+  //   grouptTemplatesSignature.push({
+  //     'id': x.id,
+  //     'guid': x.cameraLocationID,
+  //     'name': x.name,
+  //     'enabled': true,
+  //     'attributes': [],
+  //     'steps': [],
+  //     'cameraLocationId': x.cameraLocationID,
+  //     'displayOrder': 3,
+  //     'direction': 0,
+  //     'attributesAlwaysOpened': false,
+  //     'imageUrl': "",
+  //     'templateGroups': [],
+  //   });
+  // });
+
   const { setIsLoading, isMobile } = useStore();
-  //console.log(groups, "gsddfdalfkdaklsjfdjadsfjdslj");
+  
+
+//   if (!isSceneLoading){
+// const templatesSignature = DesignerSignature_();
+//   const templatesLogo = DesignerLogo_();
+//   }
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -238,7 +303,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     //   selectedAttribute,
     //   "Select attribute first time"
     // );
-   // console.log(selectedGroup, selectedStep);
+    // console.log(selectedGroup, selectedStep);
 
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
@@ -380,7 +445,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const handleRightClick = () => {
     selectColorName("");
-   
+
     setCurrentIndex((currentIndex + 1) % groups.length);
     selectGroup(groups[(currentIndex + 1) % groups.length].id);
     if (selectedGroup?.steps)
@@ -395,7 +460,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const toggleTray = (trayName: string) => {
-    
     if (selectedTrayPreviewOpenButton) {
       selectTrayPreviewOpenButton(!selectedTrayPreviewOpenButton);
     }
@@ -421,13 +485,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     let filteredArray;
 
-    groups.filter(element => {
-      return element
-    })
-    
+    groups.filter((element) => {
+      return element;
+    });
+
     filteredArray = groups.filter((group) => {
       if (group?.id) {
-        group.id == data;
+        return group.id == data;
       }
     });
 
@@ -445,7 +509,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     // selectGroup(data);
     // selectGroupIdFromTray(data);
-    if(filteredArray[0]?.id){
+    if (filteredArray[0]?.id) {
       selectGroup(filteredArray[0].id);
       selectGroupIdFromTray(filteredArray[0].id);
     }
@@ -500,7 +564,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
             width: "270px",
           }}
         >
-          <div
+          {/* <div
             className="button-53"
             onClick={() => setSelectedPersonalize(!selectedPersonalize)}
           >
@@ -519,7 +583,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
             <Designer togglePersonalize={togglePersonalize} />
           ) : (
             ""
-          )}
+          )} */}
         </div>
       )}
 
@@ -587,166 +651,168 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           </div>
           <br />
 
-          { (selectedTrayType === "" || selectedTrayType === "null"  || selectedTrayType === 'colors') && 
-
+          {(selectedTrayType === "" ||
+            selectedTrayType === "null" ||
+            selectedTrayType === "colors") && (
             <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
-            {isTrayOpen && !selectedTrayPreviewOpenButton && (
-              <Tray
-                groupNameList={selectedGroupList}
-                filteredAreas={filteredAreas}
-                toggleFunc={toggleTray}
-                UpdateGroupId={groupIdFromFunc}
-              />
-            )}
+              {isTrayOpen && !selectedTrayPreviewOpenButton && (
+                <Tray
+                  groupNameList={selectedGroupList}
+                  filteredAreas={filteredAreas}
+                  toggleFunc={toggleTray}
+                  UpdateGroupId={groupIdFromFunc}
+                />
+              )}
 
-            {!isTrayOpen && !selectedTrayPreviewOpenButton && (
-              <ColorMenuSeleciton
-                updateActiveColorOption={updateActiveColorOption}
-                activeColorOption={activeColorOption}
-              />
-            )}
+              {!isTrayOpen && !selectedTrayPreviewOpenButton && (
+                <ColorMenuSeleciton
+                  updateActiveColorOption={updateActiveColorOption}
+                  activeColorOption={activeColorOption}
+                />
+              )}
 
-            {!selectedTrayPreviewOpenButton && (
-              <div
-                style={{
-                  width: "100%",
-                  background: "0% 0% / 4px 4px rgba(255, 255, 255, 0.5)",
-                  borderRadius: "0px 0px 3px 3px",
-                  padding: "10px 10px 5px",
-                  borderTop: "none",
-                  boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px",
-                  display: isTrayOpen ? "none" : "block",
-                }}
-              >
-                {selectedStepName != "KNOCK-X" && (
-                  <List>
-                    {!selectedTrayPreviewOpenButton &&
-                      selectedAttribute &&
-                      !isTrayOpen &&
-                      selectedAttribute.options.map((option) => {
-                        return (
-                          <ListItemColor
-                            key={option.id}
-                            onClick={() => {
-                              {
-                                if (
-                                  option.name === "BRODAT" ||
-                                  option.name === "TIPARIT" ||
-                                  option.name === "PRINTAT"
-                                ) {
-                                  const indexForGroupTip = groups.findIndex(
-                                    (obj) => obj.name === "MODALITATE IMPRIMARE"
-                                  );
-                                  if (indexForGroupTip > 0) {
-                                    selectGroup(groups[indexForGroupTip].id);
-                                    if (
-                                      groups[groups?.length - 1].attributes[0]
-                                        .code === "MODALITATE IMPRIMARE"
-                                    ) {
-                                      //          console.log(option,'selectOption(option.id);selectOption(option.id);');
+              {!selectedTrayPreviewOpenButton && (
+                <div
+                  style={{
+                    width: "100%",
+                    background: "0% 0% / 4px 4px rgba(255, 255, 255, 0.5)",
+                    borderRadius: "0px 0px 3px 3px",
+                    padding: "10px 10px 5px",
+                    borderTop: "none",
+                    boxShadow: "rgba(0, 64, 113, 0.1) 0px 3px 6px",
+                    display: isTrayOpen ? "none" : "block",
+                  }}
+                >
+                  {selectedStepName != "KNOCK-X" && (
+                    <List>
+                      {!selectedTrayPreviewOpenButton &&
+                        selectedAttribute &&
+                        !isTrayOpen &&
+                        selectedAttribute.options.map((option) => {
+                          return (
+                            <ListItemColor
+                              key={option.id}
+                              onClick={() => {
+                                {
+                                  if (
+                                    option.name === "BRODAT" ||
+                                    option.name === "TIPARIT" ||
+                                    option.name === "PRINTAT"
+                                  ) {
+                                    const indexForGroupTip = groups.findIndex(
+                                      (obj) =>
+                                        obj.name === "MODALITATE IMPRIMARE"
+                                    );
+                                    if (indexForGroupTip > 0) {
+                                      selectGroup(groups[indexForGroupTip].id);
+                                      if (
+                                        groups[groups?.length - 1].attributes[0]
+                                          .code === "MODALITATE IMPRIMARE"
+                                      ) {
+                                        //          console.log(option,'selectOption(option.id);selectOption(option.id);');
 
-                                      selectOption(option.id);
+                                        selectOption(option.id);
+                                      }
+                                      // selectOption(option.id);
+                                      selectOptionId(option.id);
+                                      selectOptionName(option.name);
                                     }
-                                    // selectOption(option.id);
+                                  } else {
+                                    selectOption(option.id);
                                     selectOptionId(option.id);
                                     selectOptionName(option.name);
                                   }
-                                } else {
-                                  selectOption(option.id);
-                                  selectOptionId(option.id);
-                                  selectOptionName(option.name);
                                 }
-                              }
-                            }}
-                            selected={option.selected}
-                            selectedColor={selectedColorName}
-                          >
-                            {option.imageUrl && (
-                              <ListItemImageNoCarousel
-                                src={option.imageUrl}
-                                onClick={() => selectColorName(option.name)}
-                                selected={option.selected}
-                              />
-                            )}
-                            {/* Shows the color name but we dont need it now  */}
-                            {/* <div style={{ position: "absolute", top: "120%" }}>
+                              }}
+                              selected={option.selected}
+                              selectedColor={selectedColorName}
+                            >
+                              {option.imageUrl && (
+                                <ListItemImageNoCarousel
+                                  src={option.imageUrl}
+                                  onClick={() => selectColorName(option.name)}
+                                  selected={option.selected}
+                                />
+                              )}
+                              {/* Shows the color name but we dont need it now  */}
+                              {/* <div style={{ position: "absolute", top: "120%" }}>
                               {option.id === selectedOptionId
                                 ? option.name
                                 : ""}
                             </div> */}
-                          </ListItemColor>
-                        );
-                      })}
-                  </List>
-                )}
-
-                <div>
-                  {/* <h1>Patters</h1> */}
-
-                  {selectedStepName === "KNOCK-X" ? (
-                    <div>
-                      <div className="knockXlabel">SELECT DESIGN THEME</div>
-                      <Swiper
-                        spaceBetween={1}
-                        slidesPerView={2}
-                        navigation={true}
-                        centeredSlides={true}
-                        // modules={[Navigation]}
-                        //onSlideChange={() => console.log('slide change')}
-                        //onSwiper={(swiper) => console.log(swiper)}
-                      >
-                        {attributes.map((attribute) => {
-                          return (
-                            <SwiperSlide>
-                              <ListItemX
-                                key={attribute.id}
-                                onClick={() => selectAttribute(attribute.id)}
-                                selected={selectedAttribute === attribute}
-                              >
-                                <div className="scaler"></div>
-                                {attribute.name}
-                              </ListItemX>
-                            </SwiperSlide>
+                            </ListItemColor>
                           );
                         })}
-                      </Swiper>
+                    </List>
+                  )}
 
-                      <br />
-                      <div className="knockXlabel">SELECT COLOR THEME</div>
-                      <ListX>
-                        {selectedAttribute &&
-                          selectedAttribute.options.map((option) => {
+                  <div>
+                    {/* <h1>Patters</h1> */}
+
+                    {selectedStepName === "KNOCK-X" ? (
+                      <div>
+                        <div className="knockXlabel">SELECT DESIGN THEME</div>
+                        <Swiper
+                          spaceBetween={1}
+                          slidesPerView={2}
+                          navigation={true}
+                          centeredSlides={true}
+                          // modules={[Navigation]}
+                          //onSlideChange={() => console.log('slide change')}
+                          //onSwiper={(swiper) => console.log(swiper)}
+                        >
+                          {attributes.map((attribute) => {
                             return (
-                              <ListItemX_
-                                key={option.id}
-                                onClick={() => selectOption(option.id)}
-                                selected={option.selected}
-                              >
-                                {option.imageUrl && (
-                                  <ListItemImageX src={option.imageUrl} />
-                                )}
-                                {/* {option.name} */}
-                              </ListItemX_>
+                              <SwiperSlide>
+                                <ListItemX
+                                  key={attribute.id}
+                                  onClick={() => selectAttribute(attribute.id)}
+                                  selected={selectedAttribute === attribute}
+                                >
+                                  <div className="scaler"></div>
+                                  {attribute.name}
+                                </ListItemX>
+                              </SwiperSlide>
                             );
                           })}
-                      </ListX>
-                    </div>
-                  ) : (
-                    <></>
-                  )}
+                        </Swiper>
+
+                        <br />
+                        <div className="knockXlabel">SELECT COLOR THEME</div>
+                        <ListX>
+                          {selectedAttribute &&
+                            selectedAttribute.options.map((option) => {
+                              return (
+                                <ListItemX_
+                                  key={option.id}
+                                  onClick={() => selectOption(option.id)}
+                                  selected={option.selected}
+                                >
+                                  {option.imageUrl && (
+                                    <ListItemImageX src={option.imageUrl} />
+                                  )}
+                                  {/* {option.name} */}
+                                </ListItemX_>
+                              );
+                            })}
+                        </ListX>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
                 </div>
-              </div>
-            )}
-          </div>}
+              )}
+            </div>
+          )}
 
           {selectedTrayType === "signature" && (
-          <DesignerSignature togglePersonalize={togglePersonalize} />
-        )}
+            <DesignerSignature togglePersonalize={togglePersonalize} />
+          )}
 
-        {selectedTrayType === "logos" && (
-          <DesignerLogo togglePersonalize={togglePersonalize} />
-        )}
-        
+          {selectedTrayType === "logos" && (
+            <DesignerLogo togglePersonalize={togglePersonalize} />
+          )}
         </div>
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
@@ -760,8 +826,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           </div>
           {/* </button> */}
         </div>
-
-        
       </div>
     </>
   );

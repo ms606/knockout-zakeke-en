@@ -64,11 +64,35 @@ const DialogWindowClose = styled(CloseIcon)`
 	z-index: 999;
 	width: 24px;
 	height: 24px;
-
+	background: tomato;
+	content: 'Close'
 	&:hover {
 		opacity: 0.5;
 	}
 `;
+
+
+const DialogWindowClose_New = styled.div`
+    position: absolute;
+	right: 10px;
+	top: 10px;
+	z-index: 999;
+	cursor: pointer;
+    padding: 0px;
+    width: 84px;
+    height: 36px;
+    border-radius: 4%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: tomato;
+    font-family: 'Saira', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    position: absolute;
+}`;
+
 
 export const DialogWindow: FunctionComponent<{
 	children?: React.ReactNode;
@@ -78,7 +102,7 @@ export const DialogWindow: FunctionComponent<{
 }> = ({ children, className, showCloseButton = true, onClose }) => {
 	return (
 		<DialogWindowContainer className={className}>
-			{showCloseButton && <DialogWindowClose onClick={onClose} />}
+			{showCloseButton && <DialogWindowClose_New onClick={onClose}>Close X</DialogWindowClose_New>}
 			{children}
 		</DialogWindowContainer>
 	);
@@ -140,7 +164,7 @@ const DialogTitle = styled.h1`
 	right: 0;
 	top: 0;
 	padding: 20px;
-	width: 100%;
+	width: 80%;
 `;
 
 interface DialogButton {

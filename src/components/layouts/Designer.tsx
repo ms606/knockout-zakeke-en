@@ -30,6 +30,7 @@ import {
   ArrowRight,
   ArrowRightIconStyled,
   Button,
+  Button_N,
   CarouselContainer,
   CloseEditorButton,
   Icon,
@@ -454,7 +455,7 @@ const Designer: FC<{
       backgroundColor: 'rgb(235, 237, 242)'
   }
 
-    console.log(itemText,actualAreaId,'add text');
+    // console.log(itemText,actualAreaId,'add text');
     addItemText(itemText, actualAreaId);
 
     // showDialog(
@@ -752,12 +753,12 @@ const Designer: FC<{
       
               <>  
               {showAddTextButton && (
-                <Button isFullWidth onClick={handleAddTextClick}>
+                <Button_N isFullWidth onClick={handleAddTextClick}>
                   <Icon>
                     <Add />
                   </Icon>
                   <span>{T._("Adaugă Text", "Composer")}</span>
-                </Button>
+                </Button_N>
               )}
               </>
           

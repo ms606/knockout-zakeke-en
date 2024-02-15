@@ -59,7 +59,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
  }
 
   return (
-    <div>
+    <div style={{transition: "all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) 0s"}}>
       {groupNameList && (
         <div>
            <div className="full-tray">
@@ -115,7 +115,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                           onClick={handleMultipleClicks}
                           id={groupName.id}
                         >
-                          <img className="tray-image" id={groupName.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
+                          <img className="tray-image" id={groupName.id} style={{width: '69px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
                           <div id={groupName.id} className="slabel">
                            <span id={groupName.id} style={{fontSize: '9px'}}>{groupName.name}</span> 
                           </div>

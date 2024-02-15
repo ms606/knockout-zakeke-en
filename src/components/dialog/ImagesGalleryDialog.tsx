@@ -6,7 +6,15 @@ import { TailSpin } from 'react-loader-spinner';
 import { T } from "../../Helpers";
 
 const CustomWindow = styled(DialogWindow)`
-    flex-basis: 350px;
+    flex-basis: 400px;
+    background: linear-gradient(to right, rgba(10, 70, 140, 0.9), rgb(41, 56, 132)) !important;
+    color: #fff;
+    font-family: Saira, sans-serif;
+    height: 100vh;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 `;
 
 const CategoriesList = styled.ul`
@@ -23,7 +31,8 @@ const CategoryItem = styled.li`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eee;
+    background: linear-gradient(to right, rgba(10, 70, 140, 0.9), rgb(41, 56, 132));
+    // background-color: #eee;
     cursor: pointer;
     margin-bottom: 10px;
     color: #313c46;
@@ -34,7 +43,7 @@ const CategoryItem = styled.li`
 `;
 
 const ImagesList = styled.ul`
-    max-height:300px;
+    max-height100vh;
     padding-left:0px;
     list-style: none;
     margin: 0;
@@ -43,6 +52,7 @@ const ImagesList = styled.ul`
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     grid-gap: 10px;
     overflow:auto;
+
 `
 
 const ImageItem = styled.li`
@@ -52,7 +62,7 @@ const ImageItem = styled.li`
     border: 1px black solid;
     padding: 10px;
     cursor: pointer;
-
+    border-radius: 7%;
     &:hover {
         border: 1px black solid;
     }
@@ -203,7 +213,7 @@ const ImagesGalleryDialog: FC<{ onClose: () => void, onImageSelected: (image: an
                 <ImagesList>
                     {images.map(image => {
                         return <ImageItem key={image.imageID!.toString()} onClick={() => onImageSelected(image)}>
-                            <img src={image.choiceUrl} alt={image.name} />
+                            <img style={{borderRadius: '5%'}} src={image.choiceUrl} alt={image.name} />
                             <span>{image.name}</span>
                         </ImageItem>
                     })}

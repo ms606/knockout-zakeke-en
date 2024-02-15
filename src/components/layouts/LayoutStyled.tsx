@@ -139,7 +139,8 @@ export const ZoomOutIcon = styled(Icon)<{ isMobile?: boolean }>`
 
 
 export const SupportedFormatsList = styled.span`
-	font-size: 16px;
+	font-size: 12px;
+	font-weight: 700px;
 	font-style: italic;
 	text-align: center;
 	color: #313c46;

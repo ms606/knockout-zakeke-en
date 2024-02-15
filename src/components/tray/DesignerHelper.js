@@ -607,16 +607,68 @@ export function DesignerSignature() {
     product,
     templates,
     setTemplate,
+    isSceneLoading
   } = useZakeke();
 
-  const filteredAreas =
-    product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+  if (!isSceneLoading && templates && product) {
 
-  let filterSignatureAreas = templates[0].areas
-    .filter((template) => template.canAddText === true)
-    .map((template) => {
-      return { id: template.id };
+    const filteredAreas =
+      product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+      
+      let filterSignatureAreas = templates[0].areas
+      .filter((template) => template.canAddText === true)
+      .map((template) => {
+        return { id: template.id };
+      });
+    const signatureIdAreas = [];
+  
+    filteredAreas.forEach((x) => {
+      const found = filterSignatureAreas.some((item2) => item2.id === x.id);
+      // console.log(found);
+      if (found) signatureIdAreas.push(x);
     });
+
+    return signatureIdAreas;
+  }
+   
+
+  // console.log(filterSignatureAreas, signatureIdAreas,'signature');
+  // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
+
+  
+}
+
+
+export function DesignerLogo() {
+  const {
+    currentTemplate,
+    items,
+    isAreaVisible,
+    product,
+    templates,
+    setTemplate,
+    isSceneLoading
+  } = useZakeke();
+
+ 
+  if (!isSceneLoading && templates && product) {
+
+const filteredAreas =
+product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+console.log(templates[0]);
+let filterSignatureAreas = templates[0].areas
+.filter((template) => template.canAddImage === true)
+.map((template) => {
+  return { id: template.id };
+});
+
+
+
+// let filterSignatureAreas = templates[0].areas
+//     .filter((template) => template.canAddImage === true)
+//     .map((template) => {
+//       return { id: template.id };
+//     });
 
   const signatureIdAreas = [];
 
@@ -631,37 +683,4 @@ export function DesignerSignature() {
 
   return signatureIdAreas;
 }
-
-
-export function DesignerLogo() {
-  const {
-    currentTemplate,
-    items,
-    isAreaVisible,
-    product,
-    templates,
-    setTemplate,
-  } = useZakeke();
-
-  const filteredAreas =
-    product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
-console.log(templates[0]);
-  let filterSignatureAreas = templates[0].areas
-    .filter((template) => template.canAddImage === true)
-    .map((template) => {
-      return { id: template.id };
-    });
-
-  const signatureIdAreas = [];
-
-  filteredAreas.forEach((x) => {
-    const found = filterSignatureAreas.some((item2) => item2.id === x.id);
-    // console.log(found);
-    if (found) signatureIdAreas.push(x);
-  });
-
-  // console.log(filterSignatureAreas, signatureIdAreas,'signature');
-  // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
-
-  return signatureIdAreas;
 }
