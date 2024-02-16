@@ -21,7 +21,7 @@ import DesignerSignature from "./layouts/DesignerSignature";
 import DesignerLogo from "./layouts/DesignerLogo";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
 import useStore from "../Store";
-import { makeFirstLetterCaps, T } from "../Helpers";
+import { makeFirstLetterCaps, T, useActualGroups } from "../Helpers";
 import Footer from "./layouts/Footer";
 import FooterMobile from "./layouts/FooterMobile";
 
@@ -35,11 +35,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import {
-  DesignerHelper,
-  DesignerSignature as DesignerSignature_,
-  DesignerLogo as DesignerLogo_,
-} from "./tray/DesignerHelper";
+
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -63,61 +59,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     getOnlineScreenshot,
   } = useZakeke();
 
+
+const { setIsLoading, isMobile } = useStore();
   
-  if (!isSceneLoading && templates){
-    const templatesSignature = DesignerSignature_();
-      //  const templatesLogo = DesignerLogo_();
+const useActualGroups_ = useActualGroups();
 
-  let groupTemplatesSignature = groups;
-
-  templatesSignature?.map((x) => {
-    groupTemplatesSignature.push({
-      'id': x.id,
-      'guid': x.cameraLocationID,
-      'name': x.name,
-      'enabled': true,
-      'attributes': [],
-      'steps': [],
-      'cameraLocationId': x.cameraLocationID,
-      'displayOrder': 3,
-      'direction': 0,
-      'attributesAlwaysOpened': false,
-      'imageUrl': "",
-      'templateGroups': [],
-    });
-  });
-
-      console.log(
-        isSceneLoading,
-        groups,
-        templatesSignature,
-        // templatesLogo,
-        groupTemplatesSignature,
-        "gsddfdalfkdaklsjfdjadsfjdslj"
-      );
-      }
-
-  // let grouptTemplatesSignature = groups;
-
-  // templatesSignature.map((x) => {
-  //   grouptTemplatesSignature.push({
-  //     'id': x.id,
-  //     'guid': x.cameraLocationID,
-  //     'name': x.name,
-  //     'enabled': true,
-  //     'attributes': [],
-  //     'steps': [],
-  //     'cameraLocationId': x.cameraLocationID,
-  //     'displayOrder': 3,
-  //     'direction': 0,
-  //     'attributesAlwaysOpened': false,
-  //     'imageUrl': "",
-  //     'templateGroups': [],
-  //   });
-  // });
-
-  const { setIsLoading, isMobile } = useStore();
-  
 
 //   if (!isSceneLoading){
 // const templatesSignature = DesignerSignature_();
@@ -163,7 +109,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const [width, setWidth] = useState(window.innerWidth);
 
-  const selectedGroup = groups.find((group) => group.id === selectedGroupId);
+  const selectedGroup = useActualGroups_.find((group) => group.id === selectedGroupId);
 
   const selectedStep = selectedGroup
     ? selectedGroup.steps.find((step) => step.id === selectedStepId)
@@ -254,35 +200,35 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   useEffect(() => {
     // console.log("loading in the first group");
 
-    if (items?.some((obj) => obj.type === 0)) {
-      setHasTypeZero(items?.some((obj) => obj.type === 0));
-    } else {
-      setHasTypeZero(false);
-    }
+    // if (items?.some((obj) => obj.type === 0)) {
+    //   setHasTypeZero(items?.some((obj) => obj.type === 0));
+    // } else {
+    //   setHasTypeZero(false);
+    // }
 
-    if (!selectedGroup && groups.length > 0) {
+    if (!selectedGroup && useActualGroups_.length > 0) {
       selectGroup(groups[0].id);
 
       setActiveColorOption("plain");
 
       if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
-      if (selectedStep) {
-        if (activeColorOption === "fluorescent") {
-          selectAttribute(selectedStep.attributes[3].id);
-        }
-      }
+      // if (selectedStep) {
+      //   if (activeColorOption === "fluorescent") {
+      //     selectAttribute(selectedStep.attributes[3].id);
+      //   }
+      // }
 
       if (templates.length > 0) setTemplate(templates[0].id);
     }
 
-    if (groups.length > 0) {
+    if (useActualGroups_.length > 0) {
       var groupRec: {
         id: number;
         name: string;
         imageUrl: string | null | undefined;
       }[] = [];
-      groups.map((group) => {
+      useActualGroups_.map((group) => {
         groupRec.push({
           id: group.id,
           name: group.name,
@@ -293,18 +239,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedGroup, groups]);
+  }, [groups]);
 
   // Select attribute first time
   useEffect(() => {
-    // console.log(
-    //   selectedGroup,
-    //   selectedStep,
-    //   selectedAttribute,
-    //   "Select attribute first time"
-    // );
-    // console.log(selectedGroup, selectedStep);
-
     if (!selectedAttribute && attributes.length > 0)
       selectAttribute(attributes[0].id);
 
@@ -379,16 +317,16 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const handleLeftClick = () => {
     selectColorName("");
-    setCurrentIndex((currentIndex - 1 + groups.length) % groups.length);
-    selectGroup(groups[(currentIndex - 1 + groups.length) % groups.length].id);
+    setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
+    selectGroup(useActualGroups_[(currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length].id);
     if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
 
-    if (items.filter((item) => item.type === 0).length === 0) {
-      if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
-        if (items?.filter((item) => item.type === 0)) {
-          groups.splice(groups.length - 1, 1);
-        }
-    }
+    // if (items.filter((item) => item.type === 0).length === 0) {
+    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
+    //     if (items?.filter((item) => item.type === 0)) {
+    //       useActualGroups_.splice(groups.length - 1, 1);
+    //     }
+    // }
   };
 
   async function downloadImage(url: any) {
@@ -444,17 +382,26 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const handleRightClick = () => {
-    selectColorName("");
+      if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
+        setSelectedTrayType('colors')
+      }
+      else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
+        setSelectedTrayType('signature')
+      }
+      else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
+        setSelectedTrayType('logos')
+      }
 
-    setCurrentIndex((currentIndex + 1) % groups.length);
-    selectGroup(groups[(currentIndex + 1) % groups.length].id);
+    selectColorName("");
+    setCurrentIndex((currentIndex + 1) % useActualGroups_.length);
+    selectGroup(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id);
     if (selectedGroup?.steps)
-      selectStep(groups[(currentIndex + 1) % groups.length].steps[0]?.id);
+      selectStep(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].steps[0]?.id);
 
     if (items.filter((item) => item.type === 0).length === 0) {
-      if (groups[groups.length - 1].name === "MODALITATE IMPRIMARE")
+      if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
         if (items?.filter((item) => item.type === 0)) {
-          groups.splice(groups.length - 1, 1);
+          useActualGroups_.splice(useActualGroups_.length - 1, 1);
         }
     }
   };
@@ -525,7 +472,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
 
-  let groupNameText = makeFirstLetterCaps(groups[currentIndex]?.name);
+  let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
 
   return (
     <>

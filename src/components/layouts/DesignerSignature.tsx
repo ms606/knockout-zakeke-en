@@ -264,6 +264,8 @@ const DesignerSignature: FC<{
     name: currentTemplate?.name ?? "",
     areas: currentTemplate?.areas,
   };
+
+  
   let translatedAreas = filteredAreas.map((area) => {
     return { id: area.id, name: area.name };
   });
@@ -338,9 +340,11 @@ const DesignerSignature: FC<{
   }, [actualAreaId]);
 
   useEffect(() => {
-    if (finalVisibleAreas.length > 0 && actualAreaId === 0)
+    if (finalVisibleAreas.length > 0 && actualAreaId === 0){
       setActualAreaId(finalVisibleAreas[0].id);
-
+      console.log(finalVisibleAreas[0],'finalVisibleAreas');
+      
+}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalVisibleAreas]);
 
@@ -510,7 +514,11 @@ const DesignerSignature: FC<{
                 value={translatedTemplates!.find(
                   (x) => x.id === translatedCurrentTemplate.id
                 )}
-                onChange={(template: any) => setTemplate(template.id)}
+                onChange={(template: any) => {
+                  setTemplate(template.id)
+                 console.log(template,'templateeee from signature');
+                 
+                }}
               />
             </SelectContainer>
           )}

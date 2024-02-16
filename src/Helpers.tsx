@@ -3,6 +3,12 @@ import _ from 'lodash';
 import useStore from './Store';
 import { Group, Option, SellerSettings, useZakeke } from 'zakeke-configurator-react';
 
+import {
+	DesignerHelper,
+	DesignerSignature as DesignerSignature_,
+	DesignerLogo as DesignerLogo_,
+  } from "./components/tray/DesignerHelper";
+
 
 export interface UndoRedoStep {
     type: any;
@@ -309,6 +315,52 @@ export function useActualGroups() {
 
 	const actualGroups =
 		useDefinitiveGroups(groups, shouldCustomizerGroupBeVisible, hasDesignsSaved, sellerSettings) ?? [];
+	
+		  if (!isSceneLoading){
+			const templatesSignature = DesignerSignature_();
+		    const templatesLogo = DesignerLogo_();
+		
+		  let groupTemplatesSignature = actualGroups;
+		
+		  templatesSignature?.map((x) => {
+			groupTemplatesSignature.push({
+			  'id': x.id,
+			  'guid': x.cameraLocationID,
+			  'name': x.name,
+			  'enabled': true,
+			  'attributes': [],
+			  'steps': [],
+			  'cameraLocationId': x.cameraLocationID,
+			  'displayOrder': 3,
+			  'direction': 2,
+			  'attributesAlwaysOpened': false,
+			  'imageUrl': "",
+			  'templateGroups': [],
+			});
+		  });
+
+		  templatesLogo?.map((x) => {
+			groupTemplatesSignature.push({
+			  'id': x.id,
+			  'guid': x.cameraLocationID,
+			  'name': x.name,
+			  'enabled': true,
+			  'attributes': [],
+			  'steps': [],
+			  'cameraLocationId': x.cameraLocationID,
+			  'displayOrder': 3,
+			  'direction': 3,
+			  'attributesAlwaysOpened': false,
+			  'imageUrl': "",
+			  'templateGroups': [],
+			});
+		  });
+		
+			// console.log(groupTemplatesSignature,'groupTemplatesSignature');
+			  }
+
+			  
+
 	return actualGroups;
 }
 

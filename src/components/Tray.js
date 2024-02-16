@@ -117,7 +117,8 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                         >
                           <img className="tray-image" id={groupName.id} style={{width: '69px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
                           <div id={groupName.id} className="slabel">
-                           <span id={groupName.id} style={{fontSize: '9px'}}>{groupName.name}</span> 
+                           <span id={groupName.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
+                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{groupName.name}</span> 
                           </div>
                           </div>
                       </div>
@@ -155,7 +156,8 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                         >
                           {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
                           <div id={template.id} className="slabel">
-                           <span id={template.id} style={{fontSize: '9px'}}>{template.name}</span> 
+                           <span id={template.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
+                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{template.name}</span> 
                           </div>
                           </div>
                       </div>
@@ -194,7 +196,8 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                       >
                         {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
                         <div id={template.id} className="slabel">
-                          <span id={template.id} style={{fontSize: '9px'}}>{template.name}</span> 
+                          <span id={template.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
+                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{template.name}</span> 
                         </div>
                         </div>
                     </div>
