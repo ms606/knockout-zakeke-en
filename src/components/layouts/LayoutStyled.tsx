@@ -148,12 +148,14 @@ export const SupportedFormatsList = styled.span`
 `;
 
 export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
+    border-radius: 1%;
 	height: 50vh;
 	width: 97%;
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	background: #ffffff;
+	background: rgb(255 255 255 / 57%);
+	border: 1px solid #1387efbd;
 	${(props) =>
 		props.isMobile &&
 		`

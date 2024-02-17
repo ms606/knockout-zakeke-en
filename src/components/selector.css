@@ -111,11 +111,12 @@
   }
 
   .selectiontype {
-    white-space: nowrap;
+    /* white-space: nowrap; */
     text-overflow: ellipsis;
     overflow: hidden;
-    line-height: 28px;
+    line-height: 21px;
     padding-right: 10px;
+    text-align: right;
   }
 
   .active-marketing-component-index{

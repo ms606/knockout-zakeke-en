@@ -316,6 +316,17 @@ const useActualGroups_ = useActualGroups();
   // -- -- -- options
 
   const handleLeftClick = () => {
+
+    if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
+      setSelectedTrayType('colors')
+    }
+    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
+      setSelectedTrayType('signature')
+    }
+    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
+      setSelectedTrayType('logos')
+    }
+    
     selectColorName("");
     setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
     selectGroup(useActualGroups_[(currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length].id);
@@ -583,7 +594,7 @@ const useActualGroups_ = useActualGroups();
                     </div>
 
                     <div className="gimg">
-                      {groups[currentIndex]?.imageUrl !== null && (
+                      {groups[currentIndex]?.imageUrl && (
                         <img
                           src={groups[currentIndex]?.imageUrl!}
                           alt="Group Image"
@@ -754,7 +765,7 @@ const useActualGroups_ = useActualGroups();
           )}
 
           {selectedTrayType === "signature" && (
-            <DesignerSignature togglePersonalize={togglePersonalize} />
+            <DesignerSignature togglePersonalize={togglePersonalize} selectedAreaID={selectedGroupId}/>
           )}
 
           {selectedTrayType === "logos" && (

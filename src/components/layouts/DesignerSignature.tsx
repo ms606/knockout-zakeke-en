@@ -186,7 +186,8 @@ const SingleValueContainer = styled(components.SingleValue)`
 const DesignerSignature: FC<{
   onCloseClick?: () => void;
   togglePersonalize?: () => void;
-}> = ({ onCloseClick, togglePersonalize }) => {
+  selectedAreaID?: any;
+}> = ({ onCloseClick, togglePersonalize, selectedAreaID}) => {
   const { showDialog, closeDialog } = useDialogManager();
   const [forceUpdate, setForceUpdate] = useState(false);
   const { setIsLoading, isMobile } = useStore();
@@ -240,6 +241,9 @@ const DesignerSignature: FC<{
       backgroundColor: 'rgb(235, 237, 242)'
   })
 
+  console.log(selectedAreaID,'selectedAreaIDselectedAreaID');
+  
+  
 
   const dynamicVals = publicTranslations?.dynamics;
   
@@ -296,13 +300,20 @@ const DesignerSignature: FC<{
         currentTemplateArea?.canAddText
       )
         finalVisibleAreas.push(filteredArea);
-    });
+    });    
+
+    console.log(finalVisibleAreas,'total visible area');
+    
 
   const [actualAreaId, setActualAreaId] = useState<number>(
     finalVisibleAreas && finalVisibleAreas.length > 0
       ? finalVisibleAreas[0].id
       : 0
   );
+
+
+
+
 
   let currentTemplateArea = currentTemplate!.areas.find(
     (x) => x.id === actualAreaId
@@ -340,11 +351,13 @@ const DesignerSignature: FC<{
   }, [actualAreaId]);
 
   useEffect(() => {
-    if (finalVisibleAreas.length > 0 && actualAreaId === 0){
-      setActualAreaId(finalVisibleAreas[0].id);
-      console.log(finalVisibleAreas[0],'finalVisibleAreas');
-      
-}
+    // if (finalVisibleAreas.length > 0 && actualAreaId === 0){
+    //   setActualAreaId(finalVisibleAreas[0].id);
+    //   // console.log(finalVisibleAreas[0],'finalVisibleAreas');    
+    // }
+
+    if(selectedAreaID) setActualAreaId(selectedAreaID);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalVisibleAreas]);
 
@@ -393,10 +406,7 @@ const DesignerSignature: FC<{
       placeholder: 'Input your text here',
       backgroundColor: 'rgb(235, 237, 242)'
   }
-
-    // console.log(itemText,actualAreaId,'add text');
     addItemText(itemText, actualAreaId);
-
   };
 
 
@@ -479,9 +489,10 @@ const DesignerSignature: FC<{
           )} */}
 
           {/* Areas */}
-          <DesignerContainerHeader>
+          {/* Closed because now its done on next button */}
+          {/* <DesignerContainerHeader>
           {!isMobile && finalVisibleAreas.length > 1 && (
-              finalVisibleAreas.map((area:any) => (
+              finalVisibleAreas.map((area:any) => (              
                 <Area
                   key={area.id}
                   selected={actualAreaId === area.id}
@@ -491,7 +502,7 @@ const DesignerSignature: FC<{
                 </Area>
               ))
            )}
-          </DesignerContainerHeader>
+          </DesignerContainerHeader> */}
           
 
           {isMobile && translatedTemplates.length > 1 && (
@@ -609,7 +620,7 @@ const DesignerSignature: FC<{
          
           <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />
                    
-         <div style={{position: "relative", top: "26px"}}>
+         <div style={{position: "relative", top: "29px"}}>
          <Button isFullWidth primary onClick={() => setMoveElements(false)}>
             <span>{"OK"} </span>
           </Button>
