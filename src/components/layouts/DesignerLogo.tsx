@@ -219,7 +219,8 @@ const CopyrightMandatoryMessage = styled.div``;
 const DesignerLogo: FC<{
   onCloseClick?: () => void;
   togglePersonalize?: () => void;
-}> = ({ onCloseClick, togglePersonalize }) => {
+  selectedAreaID?: any;
+}> = ({ onCloseClick, togglePersonalize, selectedAreaID  }) => {
   const { showDialog, closeDialog } = useDialogManager();
   const [forceUpdate, setForceUpdate] = useState(false);
   const { setIsLoading, isMobile } = useStore();
@@ -391,9 +392,11 @@ const DesignerLogo: FC<{
   }, [actualAreaId]);
 
   useEffect(() => {
-    if (finalVisibleAreas.length > 0 && actualAreaId === 0)
-      setActualAreaId(finalVisibleAreas[0].id);
+    // if (finalVisibleAreas.length > 0 && actualAreaId === 0)
+    //   setActualAreaId(finalVisibleAreas[0].id);
 
+    if(selectedAreaID) setActualAreaId(selectedAreaID);
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [finalVisibleAreas]);
 
@@ -426,9 +429,6 @@ const DesignerLogo: FC<{
       canRotate,
       canResize,
       canDelete,
-      canChangeFontColor,
-      canChangeFontFamily,
-      canChangeFontWeight,
       isPrintable,
     } = item.constraints;
 
@@ -444,39 +444,6 @@ const DesignerLogo: FC<{
 
     if (item.type === 0) return common //|| text;
     else return common || image;
-  };
-
-  const handleAddTextClick = () => {
-
-    const itemText ={
-      guid: '',
-      name: '',
-      text: "Enter your name",
-      fillColor: defaultColor,
-      fontFamily: fonts[0].name,
-      fontSize: 48,
-      fontWeight: 'normal normal',
-      isTextOnPath: false,
-      constraints: null,  
-      placeholder: 'Input your text here',
-      backgroundColor: 'rgb(235, 237, 242)'
-  }
-
-    console.log(itemText,actualAreaId,'add text');
-    addItemText(itemText, actualAreaId);
-
-    // showDialog(
-    //   "add-text",
-    //   <AddTextDialog
-    //     onClose={() => closeDialog("add-text")}
-    //     onConfirm={(item) => {
-    //       // console.log(item,actualAreaId,'add text');
-          
-    //       addItemText(item, actualAreaId);
-    //       closeDialog("add-text");
-    //     }}
-    //   />
-    // );
   };
 
   const handleAddImageFromGalleryClick = async () => {
@@ -782,7 +749,7 @@ const DesignerLogo: FC<{
                     {/* <Icon>
                       <Add />
                     </Icon> */}
-                    <span> <span>
+                    <span> <span style={{wordBreak: 'break-all'}}>
                         {itemsFiltered.some(
                           (item) =>
                             item.type === 1 &&
@@ -841,6 +808,7 @@ const DesignerLogo: FC<{
             <MoveElementButton
               isFullWidth
               outline
+              isMoveElementButton
               onClick={() => setMoveElements(true)}
             >
               <Icon>

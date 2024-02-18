@@ -315,31 +315,6 @@ const useActualGroups_ = useActualGroups();
   // -- -- attributes
   // -- -- -- options
 
-  const handleLeftClick = () => {
-
-    if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
-      setSelectedTrayType('colors')
-    }
-    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
-      setSelectedTrayType('signature')
-    }
-    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
-      setSelectedTrayType('logos')
-    }
-    
-    selectColorName("");
-    setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
-    selectGroup(useActualGroups_[(currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length].id);
-    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
-
-    // if (items.filter((item) => item.type === 0).length === 0) {
-    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
-    //     if (items?.filter((item) => item.type === 0)) {
-    //       useActualGroups_.splice(groups.length - 1, 1);
-    //     }
-    // }
-  };
-
   async function downloadImage(url: any) {
     try {
       // Replace the URL with your actual image URL
@@ -392,6 +367,32 @@ const useActualGroups_ = useActualGroups();
     }
   };
 
+
+  const handleLeftClick = () => {
+
+    if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
+      setSelectedTrayType('colors')
+    }
+    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
+      setSelectedTrayType('signature')
+    }
+    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
+      setSelectedTrayType('logos')
+    }
+    
+    selectColorName("");
+    setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
+    selectGroup(useActualGroups_[(currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length].id);
+    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
+
+    // if (items.filter((item) => item.type === 0).length === 0) {
+    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
+    //     if (items?.filter((item) => item.type === 0)) {
+    //       useActualGroups_.splice(groups.length - 1, 1);
+    //     }
+    // }
+  };
+
   const handleRightClick = () => {
       if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
         setSelectedTrayType('colors')
@@ -409,12 +410,12 @@ const useActualGroups_ = useActualGroups();
     if (selectedGroup?.steps)
       selectStep(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].steps[0]?.id);
 
-    if (items.filter((item) => item.type === 0).length === 0) {
-      if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
-        if (items?.filter((item) => item.type === 0)) {
-          useActualGroups_.splice(useActualGroups_.length - 1, 1);
-        }
-    }
+    // if (items.filter((item) => item.type === 0).length === 0) {
+    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
+    //     if (items?.filter((item) => item.type === 0)) {
+    //       useActualGroups_.splice(useActualGroups_.length - 1, 1);
+    //     }
+    // }
   };
 
   const toggleTray = (trayName: string) => {
@@ -769,7 +770,7 @@ const useActualGroups_ = useActualGroups();
           )}
 
           {selectedTrayType === "logos" && (
-            <DesignerLogo togglePersonalize={togglePersonalize} />
+            <DesignerLogo togglePersonalize={togglePersonalize} selectedAreaID={selectedGroupId}/>
           )}
         </div>
         <div className="gbuts">

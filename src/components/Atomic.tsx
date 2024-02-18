@@ -134,11 +134,12 @@ export const Button = styled.button<{
 	disabled?: boolean;
 	isFullWidth?: boolean;
 	uppercase?: boolean;
+	isMoveElementButton?: boolean;
 }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: ${(props) => (props.isFullWidth ? '100%' : props.outline ? '60px' : props.primary ? '200px' : '60px')};
+	width: ${(props) => (props.isFullWidth ? '100%' : props.outline ? '60px' : props.primary ? '200px' : props.isMoveElementButton ? '138px' : '60px' )};
 	background-color: ${(props) => (props.primary ? '#297ca3' : 'white')};
 	color: ${(props) => (props.outline ? 'black' : props.primary ? 'white' : '#297CA3')};
 	min-height: 38px;
@@ -192,12 +193,13 @@ export const Button_N = styled.div<{
 	disabled?: boolean;
 	isFullWidth?: boolean;
 	uppercase?: boolean;
+	isMoveElementButton?: boolean;
 }>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 7px 15px;
-	width: 100px;
+	padding: ${(props) => (props.isMoveElementButton ? '' : '7px 15px')};
+	width: ${(props) => (props.isMoveElementButton ? '138px' : '100px')};
 	background-color: ${(props) => (props.primary ? '#297ca3' : 'white')};
 	color: ${(props) => (props.outline ? 'black' : props.primary ? 'white' : '#297CA3')};
 	text-align: center;

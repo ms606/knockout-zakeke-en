@@ -596,6 +596,7 @@ const DesignerSignature: FC<{
           {itemsFiltered.length > 0 && !allStaticElements && (
             <MoveElementButton
               isFullWidth
+              isMoveElementButton
               outline
               onClick={() => setMoveElements(true)}
             >
@@ -621,7 +622,7 @@ const DesignerSignature: FC<{
           <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />
                    
          <div style={{position: "relative", top: "29px"}}>
-         <Button isFullWidth primary onClick={() => setMoveElements(false)}>
+         <Button  isFullWidth primary onClick={() => setMoveElements(false)}>
             <span>{"OK"} </span>
           </Button>
          </div>   
