@@ -435,6 +435,8 @@ const SelectorMobile = () => {
 			{selectedGroup?.id === -2 && isTemplateEditorOpened && (
 				<Designer
 					onCloseClick={() => {
+						console.log('closing');
+						
 						setIsTemplateEditorOpened(false);
 						handleGroupSelection(null);
 					}}

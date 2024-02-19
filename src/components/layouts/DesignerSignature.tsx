@@ -93,6 +93,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   ${(props) =>
     props.isMobile &&
     `
+    overflow-y: auto;
         // position:fixed;
         // top:0;
         // left:0;
@@ -240,10 +241,6 @@ const DesignerSignature: FC<{
       placeholder: 'Input your text here',
       backgroundColor: 'rgb(235, 237, 242)'
   })
-
-  console.log(selectedAreaID,'selectedAreaIDselectedAreaID');
-  
-  
 
   const dynamicVals = publicTranslations?.dynamics;
   
@@ -606,11 +603,11 @@ const DesignerSignature: FC<{
               <span>{T._("Move elements", "Composer")} </span>
             </MoveElementButton>
           )}
-          {isMobile && (
+          {/* {isMobile && (
             <CloseEditorButton onClick={onCloseClick}>
               {"OK"}
             </CloseEditorButton>
-          )}
+          )} */}
         </DesignerContainer>
       )}
       {moveElements && (

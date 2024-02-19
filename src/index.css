@@ -30,7 +30,7 @@ html,body {
   margin: 0;
   padding: 0;
   border: 0;
-  background-color: rgb(249, 246, 248);
+  background: linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237));
 }
 
 .css-1ecy5z8 {
@@ -183,7 +183,7 @@ button:focus {
     width: 100%;
     padding: 0px 20px;
     border-radius: 18px 18px 0px 0px;
-    bottom: 2em;
+    bottom: 0em;
     /* height: 40%; */
     left: 0px;
     top: calc(55% - 015px);

@@ -655,6 +655,7 @@ export function DesignerLogo() {
 
 const filteredAreas =
 product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+
 let filterSignatureAreas = templates[0].areas
 .filter((template) => template.canAddImage === true)
 .map((template) => {

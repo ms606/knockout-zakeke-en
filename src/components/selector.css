@@ -412,6 +412,7 @@
   }
 
   #product-info {
+    display: none;
     padding: 0;
     margin: 0;
     position: absolute;

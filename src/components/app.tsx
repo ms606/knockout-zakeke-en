@@ -35,6 +35,10 @@ const Layout = styled.div`
   height: 100%;
   width: 100%;
   overflow: hidden;
+
+  @media screen and (max-width: 568px) {
+    overflow: auto;
+  }
 `;
 
 const MobileContainer = styled.div`
@@ -101,7 +105,7 @@ const App: FunctionComponent<{}> = () => {
                       ? { width: "20vw", height: "20vh" }
                       : { 
                         aspectRatio: "1 / 1",
-                        width: "100%",  position: "absolute", top: "1em", bottom: "0", 
+                        width: "100%",  position: "absolute", top: "2em", bottom: "0", 
                         // left: "3%",
                         background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" }}
                 >

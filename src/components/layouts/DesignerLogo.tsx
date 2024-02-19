@@ -225,6 +225,10 @@ const DesignerLogo: FC<{
   const [forceUpdate, setForceUpdate] = useState(false);
   const { setIsLoading, isMobile } = useStore();
 
+  console.log(onCloseClick,'eewerewerwe');
+  
+  const [isTemplateEditorOpened, setIsTemplateEditorOpened] = useState(false);
+
   const {
     currentTemplate,
     items,
@@ -598,12 +602,21 @@ const DesignerLogo: FC<{
 
   // console.log(isItemEditable,'isItemEditable');
   
+
+
+  const onCloseClick1 = () => {
+    console.log('closing1111');
+    
+    setIsTemplateEditorOpened(false);
+    
+  }
+
   return (
     <>
       {!moveElements && (
-        <DesignerContainer isMobile={isMobile}>
+        <DesignerContainer isMobile={false}>
           {/* Templates */}
-          {!isMobile && templates.length > 1 && (
+          {templates.length > 1 && (
             <TemplatesContainer>
               {templates.map((template) => (
                 <Template
@@ -620,7 +633,8 @@ const DesignerLogo: FC<{
           )}
 
           {/* Areas */}
-          <DesignerContainerHeader>
+          {/* Closed because now its done on next button */}
+          {/* <DesignerContainerHeader>
           {!isMobile && finalVisibleAreas.length > 1 && (
               finalVisibleAreas.map((area:any) => (
                 <Area
@@ -632,9 +646,9 @@ const DesignerLogo: FC<{
                 </Area>
               ))
            )}
-          </DesignerContainerHeader>
+          </DesignerContainerHeader> */}
 
-          {isMobile && translatedTemplates.length > 1 && (
+          {/* {isMobile && translatedTemplates.length > 1 && (
             <SelectContainer>
               <span>{"Templates"}</span>
               <Select
@@ -657,10 +671,10 @@ const DesignerLogo: FC<{
                 onChange={(template: any) => setTemplate(template.id)}
               />
             </SelectContainer>
-          )}
-          {isMobile && translatedAreas.length > 1 && (
+          )} */}
+          
+          {/* {isMobile && translatedAreas.length > 1 && (
             <SelectContainer>
-              {/* <span>{T._("Customizable Areas", "Composer")}</span> */}
               <span>{dynamicVals?.get('Customizable Areas')}</span>              
               <Select
                 styles={{
@@ -683,7 +697,7 @@ const DesignerLogo: FC<{
                 onChange={(area: any) => setActualAreaId(area.id)}
               />
             </SelectContainer>
-          )}
+          )} */}
 
           {itemsFiltered.length === 0 &&
             !(showUploadButton || showGalleryButton) && (
@@ -817,11 +831,11 @@ const DesignerLogo: FC<{
               <span>{T._("Move elements", "Composer")} </span>
             </MoveElementButton>
           )}
-          {isMobile && (
-            <CloseEditorButton onClick={onCloseClick}>
+          {/* {isMobile && (
+            <CloseEditorButton onClick={onCloseClick1}>
               {"OK"}
             </CloseEditorButton>
-          )}
+          )} */}
         </DesignerContainer>
       )}
       {moveElements && (

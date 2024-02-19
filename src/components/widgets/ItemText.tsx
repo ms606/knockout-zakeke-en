@@ -100,6 +100,11 @@ const SinglePaletteItem = styled.div<{ color: string; selected: boolean }>`
   &:hover {
     opacity: 0.6;
   }
+
+  @media screen and (max-width: 568px){
+    width: 39px;
+    height: 22px;
+  }
 `;
 
 const TextColorsContainer = styled.div<{ isDefaultPalette?: boolean }>`
@@ -111,6 +116,13 @@ const TextColorsContainer = styled.div<{ isDefaultPalette?: boolean }>`
     grid-gap: 7px;
     `};
     width: 220px;
+  
+  @media screen and (max-width: 568px) {
+    width: 82vw;
+    grid-gap: 10px 22px;
+  }  
+    
+
 `;
 
 const OptionContainer = styled(components.Option)`

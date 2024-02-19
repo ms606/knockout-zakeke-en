@@ -114,10 +114,13 @@ export const ListItemColorWithCarousel = styled.li<{
   }
 
   @media screen and (max-width: 568px) {
+    width: 39px !important;
+    height: 22px !important;
+    
     &:after {
       top: 73% !important;
-      width: 6.5em;
-      height: 6.1em;
+      width: 39px !important;
+      height: 22px !important;
     }
   }
 `;
@@ -155,9 +158,9 @@ export const ListItemColor = styled.li<{
     bottom: 7%;
   }
 
-  @media screen and (max-width: 400px) {    
-    width: 39px;
-    height: 22px;
+  @media screen and (max-width: 500px) {    
+    width: 39px !important;
+    height: 22px !important;
     object-fit: fill !important;
   }
 `;
@@ -171,8 +174,8 @@ export const ListItemImage = styled.img<{ selected?: any }>`
   border: 1px solid rgb(229, 229, 229);
 
   @media screen and (max-width: 568px) {
-    width: 39px;
-    height: 22px;
+    width: 39px !important;
+    height: 22px !important;
     object-fit: fill;
     // margin: 0px 8px;
   }
@@ -234,6 +237,9 @@ export const ListItemX = styled.li<{ selected?: boolean }>`
 
   @media screen and (max-width: 568px) {
     // margin: 0 7px;
+    width: 39px !important;
+    height: 22px !important;
+    
   }
 `;
 
@@ -263,7 +269,8 @@ export const ListItemX_ = styled.li<{ selected?: boolean }>`
     // padding: 0px 7px;
     //  width: 12.5%;
     // height: 33px;
-    
+    width: 39px !important;
+    height: 22px !important;
 
   }
 `;
