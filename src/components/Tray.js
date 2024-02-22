@@ -28,6 +28,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
 
 
   const handleMultipleClicks = (event) => {
+    console.log(event, 'eventtttt');
     UpdateGroupId(event.target.id);
     toggleFunc('colors');
   };

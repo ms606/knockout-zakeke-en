@@ -319,9 +319,7 @@ export function useActualGroups() {
 		  if (!isSceneLoading){
 			const templatesSignature = DesignerSignature_();
 		    const templatesLogo = DesignerLogo_();
-
-			console.log(templatesSignature, templatesLogo,'a');
-			
+		
 		  let groupTemplatesSignature = actualGroups;
 		
 		  templatesSignature?.map((x) => {

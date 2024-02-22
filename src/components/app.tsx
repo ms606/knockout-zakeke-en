@@ -107,8 +107,7 @@ const App: FunctionComponent<{}> = () => {
                         aspectRatio: "1 / 1",
                         width: "100%",  position: "absolute", top: "2em", bottom: "0", 
                         // left: "3%",
-                        // background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" 
-                      }}
+                        background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" }}
                 >
                  <ZakekeViewer />
                 </div>
