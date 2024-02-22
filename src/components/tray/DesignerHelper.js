@@ -122,6 +122,7 @@ export function DesignerHelper() {
   // const customizerRef = useRef<any | null>(null);
   // const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
   // console.log(product,'product');
+
   const filteredAreas =
     product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 
@@ -607,37 +608,37 @@ export function DesignerSignature() {
     product,
     templates,
     setTemplate,
-    isSceneLoading
+    isSceneLoading,
   } = useZakeke();
 
-  if (!isSceneLoading && templates && product) {
 
+
+
+  if (!isSceneLoading && templates && product) {
     const filteredAreas =
       product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
-      
-      let filterSignatureAreas = templates[0].areas
+
+    let filterSignatureAreas = templates[0].areas
       .filter((template) => template.canAddText === true)
       .map((template) => {
         return { id: template.id };
       });
     const signatureIdAreas = [];
-  
+
     filteredAreas.forEach((x) => {
       const found = filterSignatureAreas.some((item2) => item2.id === x.id);
       // console.log(found);
       if (found) signatureIdAreas.push(x);
     });
 
+    console.log(filterSignatureAreas, templates, filteredAreas, signatureIdAreas ,'filterSignatureAreas');
+
     return signatureIdAreas;
   }
-   
 
   // console.log(filterSignatureAreas, signatureIdAreas,'signature');
   // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
-
-  
 }
-
 
 export function DesignerLogo() {
   const {
@@ -647,40 +648,42 @@ export function DesignerLogo() {
     product,
     templates,
     setTemplate,
-    isSceneLoading
+    isSceneLoading,
   } = useZakeke();
 
- 
+
+
   if (!isSceneLoading && templates && product) {
 
-const filteredAreas =
-product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+    
+    const filteredAreas =
+    product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+    
+    let filterSignatureAreas = templates[0].areas
+    .filter((template) => template.canAddImage === true)
+    .map((template) => {
+      return { id: template.id };
+    });
+   
+    // console.log(filteredAreas, filterSignatureAreas, templates, "filterSignatureAreas");
 
-let filterSignatureAreas = templates[0].areas
-.filter((template) => template.canAddImage === true)
-.map((template) => {
-  return { id: template.id };
-});
+    // let filterSignatureAreas = templates[0].areas
+    //     .filter((template) => template.canAddImage === true)
+    //     .map((template) => {
+    //       return { id: template.id };
+    //     });
 
+    const signatureIdAreas = [];
 
+    filteredAreas.forEach((x) => {
+      const found = filterSignatureAreas.some((item2) => item2.id === x.id);
+      // console.log(found);
+      if (found) signatureIdAreas.push(x);
+    });
 
-// let filterSignatureAreas = templates[0].areas
-//     .filter((template) => template.canAddImage === true)
-//     .map((template) => {
-//       return { id: template.id };
-//     });
+    // console.log(filterSignatureAreas, signatureIdAreas,'signature');
+    // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
 
-  const signatureIdAreas = [];
-
-  filteredAreas.forEach((x) => {
-    const found = filterSignatureAreas.some((item2) => item2.id === x.id);
-    // console.log(found);
-    if (found) signatureIdAreas.push(x);
-  });
-
-  // console.log(filterSignatureAreas, signatureIdAreas,'signature');
-  // console.log(filterSignatureAreas, filteredAreas, "translatedTemplates");
-
-  return signatureIdAreas;
-}
+    return signatureIdAreas;
+  }
 }

@@ -4,11 +4,9 @@ import { useZakeke } from "zakeke-configurator-react";
 import {
   List,
   ListX,
-  ListItem,
   ListItemX,
   ListItemX_,
   ListItemColor,
-  ListItemImage,
   ListItemImageX,
   ListItemImageNoCarousel,
 } from "./list";
@@ -16,7 +14,6 @@ import { PreviewContainer, BlurOverlay } from "./previewContainer";
 import Tray from "./Tray";
 
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
-import Designer from "./layouts/Designer";
 import DesignerSignature from "./layouts/DesignerSignature";
 import DesignerLogo from "./layouts/DesignerLogo";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
@@ -34,7 +31,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
@@ -57,9 +53,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productName,
     items,
     getOnlineScreenshot,
+    
   } = useZakeke();
+  
+  
+  // Trying out new hierarchy 
+  // console.log(groups[0].attributes,'groups');
+  // groups[0].attributes.map(x => {
+  //   if (x.code === x.code.toUpperCase()) {
+  //     console.log(x,);
+  //   }
+  // })
 
 
+  
+  
 const { setIsLoading, isMobile } = useStore();
   
 const useActualGroups_ = useActualGroups();
@@ -109,19 +117,55 @@ const useActualGroups_ = useActualGroups();
 
   const [width, setWidth] = useState(window.innerWidth);
 
-  const selectedGroup = useActualGroups_.find((group) => group.id === selectedGroupId);
+  // const selectedGroup = useActualGroups_.find((group) => group.id === selectedGroupId);
 
-  const selectedStep = selectedGroup
-    ? selectedGroup.steps.find((step) => step.id === selectedStepId)
-    : null;
+  // const selectedStep = selectedGroup
+  //   ? selectedGroup.steps.find((step) => step.id === selectedStepId)
+  //   : null;
 
   const [selectedPersonalize, setSelectedPersonalize] = useState<any | null>(
     false
   );
 
+  // const currentAttributes = selectedStep ? selectedStep.attributes : selectedGroup ? selectedGroup.attributes : [];
+
   // Filter logos and signature for tray
   const filteredAreas = null;
   // product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
+
+
+
+  // const selectedAttribute = attributes.find(
+  //   (attribute) => attribute.id === selectedAttributeId
+  // );
+
+  // console.log(currentAttributes, selectedAttribute,'selectedAttribute');
+  
+
+
+
+  // const attributess = groups[0]?.attributes;
+  //console.log(selectedGroupId,useActualGroups_,'actualGroups 1');
+	const selectedGroup = selectedGroupId ? useActualGroups_.find((group) => group.id === selectedGroupId) : null;
+	//console.log(selectedGroup,selectedGroupId,useActualGroups_,'actualGroups 2');
+
+  const selectedStep = selectedGroupId
+		? useActualGroups_.find((group) => group.id === selectedGroupId)?.steps.find((step) => step.id === selectedStepId)
+		: null;
+	const currentAttributes = selectedStep ? selectedStep.attributes : selectedGroup ? selectedGroup.attributes : [];
+	const currentTemplateGroups = selectedStep
+		? selectedStep.templateGroups
+		: selectedGroup
+		? selectedGroup.templateGroups
+		: [];
+
+	const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
+		(a, b) => a.displayOrder - b.displayOrder
+	);
+	
+	// const selectedAttribute = currentAttributes
+	// 	? currentAttributes.find((attr) => attr.id === selectedAttributeId)
+	// 	: null;
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection
   const attributes = useMemo(
@@ -129,9 +173,41 @@ const useActualGroups_ = useActualGroups();
     [selectedGroup, selectedStep]
   );
 
-  const selectedAttribute = attributes.find(
-    (attribute) => attribute.id === selectedAttributeId
-  );
+  const selectedAttribute = attributes.find(attribute => attribute.id === selectedAttributeId);
+
+  
+  const fitlerAttributes = attributes.filter(x => {
+      if (x.name === x.name.toUpperCase()) {
+        return x
+      }
+    })
+
+    fitlerAttributes.filter (x => x !== undefined);
+
+    console.log(fitlerAttributes);
+    
+   // console.log(groups, selectedGroup, fitlerAttributes, selectedStepName, 'fitlerAttributes');
+
+ //   console.log(fitlerAttributes,'attributes 2');
+
+
+
+    // select an attribute if selected step or group change
+	useEffect(() => {
+		
+    // console.log(attributess, selectedAttribute, 'sdfdssdfsd');
+    // if (attributess) selectAttribute(attributess[1].id)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [selectedStepId, selectedGroupId, useActualGroups_]);
+
+
+	// const selectedTemplateGroup = currentTemplateGroups
+	// 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
+	// 	: null;
+
+
+
 
   // removed test
   // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
@@ -200,24 +276,12 @@ const useActualGroups_ = useActualGroups();
   useEffect(() => {
     // console.log("loading in the first group");
 
-    // if (items?.some((obj) => obj.type === 0)) {
-    //   setHasTypeZero(items?.some((obj) => obj.type === 0));
-    // } else {
-    //   setHasTypeZero(false);
-    // }
-
     if (!selectedGroup && useActualGroups_.length > 0) {
       selectGroup(groups[0].id);
 
       setActiveColorOption("plain");
 
-      if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
-
-      // if (selectedStep) {
-      //   if (activeColorOption === "fluorescent") {
-      //     selectAttribute(selectedStep.attributes[3].id);
-      //   }
-      // }
+     // if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
       if (templates.length > 0) setTemplate(templates[0].id);
     }
@@ -243,52 +307,61 @@ const useActualGroups_ = useActualGroups();
 
   // Select attribute first time
   useEffect(() => {
-    if (!selectedAttribute && attributes.length > 0)
-      selectAttribute(attributes[0].id);
 
     if (selectedGroup) {
-      if (selectedGroup?.steps?.length > 0) {
+   
+      // if (selectedGroup? > 0) {
         if (activeColorOption === "plain") {
-          selectAttribute(selectedGroup.steps[0].attributes[0].id);
-          if (selectedGroup) {
-            selectStep(selectedGroup.steps[0].id);
-            selectStepName(selectedGroup?.steps[0].name);
-          }
+          selectOption(selectedGroup.attributes[0]?.options[0].id);
+          selectStepName(selectedGroup?.attributes[0]?.options[0].name);
+          // selectAttribute(selectedGroup.attributes[0]?.options[0].id);
+          // No step now -- 21-feb-24
+          // if (selectedGroup) {
+          //   selectStep(selectedGroup.steps[0].id);
+          // }
         }
         if (activeColorOption === "metallic") {
-          selectAttribute(selectedGroup.steps[0].attributes[1].id);
-          if (selectedGroup) {
-            selectStep(selectedGroup.steps[0].id);
-            selectStepName(selectedGroup?.steps[0].name);
-          }
+          selectOption(selectedGroup.attributes[0]?.options[1].id);
+          selectStepName(selectedGroup?.attributes[0]?.options[1].name);
+          // if (selectedGroup) {
+          //   selectStep(selectedGroup.steps[0].id);
+          //   selectStepName(selectedGroup?.steps[0].name);
+          // }
         }
         if (activeColorOption === "matte") {
-          selectAttribute(selectedGroup.steps[0].attributes[2].id);
-          if (selectedGroup) {
-            selectStep(selectedGroup.steps[0].id);
-            selectStepName(selectedGroup?.steps[0].name);
-          }
+          selectOption(selectedGroup.attributes[0]?.options[2].id);
+          selectStepName(selectedGroup?.attributes[0]?.options[2].name);
+          // if (selectedGroup) {
+          //   selectStep(selectedGroup.steps[0].id);
+          //   selectStepName(selectedGroup?.steps[0].name);
+          // }
         }
         if (activeColorOption === "fluorescent") {
-          selectAttribute(selectedGroup.steps[0].attributes[3].id);
-          if (selectedGroup) {
-            selectStep(selectedGroup.steps[0].id);
-            selectStepName(selectedGroup?.steps[0].name);
-          }
+          selectOption(selectedGroup.attributes[0]?.options[3].id);
+          selectStepName(selectedGroup?.attributes[0]?.options[3].name);
+          // if (selectedGroup) {
+          //   selectStep(selectedGroup.steps[0].id);
+          //   selectStepName(selectedGroup?.steps[0].name);
+          // }
         }
-        if (activeColorOption === "knockX") {
+        if (activeColorOption === "knockX" || activeColorOption === "KNOCK-X") {
+          selectOption(selectedGroup.attributes[0]?.options[4].id);
+          selectStepName(selectedGroup?.attributes[0]?.options[4].name);
           //selectGroup(selectedGroup?.steps[1].id)
-          if (selectedGroup) {
-            selectStep(selectedGroup.steps[1].id);
-            selectStepName(selectedGroup?.steps[1].name);
-          }
+          // selectOption(selectedGroup.attributes[0]?.options[3].id);
+          // if (selectedGroup) {
+          //   selectStep(selectedGroup.steps[1].id);
+          //   selectStepName(selectedGroup?.steps[1].name);
+          // }
           // selectAttribute(selectedStep.attributes[3].id);
-        }
+        // }
       }
     }
 
+    console.log(selectedGroup,activeColorOption,selectedStepName,selectedTrayType,'selectedGroup');
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAttribute, attributes, activeColorOption]);
+  }, [selectedAttribute, activeColorOption]);
 
   useEffect(() => {
     if (selectedGroup) {
@@ -403,7 +476,8 @@ const useActualGroups_ = useActualGroups();
       else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
         setSelectedTrayType('logos')
       }
-
+      // console.log(useActualGroups_[(currentIndex + 1)],selectedGroup);
+      
     selectColorName("");
     setCurrentIndex((currentIndex + 1) % useActualGroups_.length);
     selectGroup(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id);
@@ -614,6 +688,7 @@ const useActualGroups_ = useActualGroups();
             selectedTrayType === "null" ||
             selectedTrayType === "colors") && (
             <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
+           
               {isTrayOpen && !selectedTrayPreviewOpenButton && (
                 <Tray
                   groupNameList={selectedGroupList}
@@ -630,6 +705,8 @@ const useActualGroups_ = useActualGroups();
                 />
               )}
 
+
+
               {!selectedTrayPreviewOpenButton && (
                 <div
                   style={{
@@ -645,9 +722,10 @@ const useActualGroups_ = useActualGroups();
                   {selectedStepName != "KNOCK-X" && (
                     <List>
                       {!selectedTrayPreviewOpenButton &&
-                        selectedAttribute &&
+                        // selectedAttribute &&
+                        fitlerAttributes &&
                         !isTrayOpen &&
-                        selectedAttribute.options.map((option) => {
+                        fitlerAttributes[0]?.options.map((option) => {
                           return (
                             <ListItemColor
                               key={option.id}
@@ -677,6 +755,8 @@ const useActualGroups_ = useActualGroups();
                                       selectOptionName(option.name);
                                     }
                                   } else {
+                                    // console.log(option.id);
+                                    // setSelectedAttributeId()
                                     selectOption(option.id);
                                     selectOptionId(option.id);
                                     selectOptionName(option.name);
@@ -720,13 +800,14 @@ const useActualGroups_ = useActualGroups();
                           //onSlideChange={() => console.log('slide change')}
                           //onSwiper={(swiper) => console.log(swiper)}
                         >
-                          {attributes.map((attribute) => {
+                          {fitlerAttributes[0].options.map((attribute) => {
                             return (
                               <SwiperSlide>
                                 <ListItemX
                                   key={attribute.id}
-                                  onClick={() => selectAttribute(attribute.id)}
-                                  selected={selectedAttribute === attribute}
+                                  onClick={() => selectOption(attribute.id)}
+                                  selected={true}
+                                  // selected={selectedAttribute === attribute}
                                 >
                                   <div className="scaler"></div>
                                   {attribute.name}
@@ -739,8 +820,8 @@ const useActualGroups_ = useActualGroups();
                         <br />
                         <div className="knockXlabel">SELECT COLOR THEME</div>
                         <ListX>
-                          {selectedAttribute &&
-                            selectedAttribute.options.map((option) => {
+                          {fitlerAttributes[0] &&
+                            fitlerAttributes[0].options.map((option) => {
                               return (
                                 <ListItemX_
                                   key={option.id}

@@ -33,6 +33,7 @@ export const ListX = styled.ul`
     background-color: #fff;
     flex-wrap: wrap;
     align-items: flex-start;
+    // border: 1px solid black;
 }
 
     @media screen and (max-width: 568px) {
@@ -230,7 +231,8 @@ export const ListItemX = styled.li<{ selected?: boolean }>`
   font-style: normal;
   font-size: 9px;
 //   background: rgba(0, 30, 60, 0.5);
-  border: 1px solid #98acd97d;
+  // border: 1px solid #98acd97d;
+  border: 1px solid;
   &:hover {
     background-color: #ffd966;
   }
