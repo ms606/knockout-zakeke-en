@@ -610,6 +610,8 @@ export function DesignerSignature() {
     isSceneLoading
   } = useZakeke();
 
+  console.log( templates, product );
+
   if (!isSceneLoading && templates && product) {
 
     const filteredAreas =
