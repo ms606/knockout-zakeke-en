@@ -664,6 +664,7 @@ let filterSignatureAreas = templates[0].areas
   return { id: template.id };
 });
 
+// console.log('designer logggggg',isAreaVisible,filterSignatureAreas, filteredAreas, product?.areas);
 
 
 // let filterSignatureAreas = templates[0].areas

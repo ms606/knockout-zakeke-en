@@ -69,15 +69,11 @@ const { setIsLoading, isMobile } = useStore();
   
 const useActualGroups_ = useActualGroups();
 
-const iterator = useActualGroups_; 
 
-console.log(iterator.entries().next());
-console.log(iterator.entries().next());
-// const ar = [1,2,3,4]
-// console.log(Array.prototype.concat.call({}, 1, 2, 3)); 
-// console.log(Array.prototype.concat.call(1, 2, 3));
-
-// console.log(arrayLike);
+useActualGroups_.every((x,index,array)=> {
+  console.log(x, index, array);
+  
+})
 
 //   if (!isSceneLoading){
 // const templatesSignature = DesignerSignature_();
