@@ -341,6 +341,13 @@ export function useActualGroups() {
     draftCompositions,
     sellerSettings,
   } = useZakeke();
+  
+    // removed test
+    let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+    if (indexToRemove !== -1) {
+      groups.splice(indexToRemove, 1);
+    }
+
   const shouldCustomizerGroupBeVisible =
     !isSceneLoading && product
       ? product.areas.some((area) => isAreaVisible(area.id))
@@ -355,6 +362,12 @@ export function useActualGroups() {
       hasDesignsSaved,
       sellerSettings
     ) ?? [];
+
+    indexToRemove = actualGroups.findIndex((obj) => obj.id === -2);
+    
+    if (indexToRemove !== -1) {
+      actualGroups.splice(indexToRemove, 1);
+    }
 
   if (!isSceneLoading) {
     const templatesSignature = DesignerSignature_();

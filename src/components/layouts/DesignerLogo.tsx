@@ -224,8 +224,6 @@ const DesignerLogo: FC<{
   const { showDialog, closeDialog } = useDialogManager();
   const [forceUpdate, setForceUpdate] = useState(false);
   const { setIsLoading, isMobile } = useStore();
-
-  console.log(onCloseClick,'eewerewerwe');
   
   const [isTemplateEditorOpened, setIsTemplateEditorOpened] = useState(false);
 

@@ -18,7 +18,12 @@ import DesignerSignature from "./layouts/DesignerSignature";
 import DesignerLogo from "./layouts/DesignerLogo";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
 import useStore from "../Store";
-import { makeFirstLetterCaps, T, useActualGroups, downloadImage } from "../Helpers";
+import {
+  makeFirstLetterCaps,
+  T,
+  useActualGroups,
+  downloadImage,
+} from "../Helpers";
 import Footer from "./layouts/Footer";
 import FooterMobile from "./layouts/FooterMobile";
 
@@ -31,7 +36,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -53,32 +57,29 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productName,
     items,
     getOnlineScreenshot,
-    
   } = useZakeke();
-  
-  
-  // Trying out new hierarchy 
+
+  // Trying out new hierarchy
   // console.log(groups[0].attributes,'groups');
   // groups[0].attributes.map(x => {
   //   if (x.code === x.code.toUpperCase()) {
   //     console.log(x,);
   //   }
   // })
-  
-const { setIsLoading, isMobile } = useStore();
-  
-const useActualGroups_ = useActualGroups();
 
+  const { setIsLoading, isMobile } = useStore();
 
-useActualGroups_.every((x,index,array)=> {
-  console.log(x, index, array);
-  
-})
+  const useActualGroups_ = useActualGroups();
 
-//   if (!isSceneLoading){
-// const templatesSignature = DesignerSignature_();
-//   const templatesLogo = DesignerLogo_();
-//   }
+  // useActualGroups_.every((x,index,array)=> {
+  //   console.log(x, index, array);
+
+  // })
+
+  //   if (!isSceneLoading){
+  // const templatesSignature = DesignerSignature_();
+  //   const templatesLogo = DesignerLogo_();
+  //   }
 
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -140,29 +141,37 @@ useActualGroups_.every((x,index,array)=> {
   // );
 
   // console.log(currentAttributes, selectedAttribute,'selectedAttribute');
-  
+
   // const attributess = groups[0]?.attributes;
   //console.log(selectedGroupId,useActualGroups_,'actualGroups 1');
-	const selectedGroup = selectedGroupId ? useActualGroups_.find((group) => group.id === selectedGroupId) : null;
-	//console.log(selectedGroup,selectedGroupId,useActualGroups_,'actualGroups 2');
+  const selectedGroup = selectedGroupId
+    ? useActualGroups_.find((group) => group.id === selectedGroupId)
+    : null;
+  //console.log(selectedGroup,selectedGroupId,useActualGroups_,'actualGroups 2');
 
   const selectedStep = selectedGroupId
-		? useActualGroups_.find((group) => group.id === selectedGroupId)?.steps.find((step) => step.id === selectedStepId)
-		: null;
-	const currentAttributes = selectedStep ? selectedStep.attributes : selectedGroup ? selectedGroup.attributes : [];
-	const currentTemplateGroups = selectedStep
-		? selectedStep.templateGroups
-		: selectedGroup
-		? selectedGroup.templateGroups
-		: [];
+    ? useActualGroups_
+        .find((group) => group.id === selectedGroupId)
+        ?.steps.find((step) => step.id === selectedStepId)
+    : null;
+  const currentAttributes = selectedStep
+    ? selectedStep.attributes
+    : selectedGroup
+    ? selectedGroup.attributes
+    : [];
+  const currentTemplateGroups = selectedStep
+    ? selectedStep.templateGroups
+    : selectedGroup
+    ? selectedGroup.templateGroups
+    : [];
 
-	const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
-		(a, b) => a.displayOrder - b.displayOrder
-	);
-	
-	// const selectedAttribute = currentAttributes
-	// 	? currentAttributes.find((attr) => attr.id === selectedAttributeId)
-	// 	: null;
+  const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
+    (a, b) => a.displayOrder - b.displayOrder
+  );
+
+  // const selectedAttribute = currentAttributes
+  // 	? currentAttributes.find((attr) => attr.id === selectedAttributeId)
+  // 	: null;
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection
   const attributes = useMemo(
@@ -170,46 +179,52 @@ useActualGroups_.every((x,index,array)=> {
     [selectedGroup, selectedStep]
   );
 
-  const selectedAttribute = attributes.find(attribute => attribute.id === selectedAttributeId);
+  const selectedAttribute = attributes.find(
+    (attribute) => attribute.id === selectedAttributeId
+  );
 
-  const fitlerAttributes = attributes.filter(x => {
-      if (x.name === x.name.toUpperCase()) {
-        return x
-      }
-    })
-  
-  fitlerAttributes.filter (x => x !== undefined);
+  const fitlerAttributes = attributes.filter((x) => {
+    if (x.name === x.name.toUpperCase()) {
+      return x;
+    }
+  });
+
+  fitlerAttributes.filter((x) => x !== undefined);
 
   // console.log(fitlerAttributes);
-    
+
   // console.log(groups, selectedGroup, fitlerAttributes, selectedStepName, 'fitlerAttributes');
 
   //   console.log(fitlerAttributes,'attributes 2');
 
   // select an attribute if selected step or group change
 
-	useEffect(() => {
-		
+  useEffect(() => {
     // console.log(attributess, selectedAttribute, 'sdfdssdfsd');
     // if (attributess) selectAttribute(attributess[1].id)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedStepId, selectedGroupId, useActualGroups_]);
 
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [selectedStepId, selectedGroupId, useActualGroups_]);
-
-
-	// const selectedTemplateGroup = currentTemplateGroups
-	// 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
-	// 	: null;
-
-
-
+  // const selectedTemplateGroup = currentTemplateGroups
+  // 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
+  // 	: null;
 
   // removed test
-  // let indexToRemove = groups.findIndex((obj) => obj.id === -1);
-  // if (indexToRemove !== -1) {
-  //   groups.splice(indexToRemove, 1);
-  // }
+  let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+  if (indexToRemove !== -1) {
+    groups.splice(indexToRemove, 1);
+  }
 
+
+  // console.log(groups,'groups');
+  console.log(
+    Array.prototype.every.call(groups, (x) => {
+      console.log(x,'xxxx');
+      
+    })
+  );
+  
+  
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
 
@@ -269,14 +284,14 @@ useActualGroups_.every((x,index,array)=> {
 
   // Open the first group and the first step when loaded
   useEffect(() => {
-    // console.log("loading in the first group");
+    // console.log("loading in the first group",groups);
 
     if (!selectedGroup && useActualGroups_.length > 0) {
       selectGroup(groups[0].id);
 
       setActiveColorOption("plain");
 
-     // if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
+      // if (groups[0].steps.length > 0) selectStep(groups[0].steps[0].id);
 
       if (templates.length > 0) setTemplate(templates[0].id);
     }
@@ -287,7 +302,7 @@ useActualGroups_.every((x,index,array)=> {
         name: string;
         imageUrl: string | null | undefined;
       }[] = [];
-      useActualGroups_.map((group) => {
+      groups.map((group) => {
         groupRec.push({
           id: group.id,
           name: group.name,
@@ -302,58 +317,61 @@ useActualGroups_.every((x,index,array)=> {
 
   // Select attribute first time
   useEffect(() => {
-
     if (selectedGroup) {
-   
       // if (selectedGroup? > 0) {
-        if (activeColorOption === "plain") {
-          selectOption(selectedGroup.attributes[0]?.options[0].id);
-          selectStepName(selectedGroup?.attributes[0]?.options[0].name);
-          // selectAttribute(selectedGroup.attributes[0]?.options[0].id);
-          // No step now -- 21-feb-24
-          // if (selectedGroup) {
-          //   selectStep(selectedGroup.steps[0].id);
-          // }
-        }
-        if (activeColorOption === "metallic") {
-          selectOption(selectedGroup.attributes[0]?.options[1].id);
-          selectStepName(selectedGroup?.attributes[0]?.options[1].name);
-          // if (selectedGroup) {
-          //   selectStep(selectedGroup.steps[0].id);
-          //   selectStepName(selectedGroup?.steps[0].name);
-          // }
-        }
-        if (activeColorOption === "matte") {
-          selectOption(selectedGroup.attributes[0]?.options[2].id);
-          selectStepName(selectedGroup?.attributes[0]?.options[2].name);
-          // if (selectedGroup) {
-          //   selectStep(selectedGroup.steps[0].id);
-          //   selectStepName(selectedGroup?.steps[0].name);
-          // }
-        }
-        if (activeColorOption === "fluorescent") {
+      if (activeColorOption === "plain") {
+        selectOption(selectedGroup.attributes[0]?.options[0].id);
+        selectStepName(selectedGroup?.attributes[0]?.options[0].name);
+        // selectAttribute(selectedGroup.attributes[0]?.options[0].id);
+        // No step now -- 21-feb-24
+        // if (selectedGroup) {
+        //   selectStep(selectedGroup.steps[0].id);
+        // }
+      }
+      if (activeColorOption === "metallic") {
+        selectOption(selectedGroup.attributes[0]?.options[1].id);
+        selectStepName(selectedGroup?.attributes[0]?.options[1].name);
+        // if (selectedGroup) {
+        //   selectStep(selectedGroup.steps[0].id);
+        //   selectStepName(selectedGroup?.steps[0].name);
+        // }
+      }
+      if (activeColorOption === "matte") {
+        selectOption(selectedGroup.attributes[0]?.options[2].id);
+        selectStepName(selectedGroup?.attributes[0]?.options[2].name);
+        // if (selectedGroup) {
+        //   selectStep(selectedGroup.steps[0].id);
+        //   selectStepName(selectedGroup?.steps[0].name);
+        // }
+      }
+      if (activeColorOption === "fluorescent") {
+        if (selectedGroup.attributes[0]?.options[3]) {
           selectOption(selectedGroup.attributes[0]?.options[3].id);
           selectStepName(selectedGroup?.attributes[0]?.options[3].name);
-          // if (selectedGroup) {
-          //   selectStep(selectedGroup.steps[0].id);
-          //   selectStepName(selectedGroup?.steps[0].name);
-          // }
         }
-        if (activeColorOption === "knockX" || activeColorOption === "KNOCK-X") {
+        // if (selectedGroup) {
+        //   selectStep(selectedGroup.steps[0].id);
+        //   selectStepName(selectedGroup?.steps[0].name);
+        // }
+      }
+      if (activeColorOption === "knockX" || activeColorOption === "KNOCK-X") {
+        if (selectedGroup.attributes[0]?.options[4]) {
           selectOption(selectedGroup.attributes[0]?.options[4].id);
           selectStepName(selectedGroup?.attributes[0]?.options[4].name);
-          //selectGroup(selectedGroup?.steps[1].id)
-          // selectOption(selectedGroup.attributes[0]?.options[3].id);
-          // if (selectedGroup) {
-          //   selectStep(selectedGroup.steps[1].id);
-          //   selectStepName(selectedGroup?.steps[1].name);
-          // }
-          // selectAttribute(selectedStep.attributes[3].id);
+        }
+
+        //selectGroup(selectedGroup?.steps[1].id)
+        // selectOption(selectedGroup.attributes[0]?.options[3].id);
+        // if (selectedGroup) {
+        //   selectStep(selectedGroup.steps[1].id);
+        //   selectStepName(selectedGroup?.steps[1].name);
+        // }
+        // selectAttribute(selectedStep.attributes[3].id);
         // }
       }
     }
 
-    console.log(selectedGroup,activeColorOption,selectedStepName,selectedTrayType,'selectedGroup');
+    // console.log(selectedGroup,activeColorOption,selectedStepName,selectedTrayType,'selectedGroup');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAttribute, activeColorOption]);
@@ -383,7 +401,6 @@ useActualGroups_.every((x,index,array)=> {
   // -- -- attributes
   // -- -- -- options
 
-
   const handleScreenShotClick = async () => {
     try {
       const url = await getOnlineScreenshot(800, 800);
@@ -403,22 +420,34 @@ useActualGroups_.every((x,index,array)=> {
     }
   };
 
-
   const handleLeftClick = () => {
+    if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 0
+    ) {
+      setSelectedTrayType("colors");
+    } else if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 2
+    ) {
+      setSelectedTrayType("signature");
+    } else if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 3
+    ) {
+      setSelectedTrayType("logos");
+    }
 
-    if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
-      setSelectedTrayType('colors')
-    }
-    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
-      setSelectedTrayType('signature')
-    }
-    else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
-      setSelectedTrayType('logos')
-    }
-    
     selectColorName("");
-    setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
-    selectGroup(useActualGroups_[(currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length].id);
+    setActiveColorOption("plain");
+    setCurrentIndex(
+      (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
+    );
+    selectGroup(
+      useActualGroups_[
+        (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
+      ].id
+    );
     if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
 
     // if (items.filter((item) => item.type === 0).length === 0) {
@@ -430,22 +459,36 @@ useActualGroups_.every((x,index,array)=> {
   };
 
   const handleRightClick = () => {
-      if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 0 ) {
-        setSelectedTrayType('colors')
-      }
-      else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 2) {
-        setSelectedTrayType('signature')
-      }
-      else if (useActualGroups_[(currentIndex + 1) % useActualGroups_.length].direction == 3) {
-        setSelectedTrayType('logos')
-      }
-      // console.log(useActualGroups_[(currentIndex + 1)],selectedGroup);
-      
+    console.log(useActualGroups_,'useActualGroups_');
+    
+    if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 0
+    ) {
+      setSelectedTrayType("colors");
+    } else if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 2
+    ) {
+      setSelectedTrayType("signature");
+    } else if (
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+        .direction == 3
+    ) {
+      setSelectedTrayType("logos");
+    }
+    // console.log(useActualGroups_[(currentIndex + 1)],selectedGroup);
+    setActiveColorOption("plain");
     selectColorName("");
     setCurrentIndex((currentIndex + 1) % useActualGroups_.length);
-    selectGroup(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id);
+    selectGroup(
+      useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id
+    );
     if (selectedGroup?.steps)
-      selectStep(useActualGroups_[(currentIndex + 1) % useActualGroups_.length].steps[0]?.id);
+      selectStep(
+        useActualGroups_[(currentIndex + 1) % useActualGroups_.length].steps[0]
+          ?.id
+      );
 
     // if (items.filter((item) => item.type === 0).length === 0) {
     //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
@@ -632,9 +675,9 @@ useActualGroups_.every((x,index,array)=> {
                     </div>
 
                     <div className="gimg">
-                      {groups[currentIndex]?.imageUrl && (
+                      {useActualGroups_[currentIndex]?.imageUrl && (
                         <img
-                          src={groups[currentIndex]?.imageUrl!}
+                          src={useActualGroups_[currentIndex]?.imageUrl!}
                           alt="Group Image"
                           style={{ maxWidth: "100%", height: "auto" }}
                         />
@@ -651,7 +694,6 @@ useActualGroups_.every((x,index,array)=> {
             selectedTrayType === "null" ||
             selectedTrayType === "colors") && (
             <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
-           
               {isTrayOpen && !selectedTrayPreviewOpenButton && (
                 <Tray
                   groupNameList={selectedGroupList}
@@ -667,8 +709,6 @@ useActualGroups_.every((x,index,array)=> {
                   activeColorOption={activeColorOption}
                 />
               )}
-
-
 
               {!selectedTrayPreviewOpenButton && (
                 <div
@@ -810,11 +850,17 @@ useActualGroups_.every((x,index,array)=> {
           )}
 
           {selectedTrayType === "signature" && (
-            <DesignerSignature togglePersonalize={togglePersonalize} selectedAreaID={selectedGroupId}/>
+            <DesignerSignature
+              togglePersonalize={togglePersonalize}
+              selectedAreaID={selectedGroupId}
+            />
           )}
 
           {selectedTrayType === "logos" && (
-            <DesignerLogo togglePersonalize={togglePersonalize} selectedAreaID={selectedGroupId}/>
+            <DesignerLogo
+              togglePersonalize={togglePersonalize}
+              selectedAreaID={selectedGroupId}
+            />
           )}
         </div>
         <div className="gbuts">

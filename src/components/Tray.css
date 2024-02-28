@@ -162,6 +162,12 @@
     padding-top: 5px;
     border-radius: 0px 0px 5px 5px;
     margin: 0px auto;
+    background-color: #fff;
+  }
+
+  .slabel:hover {
+    color: black; 
+    background-color: #fff ;
   }
   
   .tray-mc-grid:hover {
@@ -169,8 +175,7 @@
   }
 
   .heading:hover {
-    background-color: #fff;
-    color: black !important;
+    color: black !important;    
     box-shadow: rgb(100 211 255 / 73%) 0px 0px 30px 6px !important;
   }
 
@@ -183,12 +188,9 @@
   }
 
   .sitems:hover {
-    color: black !important; 
+    /* color: black !important;  */
   }
 
-  .slabel:hover {
-    color: black !important; 
-  }
 
   @media screen and (max-width: 400px) {
     .full-tray {
