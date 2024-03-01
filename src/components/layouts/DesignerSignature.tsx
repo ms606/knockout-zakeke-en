@@ -299,7 +299,7 @@ const DesignerSignature: FC<{
         finalVisibleAreas.push(filteredArea);
     });    
 
-    console.log(finalVisibleAreas,'total visible area');
+    // console.log(finalVisibleAreas,'total visible area');
     
 
   const [actualAreaId, setActualAreaId] = useState<number>(

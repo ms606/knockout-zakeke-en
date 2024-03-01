@@ -24,11 +24,11 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
 
   const templates =  DesignerSignature();
   const templatesLogo =  DesignerLogo();
-  // console.log(templates,'items');
+  
 
 
   const handleMultipleClicks = (event) => {
-    UpdateGroupId(event.target.id);
+    UpdateGroupId(event.target.id, 'colors');
     toggleFunc('colors');
   };
 
@@ -47,14 +47,14 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
      backgroundColor: 'rgb(235, 237, 242)'
  }
  
-   console.log(itemText,actualAreaId,'add text');
+   UpdateGroupId(actualAreaId, 'signature'); // This is for setting index
    addItemText(itemText, actualAreaId);
    toggleFunc('signature');
  }
 
  const handleImageItem = (actualAreaId) => {
+  UpdateGroupId(actualAreaId, 'logos'); // This is for setting index
   toggleFunc('logos');
-
  }
 
   return (

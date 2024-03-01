@@ -70,7 +70,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
-
+  
   // useActualGroups_.every((x,index,array)=> {
   //   console.log(x, index, array);
 
@@ -215,16 +215,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     groups.splice(indexToRemove, 1);
   }
 
-
   // console.log(groups,'groups');
-  console.log(
-    Array.prototype.every.call(groups, (x) => {
-      console.log(x,'xxxx');
-      
-    })
-  );
-  
-  
+  // console.log(
+  //   Array.prototype.every.call(groups, (x) => {
+  //     console.log(x, "xxxx");
+  //   })
+  // );
+
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
 
@@ -422,17 +419,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const handleLeftClick = () => {
     if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
         .direction == 0
     ) {
       setSelectedTrayType("colors");
     } else if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
         .direction == 2
     ) {
       setSelectedTrayType("signature");
     } else if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
+      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
         .direction == 3
     ) {
       setSelectedTrayType("logos");
@@ -459,8 +456,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const handleRightClick = () => {
-    console.log(useActualGroups_,'useActualGroups_');
-    
     if (
       useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
         .direction == 0
@@ -519,39 +514,50 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   // After selection of the element from the tray
-  const groupIdFromFunc = (data: number) => {
-    // console.log(data, groups, "filteredArrayfilteredArray");
+  const groupIdFromFunc = (data: number, type: string) => {
+    // console.log(data, useActualGroups_, "filteredArrayfilteredArray");
 
     let filteredArray;
 
-    groups.filter((element) => {
+    useActualGroups_.filter((element) => {
       return element;
     });
 
-    filteredArray = groups.filter((group) => {
+    filteredArray = useActualGroups_.filter((group) => {
       if (group?.id) {
         return group.id == data;
       }
     });
 
-    const filteredArrayId = groups.filter((i: any, index: number) => {
+    const filteredArrayId = useActualGroups_.filter((i: any, index: number) => {
       return i.id == data;
     });
 
     if (filteredArrayId.length > 0) {
       const foundItem = filteredArrayId[0];
-      const foundItemIndex = groups.indexOf(foundItem);
+      const foundItemIndex = useActualGroups_.indexOf(foundItem);
       setCurrentIndex(foundItemIndex);
     }
 
-    // console.log(filteredArray,'filteredArray');
+    setSelectedTrayType(type);
 
-    // selectGroup(data);
-    // selectGroupIdFromTray(data);
+    // console.log(selectedGroupId,'selectedGroupId');
+     
+  if (type === 'colors') {
     if (filteredArray[0]?.id) {
       selectGroup(filteredArray[0].id);
       selectGroupIdFromTray(filteredArray[0].id);
     }
+  }
+  else {
+     selectGroup(data) //selectedGroupId = data
+  //   console.log(selectedGroupId,'selectedGroupId');
+  //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
+  }
+
+ 
+  
+
   };
 
   const togglePersonalize = () => {
@@ -748,9 +754,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                       if (
                                         groups[groups?.length - 1].attributes[0]
                                           .code === "MODALITATE IMPRIMARE"
-                                      ) {
-                                        //          console.log(option,'selectOption(option.id);selectOption(option.id);');
-
+                                      ) {                                    
                                         selectOption(option.id);
                                       }
                                       // selectOption(option.id);
