@@ -70,6 +70,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
+
+
   
   // useActualGroups_.every((x,index,array)=> {
   //   console.log(x, index, array);
@@ -184,6 +186,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   );
 
   const fitlerAttributes = attributes.filter((x) => {
+    
     if (x.name === x.name.toUpperCase()) {
       return x;
     }
@@ -191,6 +194,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   fitlerAttributes.filter((x) => x !== undefined);
 
+
+  
   // console.log(fitlerAttributes);
 
   // console.log(groups, selectedGroup, fitlerAttributes, selectedStepName, 'fitlerAttributes');
@@ -540,8 +545,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
 
     setSelectedTrayType(type);
-
-    // console.log(selectedGroupId,'selectedGroupId');
      
   if (type === 'colors') {
     if (filteredArray[0]?.id) {
@@ -554,9 +557,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   //   console.log(selectedGroupId,'selectedGroupId');
   //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
   }
-
- 
-  
 
   };
 
@@ -807,7 +807,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                           //onSlideChange={() => console.log('slide change')}
                           //onSwiper={(swiper) => console.log(swiper)}
                         >
-                          {fitlerAttributes[0].options.map((attribute) => {
+                          {/* {fitlerAttributes[0].options.map((attribute) => {
                             return (
                               <SwiperSlide>
                                 <ListItemX
@@ -816,12 +816,32 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                   selected={true}
                                   // selected={selectedAttribute === attribute}
                                 >
-                                  <div className="scaler"></div>
-                                  {attribute.name}
+                                  <div className="scaler">
+                                   {attribute.name}
+                                  </div>
                                 </ListItemX>
                               </SwiperSlide>
                             );
-                          })}
+                          })} */}
+
+                        {selectedGroup?.attributes[1]?.options.map((attribute) => {
+                            return (
+                              <SwiperSlide>
+                                <ListItemX
+                                  key={attribute.id}
+                                  onClick={() => selectOption(attribute.id)}
+                                  selected={true}
+                                  // selected={selectedAttribute === attribute}
+                                >
+                                  <div className="scaler">
+                                   {attribute.name}
+                                  </div>
+                                </ListItemX>
+                              </SwiperSlide>
+                            );
+                          })} 
+
+
                         </Swiper>
 
                         <br />

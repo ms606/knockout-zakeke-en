@@ -330,6 +330,14 @@
   text-align: end;
 }
 
+.scaler {
+  width: 100%;
+  height: 100%;
+  white-space: break-spaces;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .swiper {
   /* width: 19vw !important; */
   background-color: #fff;

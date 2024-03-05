@@ -220,7 +220,7 @@ export const ListItemX = styled.li<{ selected?: boolean }>`
   align-items: center;
   text-align: flex-end;
   justify-content: end;
-  padding: 10px 10px;
+  // padding: 10px 10px;
   cursor: pointer;
   margin: 0 10px;
   width: 45px;
