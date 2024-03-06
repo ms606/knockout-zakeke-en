@@ -711,6 +711,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
               {!isTrayOpen && !selectedTrayPreviewOpenButton && (
                 <ColorMenuSeleciton
+                  selectedGroupName={selectedGroup}
                   updateActiveColorOption={updateActiveColorOption}
                   activeColorOption={activeColorOption}
                 />

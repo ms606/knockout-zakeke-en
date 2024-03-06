@@ -3,9 +3,11 @@ import React, { useState } from "react";
 export const ColorMenuSeleciton = ({
   updateActiveColorOption,
   activeColorOption,
+  selectedGroupName
 }) => {
   // const [activeColorOption, setActiveColorOption] = useState('');
 
+  console.log(selectedGroupName,'selectedGroup');
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
@@ -37,13 +39,13 @@ export const ColorMenuSeleciton = ({
         >
           Fluoro
         </div>
-        <div
+        {selectedGroupName === 'PALMA EXTERIOR' && <div
           data-sel="knockX"
           className={activeColorOption === "knockX" ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
         >
           Knock X
-        </div>
+        </div>}
       </div>
     </div>
   );
