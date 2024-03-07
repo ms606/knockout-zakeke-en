@@ -57,6 +57,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productName,
     items,
     getOnlineScreenshot,
+    productCode
   } = useZakeke();
 
   // Trying out new hierarchy
@@ -186,6 +187,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   );
 
   const fitlerAttributes = attributes.filter((x) => {
+    // console.log(x);
     
     if (x.name === x.name.toUpperCase()) {
       return x;
@@ -711,6 +713,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
               {!isTrayOpen && !selectedTrayPreviewOpenButton && (
                 <ColorMenuSeleciton
+                  productCode={productCode}
                   selectedGroupName={selectedGroup}
                   updateActiveColorOption={updateActiveColorOption}
                   activeColorOption={activeColorOption}

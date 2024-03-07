@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
 export const ColorMenuSeleciton = ({
+  productCode,
   updateActiveColorOption,
   activeColorOption,
   selectedGroupName
 }) => {
   // const [activeColorOption, setActiveColorOption] = useState('');
 
-  console.log(selectedGroupName,'selectedGroup');
+  console.log(productCode, selectedGroupName,'selectedGroup');
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
@@ -39,7 +40,15 @@ export const ColorMenuSeleciton = ({
         >
           Fluoro
         </div>
-        {selectedGroupName === 'PALMA EXTERIOR' && <div
+        {productCode === "8713902948686" && (selectedGroupName.name === 'PALMA EXTERIOR' || 
+        selectedGroupName.name === 'INCHEIETURA EXTERIOR' || 
+        selectedGroupName.name === 'CUREA' || 
+        selectedGroupName.name === 'DEGET MARE EXTERIOR' || 
+        selectedGroupName.name === 'DEGET MARE INTERIOR' || 
+        selectedGroupName.name === 'PALMA INTERIOR'
+
+        
+        ) && <div
           data-sel="knockX"
           className={activeColorOption === "knockX" ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
