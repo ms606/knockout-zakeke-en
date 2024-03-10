@@ -273,7 +273,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       if (items.filter((item) => item.type === 1)) {
         console.log(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
     //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
-          useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
+          // useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
     //     }
       }
     }
