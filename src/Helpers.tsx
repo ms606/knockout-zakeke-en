@@ -340,13 +340,16 @@ export function useActualGroups() {
     isAreaVisible,
     draftCompositions,
     sellerSettings,
+    items
   } = useZakeke();
   
-    // removed test
-    let indexToRemove = groups.findIndex((obj) => obj.id === -1);
-    if (indexToRemove !== -1) {
-      groups.splice(indexToRemove, 1);
-    }
+  
+  // removed test
+  let indexToRemove = groups.findIndex((obj) => obj.id === -1);
+  if (indexToRemove !== -1) {
+    groups.splice(indexToRemove, 1);
+  }
+
 
   const shouldCustomizerGroupBeVisible =
     !isSceneLoading && product
@@ -367,6 +370,13 @@ export function useActualGroups() {
     
     if (indexToRemove !== -1) {
       actualGroups.splice(indexToRemove, 1);
+    }
+
+    const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
+
+    if (items && !itemAvailable) {
+    const tipIndex_ = actualGroups.findIndex((x) => x.name  === "ACOPERIRE TIP");
+    if(tipIndex_ > 0) actualGroups.splice(tipIndex_, 1);
     }
 
   if (!isSceneLoading) {
@@ -414,20 +424,17 @@ export function useActualGroups() {
 }
 
 export function makeFirstLetterCaps(sentence: any) {
+  console.log(sentence,'sentence');
+  if (sentence){
   const str = sentence.split(" ");
-  // console.log(str,'string')
-  // let newSentence:any = " ";//= str[0].toUpperCase();
-  // console.log(newSentence);
 
   for (let i = 0; i < str.length; i++) {
-    // console.log(str[i],'str');
-
     str[i] = str[i][0].toUpperCase() + str[i].substr(1).toLowerCase();
-
   }
   let newSentence: any = str.join(" ");
-
   return newSentence;
+}
+  
 }
 
 

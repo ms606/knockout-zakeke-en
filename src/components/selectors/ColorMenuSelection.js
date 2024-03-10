@@ -8,7 +8,7 @@ export const ColorMenuSeleciton = ({
 }) => {
   // const [activeColorOption, setActiveColorOption] = useState('');
 
-  console.log(productCode, selectedGroupName,'selectedGroup');
+  // console.log(productCode, selectedGroupName,'selectedGroup');
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">

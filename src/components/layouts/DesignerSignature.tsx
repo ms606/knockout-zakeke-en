@@ -308,10 +308,6 @@ const DesignerSignature: FC<{
       : 0
   );
 
-
-
-
-
   let currentTemplateArea = currentTemplate!.areas.find(
     (x) => x.id === actualAreaId
   );

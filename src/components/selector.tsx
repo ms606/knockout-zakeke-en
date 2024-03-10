@@ -57,7 +57,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productName,
     items,
     getOnlineScreenshot,
-    productCode
+    productCode,
   } = useZakeke();
 
   // Trying out new hierarchy
@@ -72,8 +72,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const useActualGroups_ = useActualGroups();
 
-
-  
   // useActualGroups_.every((x,index,array)=> {
   //   console.log(x, index, array);
 
@@ -95,6 +93,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedColorName, selectColorName] = useState<any | null>(null);
   const [hasTypeZero, setHasTypeZero] = useState<boolean | null>(null);
   const [stitchTypeGroup, setStitchTypeGroup] = useState<any | null>(null);
+
+  const [tipIndex, setTipIndex] = useState<number | null>(null);
 
   // Get a list of all group names so we can populate on the tray
   const [selectedGroupList, selectGroupList] = useState<any | null>(null);
@@ -188,7 +188,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const fitlerAttributes = attributes.filter((x) => {
     // console.log(x);
-    
+
     if (x.name === x.name.toUpperCase()) {
       return x;
     }
@@ -196,11 +196,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   fitlerAttributes.filter((x) => x !== undefined);
 
-
-  
   // console.log(fitlerAttributes);
-
-  // console.log(groups, selectedGroup, fitlerAttributes, selectedStepName, 'fitlerAttributes');
 
   //   console.log(fitlerAttributes,'attributes 2');
 
@@ -231,44 +227,62 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
+    // console.log(itemAvailable,'itemAvailable');
+    
+    // setTipIndex(useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
+    // const tipIndex_ = useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP");
 
     // removed test
-    // if (items && !itemAvailable) {
+    if (items && !itemAvailable) {
+      // console.log(useActualGroups_,useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
+      // setTipIndex(useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
 
-    //   if (groups[groups.length - 1]?.name === "MODALITATE IMPRIMARE") {
-    //     setStitchTypeGroup(groups[groups.length - 1]);
-    //   }
-    //   // removed test
-    //   if (
-    //     hasTypeZero == false ||
-    //     items.filter((item) => item.type === 0).length === 0
-    //   ) {
-    //     const indexToDel = groups.findIndex(
-    //       (obj) => obj.name === "MODALITATE IMPRIMARE"
-    //     );
+      if (tipIndex) {
+        setStitchTypeGroup(useActualGroups_[tipIndex]);
+      }
+      // removed test
+      // if (
+      //   hasTypeZero == false ||
+      //   items.filter((item) => item.type === 0).length === 0
+      // ) {
+      //   const indexToDel = useActualGroups_.findIndex(
+      //     (obj) => obj.name === "ACOPERIRE TIP"
+      //   );
 
-    //     for (let i = 0; i < groups.length; i++) {
-    //       if (
-    //         selectedOptionName !== "PRINTAT" &&
-    //         selectedOptionName !== "BRODAT"
-    //       ) {
-    //         if (groups[i]?.name === "MODALITATE IMPRIMARE") groups.splice(i, 1);
-    //       }
-    //     }
-    //   }
-    // }
+      //   if (tipIndex) {
+      //     useActualGroups_.splice(tipIndex, 1);
+      //   }
 
-    // if (items && itemAvailable) {
-    //   if (items.filter((item) => item.type === 1)) {
+      //   for (let i = 0; i < useActualGroups_.length; i++) {
+      //     if (
+      //       selectedOptionName !== "PRINTAT" &&
+      //       selectedOptionName !== "BRODAT"
+      //     ) {
+      //       if (useActualGroups_[i]?.name === "ACOPERIRE TIP")
+      //         useActualGroups_.splice(i, 1);
+      //     }
+      //   }
+      // }
+    }
+
+    // console.log(useActualGroups_);
+
+    // console.log(groups, useActualGroups_, "ssffds");
+
+    if (items && itemAvailable) {
+      if (items.filter((item) => item.type === 1)) {
+        console.log(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
     //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
-    //       groups.push(stitchTypeGroup);
+          useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
     //     }
-    //   }
-    // }
+      }
+    }
+    // console.log(useActualGroups_,'useActualGroups_');
+    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }
-  }, [hasTypeZero, groups, items]);
+  }, [hasTypeZero, useActualGroups_, items]);
 
   const dialogsPortal = document.getElementById("dialogs-portal");
 
@@ -425,23 +439,26 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const handleLeftClick = () => {
-    if (
-      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-        .direction == 0
-    ) {
-      setSelectedTrayType("colors");
-    } else if (
-      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-        .direction == 2
-    ) {
-      setSelectedTrayType("signature");
-    } else if (
-      useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-        .direction == 3
-    ) {
-      setSelectedTrayType("logos");
-    }
+    console.log(currentIndex, "currentIndex");
 
+    if (useActualGroups_[(currentIndex - 1) % useActualGroups_.length]) {
+      if (
+        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+          .direction == 0
+      ) {
+        setSelectedTrayType("colors");
+      } else if (
+        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+          .direction == 2
+      ) {
+        setSelectedTrayType("signature");
+      } else if (
+        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+          .direction == 3
+      ) {
+        setSelectedTrayType("logos");
+      }
+    }
     selectColorName("");
     setActiveColorOption("plain");
     setCurrentIndex(
@@ -547,19 +564,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
 
     setSelectedTrayType(type);
-     
-  if (type === 'colors') {
-    if (filteredArray[0]?.id) {
-      selectGroup(filteredArray[0].id);
-      selectGroupIdFromTray(filteredArray[0].id);
-    }
-  }
-  else {
-     selectGroup(data) //selectedGroupId = data
-  //   console.log(selectedGroupId,'selectedGroupId');
-  //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
-  }
 
+    if (type === "colors") {
+      if (filteredArray[0]?.id) {
+        selectGroup(filteredArray[0].id);
+        selectGroupIdFromTray(filteredArray[0].id);
+      }
+    } else {
+      selectGroup(data); //selectedGroupId = data
+      //   console.log(selectedGroupId,'selectedGroupId');
+      //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
+    }
   };
 
   const togglePersonalize = () => {
@@ -571,6 +586,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     width: "100%",
     // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
+  console.log(currentIndex,useActualGroups_,'currentIndex');
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
 
@@ -758,7 +774,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                       if (
                                         groups[groups?.length - 1].attributes[0]
                                           .code === "MODALITATE IMPRIMARE"
-                                      ) {                                    
+                                      ) {
                                         selectOption(option.id);
                                       }
                                       // selectOption(option.id);
@@ -828,24 +844,24 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                             );
                           })} */}
 
-                        {selectedGroup?.attributes[1]?.options.map((attribute) => {
-                            return (
-                              <SwiperSlide>
-                                <ListItemX
-                                  key={attribute.id}
-                                  onClick={() => selectOption(attribute.id)}
-                                  selected={true}
-                                  // selected={selectedAttribute === attribute}
-                                >
-                                  <div className="scaler">
-                                   {attribute.name}
-                                  </div>
-                                </ListItemX>
-                              </SwiperSlide>
-                            );
-                          })} 
-
-
+                          {selectedGroup?.attributes[1]?.options.map(
+                            (attribute) => {
+                              return (
+                                <SwiperSlide>
+                                  <ListItemX
+                                    key={attribute.id}
+                                    onClick={() => selectOption(attribute.id)}
+                                    selected={true}
+                                    // selected={selectedAttribute === attribute}
+                                  >
+                                    <div className="scaler">
+                                      {attribute.name}
+                                    </div>
+                                  </ListItemX>
+                                </SwiperSlide>
+                              );
+                            }
+                          )}
                         </Swiper>
 
                         <br />
