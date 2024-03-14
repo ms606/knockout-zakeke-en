@@ -36,6 +36,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { setCommentRange } from "typescript";
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -120,6 +121,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  function updCurrentIndex(indexVal: number) {
+    console.log(currentIndex, "currentIndex1");
+
+    setCurrentIndex(indexVal);
+    console.log(currentIndex, "currentIndex2");
+  }
 
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -228,15 +236,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
     // console.log(itemAvailable,'itemAvailable');
-    
+
     // setTipIndex(useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
     // const tipIndex_ = useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP");
 
     // removed test
     if (items && !itemAvailable) {
-      // console.log(useActualGroups_,useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
-      // setTipIndex(useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
-
       if (tipIndex) {
         setStitchTypeGroup(useActualGroups_[tipIndex]);
       }
@@ -271,14 +276,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     if (items && itemAvailable) {
       if (items.filter((item) => item.type === 1)) {
-        console.log(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
-    //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
-          // useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
-    //     }
+        //   console.log(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
+        //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
+        // useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
+        //     }
       }
     }
     // console.log(useActualGroups_,'useActualGroups_');
-    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // }
@@ -439,31 +443,45 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const handleLeftClick = () => {
-    console.log(currentIndex, "currentIndex");
+    //  console.log(currentIndex, "currentIndex");
 
-    if (useActualGroups_[(currentIndex - 1) % useActualGroups_.length]) {
-      if (
-        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-          .direction == 0
-      ) {
-        setSelectedTrayType("colors");
-      } else if (
-        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-          .direction == 2
-      ) {
-        setSelectedTrayType("signature");
-      } else if (
-        useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-          .direction == 3
-      ) {
-        setSelectedTrayType("logos");
+    if (currentIndex - 1 != -1) {
+      if (useActualGroups_[(currentIndex - 1) % useActualGroups_.length]) {
+        if (
+          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+            .direction == 0
+        ) {
+          setSelectedTrayType("colors");
+          setActiveColorOption("plain");
+        } else if (
+          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+            .direction == 2
+        ) {
+          setSelectedTrayType("signature");
+        } else if (
+          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
+            .direction == 3
+        ) {
+          setSelectedTrayType("logos");
+        }
       }
+    } else {
+      setSelectedTrayType("logos");
     }
+
     selectColorName("");
-    setActiveColorOption("plain");
-    setCurrentIndex(
-      (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
-    );
+
+    if (currentIndex - 1 === -1) {
+      setCurrentIndex(useActualGroups_.length - 1);
+    } else {
+      setCurrentIndex(
+        (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
+      );
+    }
+
+    // setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
+    //   console.log(selectedTrayType,'selectedTrayType');
+
     selectGroup(
       useActualGroups_[
         (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
@@ -499,6 +517,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // console.log(useActualGroups_[(currentIndex + 1)],selectedGroup);
     setActiveColorOption("plain");
     selectColorName("");
+
     setCurrentIndex((currentIndex + 1) % useActualGroups_.length);
     selectGroup(
       useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id
@@ -523,9 +542,38 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
     // trayPreviewOpenButton();
     setIsTrayOpen(!isTrayOpen);
+    console.log(trayName,'trayName');
 
     // set what tray type is selected e.g. colors, signature, logo
     setSelectedTrayType(trayName);
+
+    if (trayName === null) {
+      const tipIndex_ = useActualGroups_.findIndex(
+        (x) => x.id === selectedGroupId
+      );
+
+      if (useActualGroups_[tipIndex_].direction == 0) {
+        setSelectedTrayType("colors");
+      } else if (useActualGroups_[tipIndex_].direction == 2) {
+        setSelectedTrayType("signature");
+      } else if (useActualGroups_[tipIndex_].direction == 3) {
+        setSelectedTrayType("logos");
+      }
+    }
+
+    // if (
+    //   useActualGroups_[currentIndex].direction == 0
+    // ) {
+    //   setSelectedTrayType("colors");
+    // } else if (
+    //   useActualGroups_[currentIndex].direction == 2
+    // ) {
+    //   setSelectedTrayType("signature");
+    // } else if (
+    //   useActualGroups_[currentIndex].direction == 3
+    // ) {
+    //   setSelectedTrayType("logos");
+    // }
 
     // console.log(trayName);
   };
@@ -570,7 +618,23 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         selectGroup(filteredArray[0].id);
         selectGroupIdFromTray(filteredArray[0].id);
       }
-    } else {
+    }
+    // if (type === "signature") {
+    //   const tipIndex_ = useActualGroups_.findIndex(
+    //     (x) => x.name === "ACOPERIRE TIP"
+    //   );
+
+    //   const findFirstSignature = useActualGroups_.findIndex(
+    //     (x) => x.direction === 2
+    //     );
+    //   //  console.log(findFirstSignature,'sdfdfdsdsfds');
+
+    //   if (tipIndex_ < 0) {setCurrentIndex(findFirstSignature)}
+
+    //   selectGroup(data);
+
+    // }
+    else {
       selectGroup(data); //selectedGroupId = data
       //   console.log(selectedGroupId,'selectedGroupId');
       //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
@@ -586,7 +650,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     width: "100%",
     // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
-  console.log(currentIndex,useActualGroups_,'currentIndex');
+  // console.log(currentIndex,useActualGroups_,'currentIndex');
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
 
@@ -724,17 +788,21 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   filteredAreas={filteredAreas}
                   toggleFunc={toggleTray}
                   UpdateGroupId={groupIdFromFunc}
+                  updCurrentIndex={updCurrentIndex}
+                  selectedTray={selectedTrayType}
                 />
               )}
 
-              {!isTrayOpen && !selectedTrayPreviewOpenButton && (
-                <ColorMenuSeleciton
-                  productCode={productCode}
-                  selectedGroupName={selectedGroup}
-                  updateActiveColorOption={updateActiveColorOption}
-                  activeColorOption={activeColorOption}
-                />
-              )}
+              {!isTrayOpen &&
+                !selectedTrayPreviewOpenButton &&
+                groupNameText != "Acoperire Tip" && (
+                  <ColorMenuSeleciton
+                    productCode={productCode}
+                    selectedGroupName={selectedGroup}
+                    updateActiveColorOption={updateActiveColorOption}
+                    activeColorOption={activeColorOption}
+                  />
+                )}
 
               {!selectedTrayPreviewOpenButton && (
                 <div
@@ -919,7 +987,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           </div>
           {/* </button> */}
         </div>
+
+        {width <= 460 && <FooterMobile />}
       </div>
+
+      {width > 460 && <Footer />}
     </>
   );
 };

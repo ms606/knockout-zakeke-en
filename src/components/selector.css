@@ -384,6 +384,21 @@
 }
 
 
+.menu_price {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Avenir Next",sans-serif;
+  font-weight: 550;
+  font-size: 16px;
+  line-height: 16px;
+  font-size: 14px;
+  font-style: normal;
+  letter-spacing: -.5px;
+  width: 100%;
+  color: #00458c ; 
+  /* var(--template-boundary-color) !important; */
+}
+
 @media screen and (min-width: 768px) {
   .button-53 {
     font-size: 18px;
@@ -527,6 +542,13 @@
    -moz-height: 12px !important;
    align-items: start !important;
    justify-content: center !important;
+  }
+  .menu_price {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    padding: 20px;
+    color: #00458c ; 
   }
   
 }

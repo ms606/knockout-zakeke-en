@@ -42,9 +42,12 @@ const FooterMobileIcon = styled.div<{
 	align-items: center;
 	justify-content: flex-end;
 	border: 1px transparent solid;
-	color: ${(props) => (props.color ? props.color : `#313c46`)};
+	padding: 10px;
+    border-radius: 6px;
+	//color: ${(props) => (props.color ? props.color : `#313c46`)};
+	background-color: rgb(234 229 229 / 50%);
 	// background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : `transparent`)};
-	background-color: transparent;
+	// background-color: transparent;
 	font-size: 14px;
 	text-transform: uppercase;
 	text-align: center;
@@ -331,9 +334,9 @@ const FooterMobile = () => {
 
 			{!isSceneLoading && (
 				<FooterMobileContainer isQuoteEnable={product?.quoteRule !== null}>
-					<FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
+					{/* <FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
 						<AngleLeftSolid />
-					</FooterMobileIcon>
+					</FooterMobileIcon> */}
 {/* 
 					{
 						<FooterMobileIcon gridArea='pdf' onClick={handlePdfClick}>
@@ -361,14 +364,14 @@ const FooterMobile = () => {
 							gridArea='cart'
 							isCart
 							iconColor='white'
-							color='white'
+							// color='white'
 							ref={addToCartButtonRef}
 							// onPointerEnter={() => {
 							// 	if (isAddToCartDisabled)
 							// 		openOutOfStockTooltip(addToCartButtonRef.current!, 'top', 'top');
 							// }}
 							disabled={isAddToCartDisabled}
-							backgroundColor='#313c46'
+							// backgroundColor='#313c46'
 							onClick={!isAddToCartDisabled ? () => handleAddToCart() : () => null}
 						>
 							{/* {!isOutOfStock &&
@@ -379,6 +382,15 @@ const FooterMobile = () => {
 								)} */}
 
 							{/* {isOutOfStock && T._('OUT OF STOCK', 'Composer')} */}
+							
+							<>
+							<div className="menu_footer" style ={{position: 'relative', bottom: '5px',  display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+							<div className="menu_price">
+								{/* <div className="price_text">Price: </div> */}
+								<div>Base:</div> <div className="price_value">{priceFormatter.format(price)}</div>
+							</div>
+							</div>
+							</>	
 							
 							<AddToCartButton>
 								<span style={{color: 'white'}}>

@@ -238,7 +238,7 @@ export const ListItemX = styled.li<{ selected?: boolean }>`
   @media screen and (max-width: 568px) {
     // margin: 0 7px;
     width: 39px !important;
-    height: 22px !important;
+    height: 37px !important;
     
   }
 `;
@@ -270,7 +270,7 @@ export const ListItemX_ = styled.li<{ selected?: boolean }>`
     //  width: 12.5%;
     // height: 33px;
     width: 39px !important;
-    height: 22px !important;
+    height: 23px !important;
 
   }
 `;

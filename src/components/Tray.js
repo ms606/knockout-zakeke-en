@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./Tray.css";
-import {DesignerHelper, DesignerSignature, DesignerLogo} from './tray/DesignerHelper';
+import {
+  DesignerHelper,
+  DesignerSignature,
+  DesignerLogo,
+} from "./tray/DesignerHelper";
 import {
   Image,
   ImageItem,
@@ -12,65 +16,113 @@ import {
   useZakeke,
 } from "zakeke-configurator-react";
 
-const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
+const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray }) => {
   //  const [isOpen, setIsOpen] = useState(false);
+console.log(selectedTray,'selectedTrayType');
 
-  const {
-    setItemTextOnPath,
-    addItemText,
-    fonts,
-    defaultColor 
-  } = useZakeke();
 
-  const templates =  DesignerSignature();
-  const templatesLogo =  DesignerLogo();
+
+  const { setItemTextOnPath, addItemText, fonts, defaultColor, items, groups } = useZakeke();
+  
+  // console.log(groupNameList, "itemAvailable");
+  const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
+  const tipIndex_ = groupNameList.findIndex(
+    (x) => x.name === "ACOPERIRE TIP"
+  );
+
+  if (items && !itemAvailable) {
+      const tipIndex_ = groupNameList.findIndex(
+        (x) => x.name === "ACOPERIRE TIP"
+      );
+      if (tipIndex_ > 0) groupNameList.splice(tipIndex_, 1);
+    }
+
+    else {
+      const checkIfNull = groupNameList.findIndex(
+        (x) => x.name === "ACOPERIRE TIP"
+      );
+
+      if (checkIfNull < 0) {
+        const tipIndex_ = groups.findIndex(
+          (x) => x.name === "ACOPERIRE TIP"
+        );
+  
+        const acopName = groups[tipIndex_];
+        // console.log(acopName,'acopName');
+  
+        groupNameList.push({
+          id: acopName.id,
+          name: acopName.name,
+          imageUrl: acopName.imageUrl,
+  
+        })
+
+        // updCurrentIndex(tipIndex_);
+      }
+
+      //  groupNameList.push(groups[tipIndex_].push({
+      //   id: group.id,
+      //   name: group.name,
+      //   imageUrl: group.imageUrl,
+      // }))
+    }
   
 
+  // else {
+  //     if (tipIndex) {
+  //       setStitchTypeGroup(useActualGroups_[tipIndex]);
+  //     }
+  // }
+
+  const templates = DesignerSignature();
+  const templatesLogo = DesignerLogo();
 
   const handleMultipleClicks = (event) => {
-    UpdateGroupId(event.target.id, 'colors');
-    toggleFunc('colors');
+    UpdateGroupId(event.target.id, "colors");
+    toggleFunc("colors");
   };
 
- const handleTextItem = (actualAreaId) => {
-   const itemText ={
-     guid: '',
-     name: '',
-     text: "Enter your name",
-     fillColor: defaultColor,
-     fontFamily: fonts[0].name,
-     fontSize: 48,
-     fontWeight: 'normal normal',
-     isTextOnPath: false,
-     constraints: null,  
-     placeholder: 'Input your text here',
-     backgroundColor: 'rgb(235, 237, 242)'
- }
- 
-   UpdateGroupId(actualAreaId, 'signature'); // This is for setting index
-   addItemText(itemText, actualAreaId);
-   toggleFunc('signature');
- }
+  const handleTextItem = (actualAreaId) => {
+    const itemText = {
+      guid: "",
+      name: "",
+      text: "Enter your name",
+      fillColor: defaultColor,
+      fontFamily: fonts[0].name,
+      fontSize: 48,
+      fontWeight: "normal normal",
+      isTextOnPath: false,
+      constraints: null,
+      placeholder: "Input your text here",
+      backgroundColor: "rgb(235, 237, 242)",
+    };
 
- const handleImageItem = (actualAreaId) => {
-  UpdateGroupId(actualAreaId, 'logos'); // This is for setting index
-  toggleFunc('logos');
- }
+    UpdateGroupId(actualAreaId, "signature"); // This is for setting index
+    addItemText(itemText, actualAreaId);
+    toggleFunc("signature");
+    // updCurrentIndex();
+  };
+
+  const handleImageItem = (actualAreaId) => {
+    UpdateGroupId(actualAreaId, "logos"); // This is for setting index
+    toggleFunc("logos");
+  };
 
   return (
-    <div style={{transition: "all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) 0s"}}>
+    <div
+      style={{ transition: "all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1) 0s" }}
+    >
       {groupNameList && (
         <div>
-           <div className="full-tray">
-            
+          <div className="full-tray">
             {/* <div className="tray-container"> */}
             <div className="tray-mc-header">
               {/* class="d-sm-flx flx-ai-sm-c flx-jc-sm-c css-154hl8z" */}
               <button
                 className="tray-trigger-close-button"
-                onClick={toggleFunc}
+                onClick={() => toggleFunc(null)}
               >
-               Close 
+                Close
                 <svg
                   aria-hidden="true"
                   focusable="false"
@@ -92,16 +144,11 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
             <div className="tray-mc-content">
               <div className="tray-mc-list-wrapper">
                 {/* class="headline-3 css-4j0u2k" */}
-                <div className="mc-list-title">
-                  Select Colors
-                </div>
+                <div className="mc-list-title">Select Colors</div>
                 <div className="tray-mc-grid">
                   {groupNameList.map((groupName, i) => {
                     return (
-                      <div
-                        className="heading"
-                        id={groupName.name}
-                      >
+                      <div className="heading" id={groupName.name}>
                         <div
                           className="sitems"
                           style={{
@@ -114,15 +161,34 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                           onClick={handleMultipleClicks}
                           id={groupName.id}
                         >
-                          <img className="tray-image" id={groupName.id} style={{width: '69px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/>
+                          <img
+                            className="tray-image"
+                            id={groupName.id}
+                            style={{
+                              width: "69px",
+                              height: "76px",
+                              borderRadius: "4px 4px 0px 0px",
+                            }}
+                            src={groupName.imageUrl}
+                          />
                           <div id={groupName.id} className="slabel">
-                           <span id={groupName.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
-                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{groupName.name}</span> 
+                            <span
+                              id={groupName.id}
+                              style={{
+                                fontSize: "9px",
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              {groupName.name}
+                            </span>
                           </div>
-                          </div>
+                        </div>
                       </div>
                     );
-                  })}     
+                  })}
                 </div>
               </div>
             </div>
@@ -131,16 +197,11 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
             <div className="tray-mc-content signature">
               <div className="tray-mc-list-wrapper">
                 {/* class="headline-3 css-4j0u2k" */}
-                <div className="mc-list-title">
-                  Select Signature
-                </div>
+                <div className="mc-list-title">Select Signature</div>
                 <div className="tray-mc-grid">
                   {templates.map((template, i) => {
                     return (
-                      <div
-                        className="heading"
-                        id={template.id}
-                      >
+                      <div className="heading" id={template.id}>
                         <div
                           className="sitems"
                           style={{
@@ -155,57 +216,70 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId }) => {
                         >
                           {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
                           <div id={template.id} className="slabel">
-                           <span id={template.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
-                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{template.name}</span> 
+                            <span
+                              id={template.id}
+                              style={{
+                                fontSize: "9px",
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              {template.name}
+                            </span>
                           </div>
-                          </div>
+                        </div>
                       </div>
                     );
-                  })}     
+                  })}
                 </div>
               </div>
             </div>
 
-
             {/* LOGOS */}
             <div className="tray-mc-content logos">
-            <div className="tray-mc-list-wrapper">
-              {/* class="headline-3 css-4j0u2k" */}
-              <div className="mc-list-title">
-                Select Logos
-              </div>
-              <div className="tray-mc-grid">
-                {templatesLogo.map((template, i) => {
-                  return (
-                    <div
-                      className="heading"
-                      id={template.id}
-                    >
-                      <div
-                        className="sitems"
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          flexGrow: 1,
-                          justifyContent: "flex-start",
-                        }}
-                        onClick={() => handleImageItem(template.id)}
-                        id={template.id}
-                      >
-                        {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
-                        <div id={template.id} className="slabel">
-                          <span id={template.id} style={{fontSize: '9px', position: 'absolute', top: '50%',
-                                     left: '50%', transform: 'translate(-50%, -50%)'}}>{template.name}</span> 
+              <div className="tray-mc-list-wrapper">
+                {/* class="headline-3 css-4j0u2k" */}
+                <div className="mc-list-title">Select Logos</div>
+                <div className="tray-mc-grid">
+                  {templatesLogo.map((template, i) => {
+                    return (
+                      <div className="heading" id={template.id}>
+                        <div
+                          className="sitems"
+                          style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            flexGrow: 1,
+                            justifyContent: "flex-start",
+                          }}
+                          onClick={() => handleImageItem(template.id)}
+                          id={template.id}
+                        >
+                          {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
+                          <div id={template.id} className="slabel">
+                            <span
+                              id={template.id}
+                              style={{
+                                fontSize: "9px",
+                                position: "absolute",
+                                top: "50%",
+                                left: "50%",
+                                transform: "translate(-50%, -50%)",
+                              }}
+                            >
+                              {template.name}
+                            </span>
+                          </div>
                         </div>
-                        </div>
-                    </div>
-                  );
-                })}     
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-          </div>
-
           </div>
         </div>
       )}

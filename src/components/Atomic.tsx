@@ -328,11 +328,18 @@ export const ZoomOutIcon = styled(Icon)`
 
 export const AddToCartButton = styled(Button)`
 	position: relative;
-	right: 10%;
-	min-width: 280px;
+	// right: 10%;
+	min-width: 200px;
 	background-color: #297ca3;
 	font-family: 'Inter';
+	display: block;
+	// float: right;
 	font-size: 18px;
+	line-height: 18px;
+	font-weight: 600;
+	box-sizing: border-box;
+	border-radius: 3px;
+	padding: 12px 20px;
 `;
 
 export const TooltipContent = styled.div`

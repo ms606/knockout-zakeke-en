@@ -322,6 +322,9 @@ export const QuantityContainer = styled.div`
 `;
 
 export const FooterContainer = styled.div`
+	position: absolute;
+    top: calc(70% - 15px);
+    right: 1%;
 	background-color: transparent;
 	display: flex;
 	flex-direction: row;
@@ -343,12 +346,12 @@ export const FooterRightElementsContainer = styled.div`
 	height: 70px;
 	min-height: 70px;
 	background-color: transparent;
-	flex-direction: row;
+	flex-direction: column;
 	grid-gap: 10px;
 	align-items: flex-start;
 	padding: 0px 0px 0px 0em;
 	font-size: 14px;
-	width: 26px;
+	width: 8em;
 	@media (max-width: 1024px) {
 		min-height: 70px;
 	}
@@ -367,18 +370,30 @@ export const PriceContainer = styled.div<{ isMobile?: boolean }>`
 `;
 
 export const FooterMobileContainer = styled.div<{ isQuoteEnable?: boolean }>`
+	position: absolute;
+	bottom: -110px;
+	width: 100vw;
+	//  background: none;
+	// 	linear-gradient(to top, 
+	// 	rgb(244, 247, 249) 5%, 
+	// 	rgb(213, 225, 231) 40%, 
+	// 	rgb(223, 232, 237)
+	// 	)
+	// 	;
+	justify-content: center;
+
 	z-index: 0;
-    height: 55px;
-	display: grid;
-	grid-template-columns: repeat(1fr), 1fr);
-	background-color: #fff;
+    height: 140px;
+	display: flex;
+	// grid-template-columns: repeat(1fr), 1fr);
+	// background-color: #fff;
 	font-size: 12px;
 	margin-top: 4px;
 	border-top: 1px #fff solid;
-	grid-template-areas: 'back pdf save share cart'; 
+	grid-template-areas: 'cart'; 
 	${(props) => props.isQuoteEnable && `
-	grid-template-columns: repeat(6, 1fr);
-	grid-template-areas: 'back pdf save share cart quote' 
+	// grid-template-columns: repeat(1, 1fr);
+	// grid-template-areas: 'back pdf save share cart quote' 
 	`};
 `;
 

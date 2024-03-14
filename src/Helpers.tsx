@@ -424,7 +424,6 @@ export function useActualGroups() {
 }
 
 export function makeFirstLetterCaps(sentence: any) {
-  console.log(sentence,'sentence');
   if (sentence){
   const str = sentence.split(" ");
 

@@ -97,7 +97,9 @@ const App: FunctionComponent<{}> = () => {
           {/* {isMobile && <LayoutMobile />}  */}
           {isMobile && (
             <Layout>
-              <div style={{ background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" , width: "100%", border: "0px solid", height: "57%"}}>
+              <div style={{ 
+                // background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" , 
+                width: "100%", border: "0px solid", height: "57%"}}>
                 <div
                   className="ThreeDRenderer"
                   style={
@@ -126,7 +128,7 @@ const App: FunctionComponent<{}> = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   // gridArea: "1 / 2 / 12 / 1",
-                  background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))",
+                  // background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))",
                 }}
               >
                 <div

@@ -40,12 +40,13 @@ export const ColorMenuSeleciton = ({
         >
           Fluoro
         </div>
-        {productCode === "8713902948686" && (selectedGroupName.name === 'PALMA EXTERIOR' || 
-        selectedGroupName.name === 'INCHEIETURA EXTERIOR' || 
-        selectedGroupName.name === 'CUREA' || 
-        selectedGroupName.name === 'DEGET MARE EXTERIOR' || 
-        selectedGroupName.name === 'DEGET MARE INTERIOR' || 
-        selectedGroupName.name === 'PALMA INTERIOR'
+        
+        {productCode === "8713902948686" && (selectedGroupName?.name === 'PALMA EXTERIOR' || 
+        selectedGroupName?.name === 'INCHEIETURA EXTERIOR' || 
+        selectedGroupName?.name === 'CUREA' || 
+        selectedGroupName?.name === 'DEGET MARE EXTERIOR' || 
+        selectedGroupName?.name === 'DEGET MARE INTERIOR' || 
+        selectedGroupName?.name === 'PALMA INTERIOR'
 
         
         ) && <div

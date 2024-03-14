@@ -298,16 +298,24 @@ const Footer = () => {
 						)} */}
 
 						{/* Price */}
-						{/* {price !== null && price > 0 && (!sellerSettings || !sellerSettings.hidePrice) && (
-							<PriceContainer>
+						{/* {price !== null && price > 0 && (!sellerSettings || !sellerSettings.hidePrice) && ( */}
+						<>
+						<div className="menu_footer" style ={{position: 'relative', bottom: '5px',  display: 'flex', justifyContent: 'space-between', width: '100%'}}>
+						<div className="menu_price">
+							{/* <div className="price_text">Price: </div> */}
+							<div>Base:</div> <div className="price_value">{priceFormatter.format(price)}</div>
+						</div>
+						</div>
+						</>	
+							{/* <PriceContainer>
 							
 								{sellerSettings && sellerSettings.priceInfoText && (
 									<PriceInfoTextContainer
 										dangerouslySetInnerHTML={{ __html: sellerSettings.priceInfoText }}
 									/>
 								)}
-							</PriceContainer>
-						)} */}
+							</PriceContainer> */}
+						{/* )} */}
 
 						{/* PDF preview */}
 						{/* <Button key={'pdf'} onClick={() => handlePdfClick()}>
