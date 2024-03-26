@@ -276,6 +276,44 @@
   }
  */
 
+ #mchead {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 10px;
+  margin-bottom: 5px;
+  float: left;
+  line-height: 32px;
+  margin-right: 7px;
+  margin-left: 14px;
+  color: #004071;
+ }
+
+ #infsel {
+  /* width: 32px;
+height: 32px;
+display: none;
+content: "";
+background-image: url("./arrdn.svg");
+background-repeat: no-repeat;
+background-size: 10px 6px;
+background-position: center;
+position: absolute;
+right: 0;
+top: 0;
+pointer-events: none; */
+ }
+ 
+ #custype_gtype {
+  padding: 0.4em;
+  line-height: normal;
+  padding-right: 2em;
+  appearance: none;
+  /* background-position: 98% 50%; */
+  background-color: #fff;
+  border-color: var(--ast-border-color);
+  border-radius: 3px;
+  box-shadow: none;
+ }
  
  .button-53 {
   align-items: center;

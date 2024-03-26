@@ -18,7 +18,9 @@ export const ColorMenuSeleciton = ({
           onClick={() => updateActiveColorOption("plain")}
         >
           Plain
-        </div>
+        </div>           
+       {(productCode != '8427833459022' && productCode != '8427835162958') && 
+       <>
         <div
           data-sel="metallic"
           className={activeColorOption === "metallic" ? "active" : ""}
@@ -40,7 +42,9 @@ export const ColorMenuSeleciton = ({
         >
           Fluoro
         </div>
-        
+       </> 
+       } 
+
         {productCode === "8713902948686" && (selectedGroupName?.name === 'PALMA EXTERIOR' || 
         selectedGroupName?.name === 'INCHEIETURA EXTERIOR' || 
         selectedGroupName?.name === 'CUREA' || 

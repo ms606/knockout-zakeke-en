@@ -17,6 +17,7 @@ import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import DesignerSignature from "./layouts/DesignerSignature";
 import DesignerLogo from "./layouts/DesignerLogo";
 import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
+import { ReactComponent as SaveSolid } from '../../assets/icons/save-solid.svg';
 import useStore from "../Store";
 import {
   makeFirstLetterCaps,
@@ -60,7 +61,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     getOnlineScreenshot,
     productCode,
   } = useZakeke();
-
+  // console.log(productCode, 'groups');
   // Trying out new hierarchy
   // console.log(groups[0].attributes,'groups');
   // groups[0].attributes.map(x => {
@@ -542,7 +543,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
     // trayPreviewOpenButton();
     setIsTrayOpen(!isTrayOpen);
-    console.log(trayName,'trayName');
+    // console.log(trayName, "trayName");
 
     // set what tray type is selected e.g. colors, signature, logo
     setSelectedTrayType(trayName);
@@ -651,7 +652,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
   // console.log(currentIndex,useActualGroups_,'currentIndex');
-
+  
+  // console.log(useActualGroups_[currentIndex]);
+  
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
 
   return (
@@ -816,65 +819,104 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {selectedStepName != "KNOCK-X" && (
+                  {fitlerAttributes[0]?.code === "MODALITATE IMPRIMARE" &&
+                    (() => {
+                      return (
+                        <div style={{display:'flex',justifyContent: 'space-around', alignContent: 'center'}}>
+                        <div className="mchead">Overlay Type</div>
+                        <div className="infsel">
+                        <select
+                          id="custype_gtype"
+                          onChange={(e) => {
+                            console.log(typeof(Number(e.target.value)));
+                            selectOptionId(Number(e.target.value));
+                            selectOptionName(e.target.value);
+                          }}
+                          // onClick={() => {
+                          //   selectOptionId(option.id);
+                          //   selectOptionName(option.name);
+                          // }}
+                        >
+                          <option
+                            value= {fitlerAttributes[0]?.options[0]?.id}
+                          >
+                            {fitlerAttributes[0]?.options[0]?.name}
+                          </option>
+                          <option value={fitlerAttributes[0]?.options[1]?.id}>
+                            {fitlerAttributes[0]?.options[1]?.name}
+                          </option>
+                        </select>
+                        </div>
+                        </div>
+                      ); // or ''
+                    })()}
+
+                  {fitlerAttributes[0]?.code != "MODALITATE IMPRIMARE" && selectedStepName != "KNOCK-X" && (
                     <List>
                       {!selectedTrayPreviewOpenButton &&
                         // selectedAttribute &&
                         fitlerAttributes &&
                         !isTrayOpen &&
                         fitlerAttributes[0]?.options.map((option) => {
+                          console.log(fitlerAttributes[0], "option");
+
                           return (
-                            <ListItemColor
-                              key={option.id}
-                              onClick={() => {
-                                {
-                                  if (
-                                    option.name === "BRODAT" ||
-                                    option.name === "TIPARIT" ||
-                                    option.name === "PRINTAT"
-                                  ) {
-                                    const indexForGroupTip = groups.findIndex(
-                                      (obj) =>
-                                        obj.name === "MODALITATE IMPRIMARE"
-                                    );
-                                    if (indexForGroupTip > 0) {
-                                      selectGroup(groups[indexForGroupTip].id);
-                                      if (
-                                        groups[groups?.length - 1].attributes[0]
-                                          .code === "MODALITATE IMPRIMARE"
-                                      ) {
-                                        selectOption(option.id);
+                            <>
+                              <ListItemColor
+                                key={option.id}
+                                onClick={() => {
+                                  {
+                                    if (
+                                      option.name === "BRODAT" ||
+                                      option.name === "TIPARIT" ||
+                                      option.name === "PRINTAT"
+                                    ) {
+                                      const indexForGroupTip = groups.findIndex(
+                                        (obj) =>
+                                          obj.name === "MODALITATE IMPRIMARE"
+                                      );
+                                      if (indexForGroupTip > 0) {
+                                        selectGroup(
+                                          groups[indexForGroupTip].id
+                                        );
+                                        if (
+                                          groups[groups?.length - 1]
+                                            .attributes[0].code ===
+                                          "MODALITATE IMPRIMARE"
+                                        ) {
+                                          selectOption(option.id);
+                                        }
+                                        // selectOption(option.id);
+                                        selectOptionId(option.id);
+                                        selectOptionName(option.name);
                                       }
-                                      // selectOption(option.id);
+                                    } else {
+                                      // console.log(option.id);
+                                      // setSelectedAttributeId()
+                                      selectOption(option.id);
                                       selectOptionId(option.id);
                                       selectOptionName(option.name);
                                     }
-                                  } else {
-                                    // console.log(option.id);
-                                    // setSelectedAttributeId()
-                                    selectOption(option.id);
-                                    selectOptionId(option.id);
-                                    selectOptionName(option.name);
                                   }
-                                }
-                              }}
-                              selected={option.selected}
-                              selectedColor={selectedColorName}
-                            >
-                              {option.imageUrl && (
-                                <ListItemImageNoCarousel
-                                  src={option.imageUrl}
-                                  onClick={() => selectColorName(option.name)}
-                                  selected={option.selected}
-                                />
-                              )}
-                              {/* Shows the color name but we dont need it now  */}
-                              {/* <div style={{ position: "absolute", top: "120%" }}>
+                                }}
+                                selected={option.selected}
+                                selectedColor={selectedColorName}
+                              >
+                                {option.imageUrl && (
+                                  <ListItemImageNoCarousel
+                                    src={option.imageUrl}
+                                    onClick={() => selectColorName(option.name)}
+                                    selected={option.selected}
+                                  />
+                                )}
+                                {/* Shows the color name but we dont need it now  */}
+                                {/* <div style={{ position: "absolute", top: "120%" }}>
                               {option.id === selectedOptionId
                                 ? option.name
                                 : ""}
                             </div> */}
-                            </ListItemColor>
+                              </ListItemColor>
+                            </>
                           );
                         })}
                     </List>
