@@ -371,7 +371,7 @@ export const PriceContainer = styled.div<{ isMobile?: boolean }>`
 
 export const FooterMobileContainer = styled.div<{ isQuoteEnable?: boolean }>`
 	position: absolute;
-	bottom: -110px;
+	bottom: -55px;
 	width: 100vw;
 	//  background: none;
 	// 	linear-gradient(to top, 
