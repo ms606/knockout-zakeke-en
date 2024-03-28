@@ -63,15 +63,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     getOnlineScreenshot,
     productCode,
   } = useZakeke();
-  // console.log(productCode, 'groups');
-  // Trying out new hierarchy
-  // console.log(groups[0].attributes,'groups');
-  // groups[0].attributes.map(x => {
-  //   if (x.code === x.code.toUpperCase()) {
-  //     console.log(x,);
-  //   }
-  // })
 
+  
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
@@ -203,22 +196,20 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // select an attribute if selected step or group change
 
   useEffect(() => {
-    
     if (selectedGroupIDFromTray) {
       // const foundItem = filteredArrayId[0];
       const tipIndex_ = useActualGroups_.findIndex(
         (x) => x.id === selectedGroupIDFromTray
-        );
-        setCurrentIndex(tipIndex_);
-      }
-      
-      const tipIndex_ = useActualGroups_.findIndex(
-        (x) => x.id === selectedGroupId
-        );
-        setCurrentIndex(tipIndex_);
+      );
+      setCurrentIndex(tipIndex_);
+    }
 
-  
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+    const tipIndex_ = useActualGroups_.findIndex(
+      (x) => x.id === selectedGroupId
+    );
+    setCurrentIndex(tipIndex_);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupIDFromTray, useActualGroups_]);
 
   // const selectedTemplateGroup = currentTemplateGroups
@@ -240,10 +231,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
-    // console.log(itemAvailable,'itemAvailable');
-
-    // setTipIndex(useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP"));
-    // const tipIndex_ = useActualGroups_.findIndex((x) => x.name  === "ACOPERIRE TIP");
 
     // removed test
     if (items && !itemAvailable) {
@@ -252,22 +239,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       }
     }
 
-    // console.log(useActualGroups_);
-
-    // console.log(groups, useActualGroups_, "ssffds");
-
     if (items && itemAvailable) {
       if (items.filter((item) => item.type === 1)) {
-        //   console.log(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
-        //     if (groups[groups.length - 1]?.name != "MODALITATE IMPRIMARE") {
-        // useActualGroups_.push(groups[groups.findIndex((x) => x.name  === "ACOPERIRE TIP")]);
-        //     }
       }
     }
-    // console.log(useActualGroups_,'useActualGroups_');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }
   }, [hasTypeZero, useActualGroups_, items]);
 
   const dialogsPortal = document.getElementById("dialogs-portal");
@@ -322,60 +299,31 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // Select attribute first time
   useEffect(() => {
     if (selectedGroup) {
-      // if (selectedGroup? > 0) {
       if (activeColorOption === "plain") {
         selectOption(selectedGroup.attributes[0]?.options[0].id);
         selectStepName(selectedGroup?.attributes[0]?.options[0].name);
-        // selectAttribute(selectedGroup.attributes[0]?.options[0].id);
-        // No step now -- 21-feb-24
-        // if (selectedGroup) {
-        //   selectStep(selectedGroup.steps[0].id);
-        // }
       }
       if (activeColorOption === "metallic") {
         selectOption(selectedGroup.attributes[0]?.options[1].id);
         selectStepName(selectedGroup?.attributes[0]?.options[1].name);
-        // if (selectedGroup) {
-        //   selectStep(selectedGroup.steps[0].id);
-        //   selectStepName(selectedGroup?.steps[0].name);
-        // }
       }
       if (activeColorOption === "matte") {
         selectOption(selectedGroup.attributes[0]?.options[2].id);
         selectStepName(selectedGroup?.attributes[0]?.options[2].name);
-        // if (selectedGroup) {
-        //   selectStep(selectedGroup.steps[0].id);
-        //   selectStepName(selectedGroup?.steps[0].name);
-        // }
       }
       if (activeColorOption === "fluorescent") {
         if (selectedGroup.attributes[0]?.options[3]) {
           selectOption(selectedGroup.attributes[0]?.options[3].id);
           selectStepName(selectedGroup?.attributes[0]?.options[3].name);
         }
-        // if (selectedGroup) {
-        //   selectStep(selectedGroup.steps[0].id);
-        //   selectStepName(selectedGroup?.steps[0].name);
-        // }
       }
       if (activeColorOption === "knockX" || activeColorOption === "KNOCK-X") {
         if (selectedGroup.attributes[0]?.options[4]) {
           selectOption(selectedGroup.attributes[0]?.options[4].id);
           selectStepName(selectedGroup?.attributes[0]?.options[4].name);
         }
-
-        //selectGroup(selectedGroup?.steps[1].id)
-        // selectOption(selectedGroup.attributes[0]?.options[3].id);
-        // if (selectedGroup) {
-        //   selectStep(selectedGroup.steps[1].id);
-        //   selectStepName(selectedGroup?.steps[1].name);
-        // }
-        // selectAttribute(selectedStep.attributes[3].id);
-        // }
       }
     }
-
-    // console.log(selectedGroup,activeColorOption,selectedStepName,selectedTrayType,'selectedGroup');
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedAttribute, activeColorOption]);
@@ -424,19 +372,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
   };
 
-
   const handleLeftClick = () => {
+    const newIndex =
+      (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length;
+    const newGroup = useActualGroups_[newIndex];
 
-   const newIndex = (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length;
-   const newGroup = useActualGroups_[newIndex];
-
-   setSelectedTrayType(updateSelectedTray(newGroup.direction));
-   setActiveColorOption("plain");
-   selectColorName("");
-   setCurrentIndex(newIndex);
-   selectGroup(newGroup.id);
-   if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
-
+    setSelectedTrayType(updateSelectedTray(newGroup.direction));
+    setActiveColorOption("plain");
+    selectColorName("");
+    setCurrentIndex(newIndex);
+    selectGroup(newGroup.id);
+    if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
   };
 
   const handleRightClick = () => {
@@ -444,7 +390,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     const newIndex = (currentIndex + 1) % useActualGroups_.length;
     const group = useActualGroups_[newIndex];
-  
+
     setSelectedGroupIDFromTray(null);
     setSelectedTrayType(updateSelectedTray(group.direction));
     setActiveColorOption("plain");
@@ -452,7 +398,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     setCurrentIndex(newIndex);
     selectGroup(group.id);
     if (group.steps) selectStep(group.steps[0]?.id);
-    
   };
 
   const toggleTray = (trayName: string) => {
