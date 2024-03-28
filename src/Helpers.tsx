@@ -469,3 +469,15 @@ export async function downloadImage(url: any) {
       console.error("Error downloading image:", error);
     }
   }
+
+
+ export const updateSelectedTray = (direction: number) => {
+    if (direction === 0) {
+      return "colors"
+    } else if (direction === 2){
+      return "signature"
+    } else if (direction === 3){
+      return "logos"
+    }
+    return "logos"
+  } 

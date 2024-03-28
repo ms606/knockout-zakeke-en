@@ -24,6 +24,7 @@ import {
   T,
   useActualGroups,
   downloadImage,
+  updateSelectedTray,
 } from "../Helpers";
 import Footer from "./layouts/Footer";
 import FooterMobile from "./layouts/FooterMobile";
@@ -75,24 +76,18 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const useActualGroups_ = useActualGroups();
 
-  // useActualGroups_.every((x,index,array)=> {
-  //   console.log(x, index, array);
-
-  // })
-
-  //   if (!isSceneLoading){
-  // const templatesSignature = DesignerSignature_();
-  //   const templatesLogo = DesignerLogo_();
-  //   }
-
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);
   const [selectedStepName, selectStepName] = useState<string | null>(null);
   const [selectedAttributeId, selectAttribute] = useState<number | null>(null);
   const [selectedOptionId, selectOptionId] = useState<number | null>(null);
-  const [selectedOptionName, selectOptionName] = useState<string | null>('TIPARIT');
-
+  const [selectedOptionName, selectOptionName] = useState<string | null>(
+    "TIPARIT"
+  );
+  const [selectedGroupIDFromTray, setSelectedGroupIDFromTray] = useState<
+    number | null
+  >(null);
   const [selectedColorName, selectColorName] = useState<any | null>(null);
   const [hasTypeZero, setHasTypeZero] = useState<boolean | null>(null);
   const [stitchTypeGroup, setStitchTypeGroup] = useState<any | null>(null);
@@ -125,16 +120,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
 
   function updCurrentIndex(indexVal: number) {
-    console.log(currentIndex, "currentIndex1");
-
-    setCurrentIndex(indexVal);
-    console.log(currentIndex, "currentIndex2");
+    // setCurrentIndex(indexVal);
   }
 
   const [width, setWidth] = useState(window.innerWidth);
 
   const [isCustomDropDownOpen, setIsCustomDropDownOpen] = useState(false);
-console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
 
   // const selectedGroup = useActualGroups_.find((group) => group.id === selectedGroupId);
 
@@ -209,17 +200,26 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
 
   fitlerAttributes.filter((x) => x !== undefined);
 
-  // console.log(fitlerAttributes);
-
-  //   console.log(fitlerAttributes,'attributes 2');
-
   // select an attribute if selected step or group change
 
   useEffect(() => {
-    // console.log(attributess, selectedAttribute, 'sdfdssdfsd');
-    // if (attributess) selectAttribute(attributess[1].id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedStepId, selectedGroupId, useActualGroups_]);
+    
+    if (selectedGroupIDFromTray) {
+      // const foundItem = filteredArrayId[0];
+      const tipIndex_ = useActualGroups_.findIndex(
+        (x) => x.id === selectedGroupIDFromTray
+        );
+        setCurrentIndex(tipIndex_);
+      }
+      
+      const tipIndex_ = useActualGroups_.findIndex(
+        (x) => x.id === selectedGroupId
+        );
+        setCurrentIndex(tipIndex_);
+
+  
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedGroupIDFromTray, useActualGroups_]);
 
   // const selectedTemplateGroup = currentTemplateGroups
   // 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
@@ -250,29 +250,6 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
       if (tipIndex) {
         setStitchTypeGroup(useActualGroups_[tipIndex]);
       }
-      // removed test
-      // if (
-      //   hasTypeZero == false ||
-      //   items.filter((item) => item.type === 0).length === 0
-      // ) {
-      //   const indexToDel = useActualGroups_.findIndex(
-      //     (obj) => obj.name === "ACOPERIRE TIP"
-      //   );
-
-      //   if (tipIndex) {
-      //     useActualGroups_.splice(tipIndex, 1);
-      //   }
-
-      //   for (let i = 0; i < useActualGroups_.length; i++) {
-      //     if (
-      //       selectedOptionName !== "PRINTAT" &&
-      //       selectedOptionName !== "BRODAT"
-      //     ) {
-      //       if (useActualGroups_[i]?.name === "ACOPERIRE TIP")
-      //         useActualGroups_.splice(i, 1);
-      //     }
-      //   }
-      // }
     }
 
     // console.log(useActualGroups_);
@@ -447,98 +424,35 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
     }
   };
 
+
   const handleLeftClick = () => {
-    //  console.log(currentIndex, "currentIndex");
 
-    if (currentIndex - 1 != -1) {
-      if (useActualGroups_[(currentIndex - 1) % useActualGroups_.length]) {
-        if (
-          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-            .direction == 0
-        ) {
-          setSelectedTrayType("colors");
-          setActiveColorOption("plain");
-        } else if (
-          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-            .direction == 2
-        ) {
-          setSelectedTrayType("signature");
-        } else if (
-          useActualGroups_[(currentIndex - 1) % useActualGroups_.length]
-            .direction == 3
-        ) {
-          setSelectedTrayType("logos");
-        }
-      }
-    } else {
-      setSelectedTrayType("logos");
-    }
+   const newIndex = (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length;
+   const newGroup = useActualGroups_[newIndex];
 
-    selectColorName("");
+   setSelectedTrayType(updateSelectedTray(newGroup.direction));
+   setActiveColorOption("plain");
+   selectColorName("");
+   setCurrentIndex(newIndex);
+   selectGroup(newGroup.id);
+   if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
 
-    if (currentIndex - 1 === -1) {
-      setCurrentIndex(useActualGroups_.length - 1);
-    } else {
-      setCurrentIndex(
-        (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
-      );
-    }
-
-    // setCurrentIndex((currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length);
-    //   console.log(selectedTrayType,'selectedTrayType');
-
-    selectGroup(
-      useActualGroups_[
-        (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length
-      ].id
-    );
-    if (selectedGroup?.steps) selectStep(selectedGroup?.steps[0]?.id);
-
-    // if (items.filter((item) => item.type === 0).length === 0) {
-    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
-    //     if (items?.filter((item) => item.type === 0)) {
-    //       useActualGroups_.splice(groups.length - 1, 1);
-    //     }
-    // }
   };
 
   const handleRightClick = () => {
-    if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
-        .direction == 0
-    ) {
-      setSelectedTrayType("colors");
-    } else if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
-        .direction == 2
-    ) {
-      setSelectedTrayType("signature");
-    } else if (
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length]
-        .direction == 3
-    ) {
-      setSelectedTrayType("logos");
-    }
-    // console.log(useActualGroups_[(currentIndex + 1)],selectedGroup);
+    setSelectedGroupIDFromTray(null);
+
+    const newIndex = (currentIndex + 1) % useActualGroups_.length;
+    const group = useActualGroups_[newIndex];
+  
+    setSelectedGroupIDFromTray(null);
+    setSelectedTrayType(updateSelectedTray(group.direction));
     setActiveColorOption("plain");
     selectColorName("");
-
-    setCurrentIndex((currentIndex + 1) % useActualGroups_.length);
-    selectGroup(
-      useActualGroups_[(currentIndex + 1) % useActualGroups_.length].id
-    );
-    if (selectedGroup?.steps)
-      selectStep(
-        useActualGroups_[(currentIndex + 1) % useActualGroups_.length].steps[0]
-          ?.id
-      );
-
-    // if (items.filter((item) => item.type === 0).length === 0) {
-    //   if (useActualGroups_[groups.length - 1].name === "MODALITATE IMPRIMARE")
-    //     if (items?.filter((item) => item.type === 0)) {
-    //       useActualGroups_.splice(useActualGroups_.length - 1, 1);
-    //     }
-    // }
+    setCurrentIndex(newIndex);
+    selectGroup(group.id);
+    if (group.steps) selectStep(group.steps[0]?.id);
+    
   };
 
   const toggleTray = (trayName: string) => {
@@ -547,7 +461,6 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
     }
     // trayPreviewOpenButton();
     setIsTrayOpen(!isTrayOpen);
-    // console.log(trayName, "trayName");
 
     // set what tray type is selected e.g. colors, signature, logo
     setSelectedTrayType(trayName);
@@ -565,22 +478,6 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
         setSelectedTrayType("logos");
       }
     }
-
-    // if (
-    //   useActualGroups_[currentIndex].direction == 0
-    // ) {
-    //   setSelectedTrayType("colors");
-    // } else if (
-    //   useActualGroups_[currentIndex].direction == 2
-    // ) {
-    //   setSelectedTrayType("signature");
-    // } else if (
-    //   useActualGroups_[currentIndex].direction == 3
-    // ) {
-    //   setSelectedTrayType("logos");
-    // }
-
-    // console.log(trayName);
   };
 
   const trayPreviewOpenButton = () => {
@@ -592,7 +489,7 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
 
   // After selection of the element from the tray
   const groupIdFromFunc = (data: number, type: string) => {
-    // console.log(data, useActualGroups_, "filteredArrayfilteredArray");
+    setSelectedGroupIDFromTray(data);
 
     let filteredArray;
 
@@ -610,9 +507,10 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
       return i.id == data;
     });
 
-    if (filteredArrayId.length > 0) {
+    if (filteredArrayId.length >= 0) {
       const foundItem = filteredArrayId[0];
       const foundItemIndex = useActualGroups_.indexOf(foundItem);
+
       setCurrentIndex(foundItemIndex);
     }
 
@@ -655,9 +553,6 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
     width: "100%",
     // height: !selectedTrayPreviewOpenButton ? "13rem" : "70px",
   };
-  // console.log(currentIndex,useActualGroups_,'currentIndex');
-
-  // console.log(useActualGroups_[currentIndex]);
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
 
@@ -856,35 +751,47 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
                     })()} */}
 
                   {fitlerAttributes[0]?.code === "MODALITATE IMPRIMARE" && (
-                     <div style={{ display: 'flex', justifyContent: 'space-around', alignContent: 'center' }}>
-                     <div className="mchead">Overlay Type</div>
-                     <div className="infsel">
-                       <div className="custom-dropdown">
-                         <button className="custom-dropdown-button" onClick={() => setIsCustomDropDownOpen(!isCustomDropDownOpen)}
-                         >
-                           {selectedOptionName} <span className="dropdown-arrow">  ▼</span>
-                         </button>
-                         {isCustomDropDownOpen && (
-                           <div className="custom-dropdown-list">
-                             {fitlerAttributes[0]?.options.map((option) => (
-                               <div 
-                                 key={option.id} 
-                                 className="custom-dropdown-option"
-                                 onClick={() => {selectOptionId(option.id);
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignContent: "center",
+                      }}
+                    >
+                      <div className="mchead">Overlay Type</div>
+                      <div className="infsel">
+                        <div className="custom-dropdown">
+                          <button
+                            className="custom-dropdown-button"
+                            onClick={() =>
+                              setIsCustomDropDownOpen(!isCustomDropDownOpen)
+                            }
+                          >
+                            {selectedOptionName}{" "}
+                            <span className="dropdown-arrow"> ▼</span>
+                          </button>
+                          {isCustomDropDownOpen && (
+                            <div className="custom-dropdown-list">
+                              {fitlerAttributes[0]?.options.map((option) => (
+                                <div
+                                  key={option.id}
+                                  className="custom-dropdown-option"
+                                  onClick={() => {
+                                    selectOptionId(option.id);
                                     selectOptionName(option.name);
-                                    setIsCustomDropDownOpen(!isCustomDropDownOpen)
-                                  }
-                                  
-                                  }
-                               >
-                                 {option.name}
-                               </div>
-                             ))}
-                           </div>
-                         )}
-                       </div>
-                     </div>
-                   </div>
+                                    setIsCustomDropDownOpen(
+                                      !isCustomDropDownOpen
+                                    );
+                                  }}
+                                >
+                                  {option.name}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   )}
 
                   {fitlerAttributes[0]?.code != "MODALITATE IMPRIMARE" &&
@@ -895,8 +802,6 @@ console.log(isCustomDropDownOpen,'isCustomDropDownOpen');
                           fitlerAttributes &&
                           !isTrayOpen &&
                           fitlerAttributes[0]?.options.map((option) => {
-                            console.log(fitlerAttributes[0], "option");
-
                             return (
                               <>
                                 <ListItemColor
