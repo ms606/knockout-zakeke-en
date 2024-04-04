@@ -6,25 +6,14 @@ import {
   DesignerLogo,
 } from "./tray/DesignerHelper";
 import {
-  Image,
-  ImageItem,
-  Item,
-  ProductArea,
-  TemplateArea,
-  TextItem,
-  ZakekeDesigner,
   useZakeke,
 } from "zakeke-configurator-react";
 
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray }) => {
-  //  const [isOpen, setIsOpen] = useState(false);
-console.log(selectedTray,'selectedTrayType');
-
-
-
-  const { setItemTextOnPath, addItemText, fonts, defaultColor, items, groups } = useZakeke();
+  const { setItemTextOnPath, addItemText, fonts, defaultColor, items, groups, publicTranslations } = useZakeke();
+	const staticsVals = publicTranslations?.statics; 
+  const dynamicsVals = publicTranslations?.dynamics; 
   
-  // console.log(groupNameList, "itemAvailable");
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
   const tipIndex_ = groupNameList.findIndex(
     (x) => x.name === "ACOPERIRE TIP"
@@ -60,19 +49,9 @@ console.log(selectedTray,'selectedTrayType');
         // updCurrentIndex(tipIndex_);
       }
 
-      //  groupNameList.push(groups[tipIndex_].push({
-      //   id: group.id,
-      //   name: group.name,
-      //   imageUrl: group.imageUrl,
-      // }))
     }
   
 
-  // else {
-  //     if (tipIndex) {
-  //       setStitchTypeGroup(useActualGroups_[tipIndex]);
-  //     }
-  // }
 
   const templates = DesignerSignature();
   const templatesLogo = DesignerLogo();
@@ -86,7 +65,7 @@ console.log(selectedTray,'selectedTrayType');
     const itemText = {
       guid: "",
       name: "",
-      text: "Enter your name",
+      text: `${dynamicsVals?.get("Enter your name") ?? "Enter your name"}`,
       fillColor: defaultColor,
       fontFamily: fonts[0].name,
       fontSize: 48,
@@ -122,7 +101,7 @@ console.log(selectedTray,'selectedTrayType');
                 className="tray-trigger-close-button"
                 onClick={() => toggleFunc(null)}
               >
-                Close
+                 {dynamicsVals?.get('Close') ?? 'Close'}  
                 <svg
                   aria-hidden="true"
                   focusable="false"
@@ -142,9 +121,8 @@ console.log(selectedTray,'selectedTrayType');
             </div>
 
             <div className="tray-mc-content">
-              <div className="tray-mc-list-wrapper">
-                {/* class="headline-3 css-4j0u2k" */}
-                <div className="mc-list-title">Select Colors</div>
+              <div className="tray-mc-list-wrapper">                
+                <div className="mc-list-title"> {dynamicsVals?.get('Select Colors') ?? 'Select Colors'} </div>
                 <div className="tray-mc-grid">
                   {groupNameList.map((groupName, i) => {
                     return (
@@ -196,8 +174,7 @@ console.log(selectedTray,'selectedTrayType');
             {/* SIGNATURE */}
             <div className="tray-mc-content signature">
               <div className="tray-mc-list-wrapper">
-                {/* class="headline-3 css-4j0u2k" */}
-                <div className="mc-list-title">Select Signature</div>
+                <div className="mc-list-title">{dynamicsVals?.get('Select Signature') ?? 'Select Signature'}</div>
                 <div className="tray-mc-grid">
                   {templates.map((template, i) => {
                     return (
@@ -214,7 +191,6 @@ console.log(selectedTray,'selectedTrayType');
                           onClick={() => handleTextItem(template.id)}
                           id={template.id}
                         >
-                          {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
                           <div id={template.id} className="slabel">
                             <span
                               id={template.id}
@@ -240,8 +216,7 @@ console.log(selectedTray,'selectedTrayType');
             {/* LOGOS */}
             <div className="tray-mc-content logos">
               <div className="tray-mc-list-wrapper">
-                {/* class="headline-3 css-4j0u2k" */}
-                <div className="mc-list-title">Select Logos</div>
+                <div className="mc-list-title">{dynamicsVals?.get('Select Logos') ?? 'Select Logos'}</div>
                 <div className="tray-mc-grid">
                   {templatesLogo.map((template, i) => {
                     return (
@@ -258,7 +233,6 @@ console.log(selectedTray,'selectedTrayType');
                           onClick={() => handleImageItem(template.id)}
                           id={template.id}
                         >
-                          {/* <img id={template.id} style={{width: '68.750px', height: '76px', borderRadius: '4px 4px 0px 0px'}} src={groupName.imageUrl}/> */}
                           <div id={template.id} className="slabel">
                             <span
                               id={template.id}

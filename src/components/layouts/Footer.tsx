@@ -60,7 +60,8 @@ const Footer = () => {
 		publicTranslations, 
 		groups
 	} = useZakeke();
-
+	
+	const dynamicsVals  = publicTranslations?.dynamics;   
 	const {
 		setIsLoading,
 		priceFormatter,
@@ -77,7 +78,6 @@ const Footer = () => {
 		
 		const cartMessage = eventMessages?.find((message) => message.eventID === 4);
 		const staticsVals = publicTranslations?.statics; 
-        
 		const findSizeIndex = groups.findIndex((obj) => obj.name.toLowerCase() === 'marime');
 		const isSizeNotSelected = groups[findSizeIndex]?.attributes[0].options[0].selected === true;
 		
@@ -303,7 +303,7 @@ const Footer = () => {
 						<div className="menu_footer" style ={{position: 'relative', bottom: '5px',  display: 'flex', justifyContent: 'space-between', width: '100%'}}>
 						<div className="menu_price">
 							{/* <div className="price_text">Price: </div> */}
-							<div>Base:</div> <div className="price_value">{priceFormatter.format(price)}</div>
+							<div>{dynamicsVals?.get('Base') ?? 'Base'} :</div> <div className="price_value">{priceFormatter.format(price)}</div>
 						</div>
 						</div>
 						</>	

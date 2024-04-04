@@ -103,7 +103,8 @@ const FooterMobile = () => {
 		sellerSettings,
 		saveComposition,
 		createQuote,
-		nftSettings
+		nftSettings,
+		publicTranslations
 	} = useZakeke();
 
 	const {
@@ -124,6 +125,8 @@ const FooterMobile = () => {
 		isMobile
 	} = useStore();
 
+	const dynamicsVals  = publicTranslations?.dynamics;
+
 	const { showDialog, closeDialog } = useDialogManager();
 	const isOutOfStock = false;
 	const isBuyVisibleForQuoteRule = product?.quoteRule ? product.quoteRule.allowAddToCart : true;
@@ -141,7 +144,7 @@ const FooterMobile = () => {
 				<QuestionDialog
 					alignButtons='center'
 					eventMessage={cartMessage?.description}
-					buttonNoLabel={T._('Cancel', 'Composer')}
+					buttonNoLabel={dynamicsVals?.get('Cancel') ?? 'Cancel'}
 					buttonYesLabel={T._('Add to cart', 'Composer')}
 					onYesClick={() => {
 						// if (nftSettings && nftSettings.isNFTEnabled && !isDraftEditor)

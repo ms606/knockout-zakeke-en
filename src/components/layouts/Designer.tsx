@@ -259,6 +259,8 @@ const Designer: FC<{
     backgroundColor: string
 }
 
+const staticsVals = publicTranslations?.statics;
+
    const [item, setItem] = useState<EditTextItem_1>({
       guid: '',
       name: '',
@@ -444,7 +446,7 @@ const Designer: FC<{
     const itemText ={
       guid: '',
       name: '',
-      text: "Enter your name",
+      text: `${staticsVals?.get("Enter your name") ?? "Enter your name"}`,
       fillColor: defaultColor,
       fontFamily: fonts[0].name,
       fontSize: 48,

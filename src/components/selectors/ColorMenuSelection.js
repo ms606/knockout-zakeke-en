@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useZakeke } from 'zakeke-configurator-react';
 
 export const ColorMenuSeleciton = ({
   productCode,
@@ -6,19 +7,20 @@ export const ColorMenuSeleciton = ({
   activeColorOption,
   selectedGroupName
 }) => {
-  // const [activeColorOption, setActiveColorOption] = useState('');
-
-  // console.log(productCode, selectedGroupName,'selectedGroup');
+  
+  const { publicTranslations } = useZakeke();
+	const staticsVals = publicTranslations?.statics; 
+  const dynamicsVals  = publicTranslations?.dynamics;
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
         <div
           data-sel="plain"
-          className={activeColorOption === "plain" ? "active" : ""}
+          className={(activeColorOption === "plain") ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
         >
-          Plain
-        </div>           
+         {dynamicsVals?.get('PLAIN') ?? 'Plain'}  
+        </div>                   
        {(productCode != '8427833459022' && productCode != '8427835162958') && 
        <>
         <div
@@ -26,21 +28,21 @@ export const ColorMenuSeleciton = ({
           className={activeColorOption === "metallic" ? "active" : ""}
           onClick={() => updateActiveColorOption("metallic")}
         >
-          Metallic
+         {dynamicsVals?.get('METALLIC') ?? 'Metallic'}   
         </div>
         <div
           data-sel="matte"
           className={activeColorOption === "matte" ? "active" : ""}
           onClick={() => updateActiveColorOption("matte")}
         >
-          Matte
+         {dynamicsVals?.get('MATTE') ?? 'Matte'}   
         </div>
         <div
           data-sel="fluorescent"
           className={activeColorOption === "fluorescent" ? "active" : ""}
           onClick={() => updateActiveColorOption("fluorescent")}
         >
-          Fluoro
+          {dynamicsVals?.get('FLUORESCENT') ?? 'Fluorescent'}   
         </div>
        </> 
        } 
@@ -58,7 +60,7 @@ export const ColorMenuSeleciton = ({
           className={activeColorOption === "knockX" ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
         >
-          Knock X
+         {dynamicsVals?.get('knock-X') ?? 'knockX'}  
         </div>}
       </div>
     </div>

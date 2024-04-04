@@ -38,8 +38,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { setCommentRange } from "typescript";
-import { is } from "immutable";
 
 const dialogsPortal = document.getElementById("dialogs-portal")!;
 
@@ -62,9 +60,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     items,
     getOnlineScreenshot,
     productCode,
+    publicTranslations
   } = useZakeke();
-
   
+  console.log(groups);
+  
+
+  const staticsVals = publicTranslations?.statics; 
+  const dynamicsVals  = publicTranslations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
@@ -130,20 +133,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     false
   );
 
-  // const currentAttributes = selectedStep ? selectedStep.attributes : selectedGroup ? selectedGroup.attributes : [];
-
   // Filter logos and signature for tray
   const filteredAreas = null;
-  // product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
-
-  // const selectedAttribute = attributes.find(
-  //   (attribute) => attribute.id === selectedAttributeId
-  // );
-
-  // console.log(currentAttributes, selectedAttribute,'selectedAttribute');
-
-  // const attributess = groups[0]?.attributes;
-  //console.log(selectedGroupId,useActualGroups_,'actualGroups 1');
+  
   const selectedGroup = selectedGroupId
     ? useActualGroups_.find((group) => group.id === selectedGroupId)
     : null;
@@ -169,9 +161,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (a, b) => a.displayOrder - b.displayOrder
   );
 
-  // const selectedAttribute = currentAttributes
-  // 	? currentAttributes.find((attr) => attr.id === selectedAttributeId)
-  // 	: null;
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection
   const attributes = useMemo(
@@ -221,13 +210,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   if (indexToRemove !== -1) {
     groups.splice(indexToRemove, 1);
   }
-
-  // console.log(groups,'groups');
-  // console.log(
-  //   Array.prototype.every.call(groups, (x) => {
-  //     console.log(x, "xxxx");
-  //   })
-  // );
 
   useEffect(() => {
     const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
@@ -298,30 +280,26 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // Select attribute first time
   useEffect(() => {
-    if (selectedGroup) {
-      if (activeColorOption === "plain") {
-        selectOption(selectedGroup.attributes[0]?.options[0].id);
-        selectStepName(selectedGroup?.attributes[0]?.options[0].name);
-      }
-      if (activeColorOption === "metallic") {
-        selectOption(selectedGroup.attributes[0]?.options[1].id);
-        selectStepName(selectedGroup?.attributes[0]?.options[1].name);
-      }
-      if (activeColorOption === "matte") {
-        selectOption(selectedGroup.attributes[0]?.options[2].id);
-        selectStepName(selectedGroup?.attributes[0]?.options[2].name);
-      }
-      if (activeColorOption === "fluorescent") {
-        if (selectedGroup.attributes[0]?.options[3]) {
-          selectOption(selectedGroup.attributes[0]?.options[3].id);
-          selectStepName(selectedGroup?.attributes[0]?.options[3].name);
-        }
-      }
-      if (activeColorOption === "knockX" || activeColorOption === "KNOCK-X") {
-        if (selectedGroup.attributes[0]?.options[4]) {
-          selectOption(selectedGroup.attributes[0]?.options[4].id);
-          selectStepName(selectedGroup?.attributes[0]?.options[4].name);
-        }
+    const colorMenuAttributeMap: {[key: string]: number} = {
+      'plain': 0,
+      'Culoare': 0,
+      'metallic': 1,
+      'matte': 2,
+      'fluorescent': 3,
+      'knockX': 4,
+      'KNOCK-X': 4, 
+    }
+
+    console.log(selectedGroup,'');
+    
+
+    if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
+      const optionIndex = colorMenuAttributeMap[activeColorOption];
+      const option = selectedGroup.attributes[0]?.options[optionIndex];
+      
+      if(option){
+        selectOption(option.id);
+        selectStepName(option.name)
       }
     }
 
@@ -818,7 +796,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                     {selectedStepName === "KNOCK-X" ? (
                       <div>
-                        <div className="knockXlabel">SELECT DESIGN THEME</div>
+                        <div className="knockXlabel">{dynamicsVals?.get('SELECT DESIGN THEME') ?? 'SELECT DESIGN THEME'}</div>
                         <Swiper
                           spaceBetween={1}
                           slidesPerView={2}
@@ -866,7 +844,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         </Swiper>
 
                         <br />
-                        <div className="knockXlabel">SELECT COLOR THEME</div>
+                        <div className="knockXlabel">{dynamicsVals?.get('SELECT COLOR THEME') ?? 'SELECT COLOR THEME'}</div>
                         <ListX>
                           {fitlerAttributes[0] &&
                             fitlerAttributes[0].options.map((option) => {
@@ -911,12 +889,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
           <div id="gprev" className="mc-prev" onClick={handleLeftClick}>
-            Back
+          {dynamicsVals?.get('Back') ?? 'Back'}
           </div>
           {/* </button> */}
           {/* <button className="next-customization" onClick={handleRightClick}> */}
           <div id="gnext" className="mc-next" onClick={handleRightClick}>
-            Next
+          {dynamicsVals?.get('Next') ?? 'Next'}   
           </div>
           {/* </button> */}
         </div>

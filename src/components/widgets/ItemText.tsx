@@ -148,7 +148,7 @@ const SingleValueContainer = styled(components.SingleValue)`
 `;
 
 const Cusimg_embu = styled.div`
-  width: 50px;
+  width: 78px;
   display: block;
   position: relative;
   float: right;
@@ -160,7 +160,7 @@ const Cusimg_embu = styled.div`
   user-select: none;
   color: rgb(0, 69, 140);
   text-align: center;
-  padding: 7px 12px;
+  padding: 7px 3px;
   border-radius: 3px;
   border-width: 1px;
   border-style: solid;
@@ -199,8 +199,8 @@ const ItemText: FC<{
   fonts?: FontFamily[];
   hideRemoveButton?: boolean;
 }> = ({ item, handleItemPropChange, hideRemoveButton }) => {
-  const { removeItem, fonts, disableTextColors, textColors } = useZakeke();
-
+  const { removeItem, fonts, disableTextColors, textColors, publicTranslations } = useZakeke();
+  const dynamicsVals  = publicTranslations?.dynamics;
   const constraints = item.constraints;
   const canEdit = constraints?.canEdit ?? true;
   const hasCurvedText = item.isTextOnPath;
@@ -254,7 +254,7 @@ const ItemText: FC<{
           <Cusimg_embu
             onClick={() => togglerFontSelectorVisible(fontSelectorVisible)}
           >
-            Font
+            {dynamicsVals?.get('Font') ?? 'Font'}  
           </Cusimg_embu>
 
           <TextArea
