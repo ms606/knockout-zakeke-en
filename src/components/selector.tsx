@@ -63,7 +63,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations
   } = useZakeke();
   
-  console.log(groups);
+  // console.log(groups,publicTranslations);
   
 
   const staticsVals = publicTranslations?.statics; 
@@ -72,6 +72,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const useActualGroups_ = useActualGroups();
 
+  console.log(useActualGroups_);
+  
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);
@@ -445,25 +447,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         selectGroupIdFromTray(filteredArray[0].id);
       }
     }
-    // if (type === "signature") {
-    //   const tipIndex_ = useActualGroups_.findIndex(
-    //     (x) => x.name === "ACOPERIRE TIP"
-    //   );
 
-    //   const findFirstSignature = useActualGroups_.findIndex(
-    //     (x) => x.direction === 2
-    //     );
-    //   //  console.log(findFirstSignature,'sdfdfdsdsfds');
-
-    //   if (tipIndex_ < 0) {setCurrentIndex(findFirstSignature)}
-
-    //   selectGroup(data);
-
-    // }
     else {
-      selectGroup(data); //selectedGroupId = data
-      //   console.log(selectedGroupId,'selectedGroupId');
-      //   selectGroup(useActualGroups_[(currentIndex) % useActualGroups_.length].id);
+      selectGroup(data); 
     }
   };
 

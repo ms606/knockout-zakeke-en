@@ -340,16 +340,14 @@ export function useActualGroups() {
     isAreaVisible,
     draftCompositions,
     sellerSettings,
-    items
+    items,
   } = useZakeke();
-  
-  
+
   // removed test
   let indexToRemove = groups.findIndex((obj) => obj.id === -1);
   if (indexToRemove !== -1) {
     groups.splice(indexToRemove, 1);
   }
-
 
   const shouldCustomizerGroupBeVisible =
     !isSceneLoading && product
@@ -366,18 +364,18 @@ export function useActualGroups() {
       sellerSettings
     ) ?? [];
 
-    indexToRemove = actualGroups.findIndex((obj) => obj.id === -2);
-    
-    if (indexToRemove !== -1) {
-      actualGroups.splice(indexToRemove, 1);
-    }
+  indexToRemove = actualGroups.findIndex((obj) => obj.id === -2);
 
-    const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
+  if (indexToRemove !== -1) {
+    actualGroups.splice(indexToRemove, 1);
+  }
 
-    if (items && !itemAvailable) {
-    const tipIndex_ = actualGroups.findIndex((x) => x.name  === "ACOPERIRE TIP");
-    if(tipIndex_ > 0) actualGroups.splice(tipIndex_, 1);
-    }
+  const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
+
+  if (items && !itemAvailable) {
+    const tipIndex_ = actualGroups.findIndex((x) => x.name === "ACOPERIRE TIP");
+    if (tipIndex_ > 0) actualGroups.splice(tipIndex_, 1);
+  }
 
   if (!isSceneLoading) {
     const templatesSignature = DesignerSignature_();
@@ -424,60 +422,60 @@ export function useActualGroups() {
 }
 
 export function makeFirstLetterCaps(sentence: any) {
-  if (sentence){
-  const str = sentence.split(" ");
+  if (sentence) {
+    const trimmedSentence = sentence ? sentence.trim() : '';
 
-  for (let i = 0; i < str.length; i++) {
-    str[i] = str[i][0].toUpperCase() + str[i].substr(1).toLowerCase();
+    const str = trimmedSentence.split(" ");
+    // const str = sentence.split(" ");
+
+    for (let i = 0; i < str.length; i++) {
+      str[i] = str[i][0].toUpperCase() + str[i].substr(1).toLowerCase();
+    }
+    let newSentence: any = str.join(" ");
+    return newSentence;
   }
-  let newSentence: any = str.join(" ");
-  return newSentence;
 }
-  
-}
-
 
 export async function downloadImage(url: any) {
-    try {
-      // Replace the URL with your actual image URL
-      const imageUrl = url;
+  try {
+    // Replace the URL with your actual image URL
+    const imageUrl = url;
 
-      // Fetch the image as a blob
-      const response = await fetch(imageUrl); //, { responseType: 'blob' });
-      const imageBlob = await response.blob();
+    // Fetch the image as a blob
+    const response = await fetch(imageUrl); //, { responseType: 'blob' });
+    const imageBlob = await response.blob();
 
-      // Create a Blob URL
-      const blobUrl = URL.createObjectURL(imageBlob);
+    // Create a Blob URL
+    const blobUrl = URL.createObjectURL(imageBlob);
 
-      // Create an anchor element
-      const link = document.createElement("a");
-      link.href = blobUrl;
+    // Create an anchor element
+    const link = document.createElement("a");
+    link.href = blobUrl;
 
-      // Set the download attribute with the desired file name
-      link.download = "yourImage.jpg";
+    // Set the download attribute with the desired file name
+    link.download = "yourImage.jpg";
 
-      // Append the anchor element to the document
-      document.body.appendChild(link);
+    // Append the anchor element to the document
+    document.body.appendChild(link);
 
-      // Trigger a click on the anchor element
-      link.click();
+    // Trigger a click on the anchor element
+    link.click();
 
-      // Remove the anchor element and revoke the Blob URL
-      document.body.removeChild(link);
-      URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-      console.error("Error downloading image:", error);
-    }
+    // Remove the anchor element and revoke the Blob URL
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    console.error("Error downloading image:", error);
   }
+}
 
-
- export const updateSelectedTray = (direction: number) => {
-    if (direction === 0) {
-      return "colors"
-    } else if (direction === 2){
-      return "signature"
-    } else if (direction === 3){
-      return "logos"
-    }
-    return "logos"
-  } 
+export const updateSelectedTray = (direction: number) => {
+  if (direction === 0) {
+    return "colors";
+  } else if (direction === 2) {
+    return "signature";
+  } else if (direction === 3) {
+    return "logos";
+  }
+  return "logos";
+};

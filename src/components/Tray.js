@@ -28,7 +28,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
 
     else {
       const checkIfNull = groupNameList.findIndex(
-        (x) => x.name === "ACOPERIRE TIP"
+        (x) => x.name === "ACOPERIRE TIP"                          
       );
 
       if (checkIfNull < 0) {
@@ -37,7 +37,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
         );
   
         const acopName = groups[tipIndex_];
-        // console.log(acopName,'acopName');
+        console.log(acopName,'acopName');
   
         groupNameList.push({
           id: acopName.id,
