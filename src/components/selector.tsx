@@ -418,6 +418,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     let filteredArray;
 
+    
     useActualGroups_.filter((element) => {
       return element;
     });
