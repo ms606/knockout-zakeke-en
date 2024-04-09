@@ -72,7 +72,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   const useActualGroups_ = useActualGroups();
 
-  console.log(useActualGroups_);
+  // console.log(useActualGroups_);
   
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
@@ -163,6 +163,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (a, b) => a.displayOrder - b.displayOrder
   );
 
+  console.log(currentAttributes,'currentAttributes ');
+  
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection
   const attributes = useMemo(
@@ -418,7 +420,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     let filteredArray;
 
-    
+
     useActualGroups_.filter((element) => {
       return element;
     });
@@ -613,6 +615,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     selectedGroupName={selectedGroup}
                     updateActiveColorOption={updateActiveColorOption}
                     activeColorOption={activeColorOption}
+                    currentAttributes={currentAttributes}
                   />
                 )}
 

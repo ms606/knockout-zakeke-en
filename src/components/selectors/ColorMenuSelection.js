@@ -5,12 +5,15 @@ export const ColorMenuSeleciton = ({
   productCode,
   updateActiveColorOption,
   activeColorOption,
-  selectedGroupName
+  selectedGroupName,
+  currentAttributes
 }) => {
-  
+
   const { publicTranslations } = useZakeke();
 	const staticsVals = publicTranslations?.statics; 
   const dynamicsVals  = publicTranslations?.dynamics;
+
+
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
@@ -19,7 +22,8 @@ export const ColorMenuSeleciton = ({
           className={(activeColorOption === "plain") ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
         >
-         {dynamicsVals?.get('PLAIN') ?? 'Plain'}  
+         {currentAttributes.length === 1 ?   currentAttributes[0].name : dynamicsVals?.get('PLAIN') ?? 'Plain'}  
+
         </div>                   
        {(productCode != '8427833459022' && productCode != '8427835162958') && 
        <>
@@ -57,7 +61,7 @@ export const ColorMenuSeleciton = ({
         
         ) && <div
           data-sel="knockX"
-          className={activeColorOption === "knockX" ? "active" : ""}
+          className={activeColorOption === "fluorescent" ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
         >
          {dynamicsVals?.get('knock-X') ?? 'knockX'}  
