@@ -163,7 +163,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (a, b) => a.displayOrder - b.displayOrder
   );
 
-  console.log(currentAttributes,'currentAttributes ');
+  console.log(groups,'groups ');
   
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection

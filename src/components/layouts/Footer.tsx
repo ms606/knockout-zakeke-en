@@ -80,14 +80,15 @@ const Footer = () => {
 		const staticsVals = publicTranslations?.statics; 
 		const findSizeIndex = groups.findIndex((obj) => obj.name.toLowerCase() === 'marime');
 		const isSizeNotSelected = groups[findSizeIndex]?.attributes[0].options[0].selected === true;
-		
+		const dynamicsVals  = publicTranslations?.dynamics;
 		if (cartMessage && cartMessage.visible && !isDraftEditor && !isEditorMode && !isSizeNotSelected)
 			showDialog(
 				'question',
 				<QuestionDialog
 					alignButtons='center'
 					eventMessage={cartMessage?.description}
-					buttonNoLabel={T._('Cancel', 'Composer')}
+					//buttonNoLabel={T._('Cancel', 'Composer')}
+					buttonNoLabel={dynamicsVals?.get('Cancel') ?? 'Cancel'}   
 					buttonYesLabel={staticsVals?.get('Add to cart')} 
 					onYesClick={() => {
 						// if (nftSettings && nftSettings.isNFTEnabled && !isDraftEditor)
