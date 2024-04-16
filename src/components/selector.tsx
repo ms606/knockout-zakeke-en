@@ -16,8 +16,6 @@ import Tray from "./Tray";
 import ProgressBarLoadingOverlay from "./widgets/ProgressBarLoadingOverlay";
 import DesignerSignature from "./layouts/DesignerSignature";
 import DesignerLogo from "./layouts/DesignerLogo";
-import { GroupItem, GroupIcon } from "./layouts/LayoutStyled";
-import { ReactComponent as SaveSolid } from "../../assets/icons/save-solid.svg";
 import useStore from "../Store";
 import {
   makeFirstLetterCaps,
@@ -60,20 +58,19 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     items,
     getOnlineScreenshot,
     productCode,
-    publicTranslations
+    publicTranslations,
   } = useZakeke();
-  
-  // console.log(groups,publicTranslations);
-  
 
-  const staticsVals = publicTranslations?.statics; 
-  const dynamicsVals  = publicTranslations?.dynamics;
+  // console.log(groups,publicTranslations);
+
+  const staticsVals = publicTranslations?.statics;
+  const dynamicsVals = publicTranslations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
 
   // console.log(useActualGroups_);
-  
+
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);
@@ -137,7 +134,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // Filter logos and signature for tray
   const filteredAreas = null;
-  
+
   const selectedGroup = selectedGroupId
     ? useActualGroups_.find((group) => group.id === selectedGroupId)
     : null;
@@ -162,9 +159,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const currentItems = [...currentAttributes, ...currentTemplateGroups].sort(
     (a, b) => a.displayOrder - b.displayOrder
   );
-
-  console.log(groups,'groups ');
-  
 
   // Attributes can be in both groups and steps, so show the attributes of step or in a group based on selection
   const attributes = useMemo(
@@ -284,26 +278,25 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
   // Select attribute first time
   useEffect(() => {
-    const colorMenuAttributeMap: {[key: string]: number} = {
-      'plain': 0,
-      'Culoare': 0,
-      'metallic': 1,
-      'matte': 2,
-      'fluorescent': 3,
-      'knockX': 4,
-      'KNOCK-X': 4, 
-    }
+    const colorMenuAttributeMap: { [key: string]: number } = {
+      plain: 0,
+      Culoare: 0,
+      metallic: 1,
+      matte: 2,
+      fluorescent: 3,
+      knockX: 4,
+      "KNOCK-X": 4,
+    };
 
-    console.log(selectedGroup,'');
-    
+    console.log(selectedGroup, "");
 
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
-      
-      if(option){
+
+      if (option) {
         selectOption(option.id);
-        selectStepName(option.name)
+        selectStepName(option.name);
       }
     }
 
@@ -420,7 +413,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
     let filteredArray;
 
-
     useActualGroups_.filter((element) => {
       return element;
     });
@@ -449,10 +441,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         selectGroup(filteredArray[0].id);
         selectGroupIdFromTray(filteredArray[0].id);
       }
-    }
-
-    else {
-      selectGroup(data); 
+    } else {
+      selectGroup(data);
     }
   };
 
@@ -631,38 +621,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {/* {fitlerAttributes[0]?.code === "MODALITATE IMPRIMARE" &&
-                    (() => {
-                      return (
-                        <div style={{display:'flex',justifyContent: 'space-around', alignContent: 'center'}}>
-                        <div className="mchead">Overlay Type</div>
-                        <div className="infsel">
-                        <select
-                          id="custype_gtype"
-                          onChange={(e) => {
-                            console.log(typeof(Number(e.target.value)));
-                            selectOptionId(Number(e.target.value));
-                            selectOptionName(e.target.value);
-                          }}
-                          // onClick={() => {
-                          //   selectOptionId(option.id);
-                          //   selectOptionName(option.name);
-                          // }}
-                        >
-                          <option
-                            value= {fitlerAttributes[0]?.options[0]?.id}
-                          >
-                            {fitlerAttributes[0]?.options[0]?.name}
-                          </option>
-                          <option value={fitlerAttributes[0]?.options[1]?.id}>
-                            {fitlerAttributes[0]?.options[1]?.name}
-                          </option>
-                        </select>
-                        </div>
-                        </div>
-                      ); // or ''
-                    })()} */}
-
                   {fitlerAttributes[0]?.code === "MODALITATE IMPRIMARE" && (
                     <div
                       style={{
@@ -786,7 +744,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                     {selectedStepName === "KNOCK-X" ? (
                       <div>
-                        <div className="knockXlabel">{dynamicsVals?.get('SELECT DESIGN THEME') ?? 'SELECT DESIGN THEME'}</div>
+                        <div className="knockXlabel">
+                          {dynamicsVals?.get("SELECT DESIGN THEME") ??
+                            "SELECT DESIGN THEME"}
+                        </div>
                         <Swiper
                           spaceBetween={1}
                           slidesPerView={2}
@@ -834,7 +795,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         </Swiper>
 
                         <br />
-                        <div className="knockXlabel">{dynamicsVals?.get('SELECT COLOR THEME') ?? 'SELECT COLOR THEME'}</div>
+                        <div className="knockXlabel">
+                          {dynamicsVals?.get("SELECT COLOR THEME") ??
+                            "SELECT COLOR THEME"}
+                        </div>
                         <ListX>
                           {fitlerAttributes[0] &&
                             fitlerAttributes[0].options.map((option) => {
@@ -879,12 +843,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
         <div className="gbuts">
           {/* <button className="previous-customization" onClick={handleLeftClick}> */}
           <div id="gprev" className="mc-prev" onClick={handleLeftClick}>
-          {dynamicsVals?.get('Back') ?? 'Back'}
+            {dynamicsVals?.get("Back") ?? "Back"}
           </div>
           {/* </button> */}
           {/* <button className="next-customization" onClick={handleRightClick}> */}
           <div id="gnext" className="mc-next" onClick={handleRightClick}>
-          {dynamicsVals?.get('Next') ?? 'Next'}   
+            {dynamicsVals?.get("Next") ?? "Next"}
           </div>
           {/* </button> */}
         </div>

@@ -91,32 +91,6 @@ const Footer = () => {
 					buttonNoLabel={dynamicsVals?.get('Cancel') ?? 'Cancel'}   
 					buttonYesLabel={staticsVals?.get('Add to cart')} 
 					onYesClick={() => {
-						// if (nftSettings && nftSettings.isNFTEnabled && !isDraftEditor)
-						// 	showDialog(
-						// 		'nft',
-						// 		<NftDialog
-						// 			nftTitle={T._(
-						// 				"You're purchasing a customized product together with an NFT.",
-						// 				'Composer'
-						// 			)}
-						// 			nftMessage={T._(
-						// 				'To confirm and mint your NFT you need an active wallet compatible with Ethereum. Confirm and add your email and wallet address.',
-						// 				'Composer'
-						// 			)}
-						// 			price={nftSettings.priceToAdd + price}
-						// 			buttonNoLabel={T._('Skip and continue', 'Composer')}
-						// 			buttonYesLabel={T._('Confirm and Purchase', 'Composer')}
-						// 			onYesClick={(nftForm: NftForm) => {
-						// 				closeDialog('nft');
-						// 				addToCart([], undefined, useLegacyScreenshot, nftForm);
-						// 			}}
-						// 			onNoClick={() => {
-						// 				closeDialog('nft');
-						// 				addToCart([], undefined, useLegacyScreenshot);
-						// 			}}
-						// 		/>
-						// 	);
-						//else 
 						addToCart([], undefined, useLegacyScreenshot);
 						closeDialog('question');
 					}}
