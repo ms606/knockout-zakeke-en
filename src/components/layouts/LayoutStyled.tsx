@@ -351,7 +351,7 @@ export const FooterRightElementsContainer = styled.div`
 	align-items: flex-start;
 	padding: 0px 0px 0px 0em;
 	font-size: 14px;
-	width: 8em;
+	width: 14em;
 	@media (max-width: 1024px) {
 		min-height: 70px;
 	}

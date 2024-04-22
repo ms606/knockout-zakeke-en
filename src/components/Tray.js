@@ -65,7 +65,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
     const itemText = {
       guid: "",
       name: "",
-      text: `${dynamicsVals?.get("Enter your name") ?? "Enter your name"}`,
+      text: `${dynamicsVals?.get("Enter Your Name") ?? "Enter Your Name"}`,
       fillColor: defaultColor,
       fontFamily: fonts[0].name,
       fontSize: 48,

@@ -446,7 +446,7 @@ const staticsVals = publicTranslations?.statics;
     const itemText ={
       guid: '',
       name: '',
-      text: `${staticsVals?.get("Enter your name") ?? "Enter your name"}`,
+      text: `${dynamicVals?.get("Enter Your Name") ?? "Enter Your Name"}`,
       fillColor: defaultColor,
       fontFamily: fonts[0].name,
       fontSize: 48,

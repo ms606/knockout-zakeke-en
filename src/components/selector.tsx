@@ -61,6 +61,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations,
   } = useZakeke();
 
+  console.log(product,'product');
+  
   // console.log(groups,publicTranslations);
 
   const staticsVals = publicTranslations?.statics;
@@ -288,7 +290,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       "KNOCK-X": 4,
     };
 
-    console.log(selectedGroup, "");
+    // console.log(selectedGroup, "");
 
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];

@@ -199,7 +199,7 @@ export const Button_N = styled.div<{
 	justify-content: center;
 	align-items: center;
 	padding: ${(props) => (props.isMoveElementButton ? '' : '7px 15px')};
-	width: ${(props) => (props.isMoveElementButton ? '138px' : '100px')};
+	width: ${(props) => (props.isMoveElementButton ? '140px' : '140px')};
 	background-color: ${(props) => (props.primary ? '#297ca3' : 'white')};
 	color: ${(props) => (props.outline ? 'black' : props.primary ? 'white' : '#297CA3')};
 	text-align: center;

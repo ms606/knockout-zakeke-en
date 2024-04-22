@@ -245,6 +245,7 @@ const DesignerSignature: FC<{
   const dynamicVals = publicTranslations?.dynamics;
   const staticsVals = publicTranslations?.statics; 
 
+  console.log(dynamicVals,staticsVals);
   
   const customizerRef = useRef<any | null>(null);
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);
@@ -391,7 +392,7 @@ const DesignerSignature: FC<{
     const itemText ={
       guid: '',
       name: '',
-      text: `${dynamicVals?.get("Enter your name") ?? "Enter your name"}`,
+      text: `${dynamicVals?.get("Enter Your Name") ?? "Enter Your Name"}`,
       fillColor: defaultColor,
       fontFamily: fonts[0].name,
       fontSize: 48,
