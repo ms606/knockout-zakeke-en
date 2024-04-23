@@ -148,7 +148,7 @@ export const SupportedFormatsList = styled.span`
 `;
 
 export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
-    border-radius: 1%;
+	border-radius: 1%;
 	height: 50vh;
 	width: 97%;
 	position: relative;

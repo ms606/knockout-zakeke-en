@@ -61,7 +61,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations,
   } = useZakeke();
 
-  console.log(product,'product');
+
   
   // console.log(groups,publicTranslations);
 
