@@ -17,7 +17,7 @@ const ProgressBarLoadingBackground = styled.div`
 
 const ProgressBarLoadingContainer = styled.div`
   width: 650px;
-  height: 150px;
+  height: 19em;
   padding: 10px;
   display: inline-flex;
   padding: 48px 24px;
@@ -29,8 +29,9 @@ const ProgressBarLoadingContainer = styled.div`
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.15), 0px 0px 3px 0px rgba(0, 0, 0, 0.1);
 
   @media screen and (max-width: 766px){
+   font-size: 10px;
    width: 350px;
-   height: 140px;
+   height: 50em;
   }
 `;
 

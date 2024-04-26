@@ -61,10 +61,10 @@ export const ColorMenuSeleciton = ({
         
         ) && <div
           data-sel="knockX"
-          className={activeColorOption === "fluorescent" ? "active" : ""}
+          className={activeColorOption === "knockX" ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
         >
-         {dynamicsVals?.get('knock-X') ?? 'knockX'}  
+         {dynamicsVals?.get('KNOCK-X') ?? 'Knock-X'}  
         </div>}
       </div>
     </div>

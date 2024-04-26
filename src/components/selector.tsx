@@ -63,10 +63,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
 
   
-  // console.log(groups,publicTranslations);
-
+  
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
+  console.log(dynamicsVals,'groups');
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
@@ -80,7 +80,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedAttributeId, selectAttribute] = useState<number | null>(null);
   const [selectedOptionId, selectOptionId] = useState<number | null>(null);
   const [selectedOptionName, selectOptionName] = useState<string | null>(
-    "TIPARIT"
+    "OPTIUNI IMPRIMARE"
   );
   const [selectedGroupIDFromTray, setSelectedGroupIDFromTray] = useState<
     number | null
@@ -287,16 +287,19 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       matte: 2,
       fluorescent: 3,
       knockX: 4,
-      "KNOCK-X": 4,
+      "knock-X": 4,
+      "kNOCK-X": 4,
     };
 
-    // console.log(selectedGroup, "");
+    console.log(activeColorOption,"activeColorOption");
 
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
 
       if (option) {
+        console.log(option.name,'selectStepName');
+        
         selectOption(option.id);
         selectStepName(option.name);
       }
@@ -459,6 +462,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
+console.log(groupNameText,'groupNameText');
 
   return (
     <>
@@ -601,7 +605,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
               {!isTrayOpen &&
                 !selectedTrayPreviewOpenButton &&
-                groupNameText != "Acoperire Tip" && (
+                groupNameText !== "Optiuni Imprimare" && (
                   <ColorMenuSeleciton
                     productCode={productCode}
                     selectedGroupName={selectedGroup}
@@ -623,7 +627,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {fitlerAttributes[0]?.code === "MODALITATE IMPRIMARE" && (
+                  {fitlerAttributes[0]?.code === "OPTIUNI IMPRIMARE" && (
                     <div
                       style={{
                         display: "flex",
@@ -631,7 +635,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                         alignContent: "center",
                       }}
                     >
-                      <div className="mchead">Overlay Type</div>
+                      <div className="mchead">
+                      {dynamicsVals?.get("Overlay Type") ??
+                            "Overlay Type"}
+                            </div>
                       <div className="infsel">
                         <div className="custom-dropdown">
                           <button
@@ -667,7 +674,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     </div>
                   )}
 
-                  {fitlerAttributes[0]?.code != "MODALITATE IMPRIMARE" &&
+                  {fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
                     selectedStepName != "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
@@ -690,7 +697,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                           groups.findIndex(
                                             (obj) =>
                                               obj.name ===
-                                              "MODALITATE IMPRIMARE"
+                                              "OPTIUNI IMPRIMARE"
                                           );
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
@@ -699,7 +706,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                           if (
                                             groups[groups?.length - 1]
                                               .attributes[0].code ===
-                                            "MODALITATE IMPRIMARE"
+                                            "OPTIUNI IMPRIMARE"
                                           ) {
                                             selectOption(option.id);
                                           }
