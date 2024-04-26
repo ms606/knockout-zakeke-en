@@ -373,7 +373,7 @@ export function useActualGroups() {
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
 
   if (items && !itemAvailable) {
-    const tipIndex_ = actualGroups.findIndex((x) => x.name === "ACOPERIRE TIP");
+    const tipIndex_ = actualGroups.findIndex((x) => x.name === "OPTIUNI IMPRIMARE");
     if (tipIndex_ > 0) actualGroups.splice(tipIndex_, 1);
   }
 

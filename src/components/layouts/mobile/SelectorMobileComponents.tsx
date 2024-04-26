@@ -169,7 +169,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
   
   return (
     <>
-      {props.label === 'MODALITATE IMPRIMARE' && (!hasTypeZero) ? null : (
+      {props.label === 'OPTIUNI IMPRIMARE' && (!hasTypeZero) ? null : (
         <MobileItemContainer onClick={props.onClick} selected={props.selected}>
           {/* {props.description && props.description.length !== 0 &&
             <Tooltip optionDescription={props.description} isMobile />

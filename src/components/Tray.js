@@ -16,24 +16,24 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
   
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
   const tipIndex_ = groupNameList.findIndex(
-    (x) => x.name === "ACOPERIRE TIP"
+    (x) => x.name === "OPTIUNI IMPRIMARE"
   );
 
   if (items && !itemAvailable) {
       const tipIndex_ = groupNameList.findIndex(
-        (x) => x.name === "ACOPERIRE TIP"
+        (x) => x.name === "OPTIUNI IMPRIMARE"
       );
       if (tipIndex_ > 0) groupNameList.splice(tipIndex_, 1);
     }
 
     else {
       const checkIfNull = groupNameList.findIndex(
-        (x) => x.name === "ACOPERIRE TIP"                          
+        (x) => x.name === "OPTIUNI IMPRIMARE"                          
       );
 
       if (checkIfNull < 0) {
         const tipIndex_ = groups.findIndex(
-          (x) => x.name === "ACOPERIRE TIP"
+          (x) => x.name === "OPTIUNI IMPRIMARE"
         );
   
         const acopName = groups[tipIndex_];

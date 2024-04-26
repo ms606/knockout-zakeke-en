@@ -66,7 +66,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
-  console.log(dynamicsVals,'groups');
+  console.log(dynamicsVals, groups,'groups');
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
@@ -80,7 +80,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedAttributeId, selectAttribute] = useState<number | null>(null);
   const [selectedOptionId, selectOptionId] = useState<number | null>(null);
   const [selectedOptionName, selectOptionName] = useState<string | null>(
-    "OPTIUNI IMPRIMARE"
+    "PRINTAT"
   );
   const [selectedGroupIDFromTray, setSelectedGroupIDFromTray] = useState<
     number | null
