@@ -61,18 +61,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations,
   } = useZakeke();
 
-
-  
-  
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
-  console.log(dynamicsVals, groups,'groups');
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
-
-  // console.log(useActualGroups_);
-
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);
@@ -462,7 +455,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-console.log(groupNameText,'groupNameText');
 
   return (
     <>
