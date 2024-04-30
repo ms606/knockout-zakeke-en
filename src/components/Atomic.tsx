@@ -142,7 +142,7 @@ export const Button = styled.button<{
 	width: ${(props) => (props.isFullWidth ? '100%' : props.outline ? '60px' : props.primary ? '200px' : props.isMoveElementButton ? '138px' : '60px' )};
 	background-color: ${(props) => (props.primary ? '#297ca3' : 'white')};
 	color: ${(props) => (props.outline ? 'black' : props.primary ? 'white' : '#297CA3')};
-	min-height: 38px;
+	min-height: 40px;
 	padding: ${(props) => (props.outline ? '' : '5px 10px 5px 10px')};
 	text-align: center;
 	text-transform: ${(props) => (props.uppercase ? 'uppercase' : 'none')};

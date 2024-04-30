@@ -60,12 +60,14 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productCode,
     publicTranslations,
   } = useZakeke();
+console.log(groups,'groups');
 
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();
+
   // Keep saved the ID and not the refereces, they will change on each update
   const [selectedGroupId, selectGroup] = useState<number | null>(null);
   const [selectedStepId, selectStep] = useState<number | null>(null);

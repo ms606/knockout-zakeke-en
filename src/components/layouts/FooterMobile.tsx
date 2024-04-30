@@ -52,7 +52,7 @@ const FooterMobileIcon = styled.div<{
 	text-transform: uppercase;
 	text-align: center;
 	display: inline-flex;
-	min-height: 38px;
+	min-height: 55px;
 	border: none;
 	// border-right: 3px #f4f4f4 solid;
 	cursor: pointer;
@@ -340,7 +340,7 @@ const FooterMobile = () => {
 					{/* <FooterMobileIcon gridArea='back' isHidden={selectedGroupId === null} onClick={handleBackClick}>
 						<AngleLeftSolid />
 					</FooterMobileIcon> */}
-{/* 
+					{/* 
 					{
 						<FooterMobileIcon gridArea='pdf' onClick={handlePdfClick}>
 							<PdfSolid />
@@ -390,7 +390,8 @@ const FooterMobile = () => {
 							<div className="menu_footer" style ={{position: 'relative', bottom: '5px',  display: 'flex', justifyContent: 'space-between', width: '100%'}}>
 							<div className="menu_price">
 								{/* <div className="price_text">Price: </div> */}
-								<div>Base:</div> <div className="price_value">{priceFormatter.format(price)}</div>
+								<div>{dynamicsVals?.get('Base') ?? 'Base'} :</div> 
+								<div className="price_value">{priceFormatter.format(price)}</div>
 							</div>
 							</div>
 							</>	

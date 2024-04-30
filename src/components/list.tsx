@@ -276,8 +276,8 @@ export const ListItemX_ = styled.li<{ selected?: boolean }>`
 `;
 
 export const ListItemImageX = styled.img<{ selected?: any }>`
-  width: 35px;
-  height: 35px;
+  width: 39px;
+  height: 22px;
   object-fit: contain;
   margin: 0px 11px;
 

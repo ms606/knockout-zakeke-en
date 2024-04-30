@@ -156,6 +156,7 @@ export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
 	flex-direction: column;
 	background: rgb(255 255 255 / 57%);
 	border: 1px solid #1387efbd;
+	background: linear-gradient(to bottom, rgb(56 177 162 / 0%) 0%, rgb(233 229 229) 100%);
 	${(props) =>
 		props.isMobile &&
 		`
