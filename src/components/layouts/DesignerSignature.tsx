@@ -244,8 +244,6 @@ const DesignerSignature: FC<{
 
   const dynamicVals = publicTranslations?.dynamics;
   const staticsVals = publicTranslations?.statics; 
-
-  console.log(dynamicVals,staticsVals);
   
   const customizerRef = useRef<any | null>(null);
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);

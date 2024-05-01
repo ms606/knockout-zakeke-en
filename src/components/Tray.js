@@ -9,7 +9,7 @@ import {
   useZakeke,
 } from "zakeke-configurator-react";
 
-const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray }) => {
+const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray, selectStepName }) => {
   const { setItemTextOnPath, addItemText, fonts, defaultColor, items, groups, publicTranslations } = useZakeke();
 	const staticsVals = publicTranslations?.statics; 
   const dynamicsVals = publicTranslations?.dynamics; 
@@ -37,8 +37,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
         );
   
         const acopName = groups[tipIndex_];
-        console.log(acopName,'acopName');
-  
+      
         groupNameList.push({
           id: acopName.id,
           name: acopName.name,
@@ -79,10 +78,12 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
     UpdateGroupId(actualAreaId, "signature"); // This is for setting index
     addItemText(itemText, actualAreaId);
     toggleFunc("signature");
+    selectStepName('')
     // updCurrentIndex();
   };
 
   const handleImageItem = (actualAreaId) => {
+    selectStepName('')
     UpdateGroupId(actualAreaId, "logos"); // This is for setting index
     toggleFunc("logos");
   };

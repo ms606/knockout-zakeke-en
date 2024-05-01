@@ -60,7 +60,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productCode,
     publicTranslations,
   } = useZakeke();
-console.log(groups,'groups');
+// console.log(groups,'groups');
 
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
@@ -129,6 +129,9 @@ console.log(groups,'groups');
     false
   );
 
+
+  console.log(selectedStepName,'selectedStepName');
+  
   // Filter logos and signature for tray
   const filteredAreas = null;
 
@@ -286,17 +289,16 @@ console.log(groups,'groups');
       "kNOCK-X": 4,
     };
 
-    console.log(activeColorOption,"activeColorOption");
-
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
 
-      if (option) {
-        console.log(option.name,'selectStepName');
-        
+      if (option) { 
         selectOption(option.id);
         selectStepName(option.name);
+      }
+      else {
+        selectStepName('')
       }
     }
 
@@ -594,6 +596,7 @@ console.log(groups,'groups');
                   UpdateGroupId={groupIdFromFunc}
                   updCurrentIndex={updCurrentIndex}
                   selectedTray={selectedTrayType}
+                  selectStepName={selectStepName}
                 />
               )}
 
@@ -669,7 +672,7 @@ console.log(groups,'groups');
                   )}
 
                   {fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
-                    selectedStepName != "KNOCK-X" && (
+                    selectedStepName !== "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
                           // selectedAttribute &&
