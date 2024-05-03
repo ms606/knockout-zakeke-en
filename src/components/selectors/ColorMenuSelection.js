@@ -51,7 +51,7 @@ export const ColorMenuSeleciton = ({
        </> 
        } 
 
-        {productCode === "8713902948686" && (selectedGroupName?.name === 'PALMA EXTERIOR' || 
+        {productCode === "8870692454734" && (selectedGroupName?.name === 'PALMA EXTERIOR' || 
         selectedGroupName?.name === 'INCHEIETURA EXTERIOR' || 
         selectedGroupName?.name === 'CUREA' || 
         selectedGroupName?.name === 'DEGET MARE EXTERIOR' || 

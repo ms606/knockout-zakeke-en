@@ -255,6 +255,8 @@ const DesignerSignature: FC<{
 
   const [moveElements, setMoveElements] = useState(false);
 
+  console.log(templates,'templates');
+  
   let translatedTemplates = templates.map((template) => {
     return { id: template.id, name: template.name, areas: template.areas };
   });

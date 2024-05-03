@@ -179,7 +179,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
                 <div className="tray-mc-grid">
                   {templates.map((template, i) => {
                     return (
-                      <div className="heading" id={template.id}>
+                      <div className="heading" id={template.id} key={i}>
                         <div
                           className="sitems"
                           style={{

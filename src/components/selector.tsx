@@ -128,9 +128,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedPersonalize, setSelectedPersonalize] = useState<any | null>(
     false
   );
-
-
-  console.log(selectedStepName,'selectedStepName');
   
   // Filter logos and signature for tray
   const filteredAreas = null;
