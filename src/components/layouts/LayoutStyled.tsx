@@ -383,7 +383,7 @@ export const FooterMobileContainer = styled.div<{ isQuoteEnable?: boolean }>`
 	// 	;
 	justify-content: center;
 
-	z-index: 0;
+	z-index: -10;
     height: 140px;
 	display: flex;
 	// grid-template-columns: repeat(1fr), 1fr);
