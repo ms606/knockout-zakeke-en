@@ -6,20 +6,27 @@ export const ColorMenuSeleciton = ({
   updateActiveColorOption,
   activeColorOption,
   selectedGroupName,
-  currentAttributes
+  currentAttributes,
+  fitlerAttributesName
 }) => {
 
   const { publicTranslations } = useZakeke();
 	const staticsVals = publicTranslations?.statics; 
   const dynamicsVals  = publicTranslations?.dynamics;
 
+console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
 
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
         <div
           data-sel="plain"
-          className={(activeColorOption === "plain") ? "active" : ""}
+          className={(activeColorOption === "plain" && (
+          fitlerAttributesName === "METALIZAT" ||
+          fitlerAttributesName === " FLUORESCENT" ||
+          fitlerAttributesName === "NORMAL" ||
+          fitlerAttributesName === "MAT") 
+          ) ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
         >
          {currentAttributes.length === 1 ?   currentAttributes[0].name : dynamicsVals?.get('PLAIN') ?? 'Plain'}  
@@ -29,21 +36,33 @@ export const ColorMenuSeleciton = ({
        <>
         <div
           data-sel="metallic"
-          className={activeColorOption === "metallic" ? "active" : ""}
+          className={activeColorOption === "metallic" && (
+            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "NORMAL" ||
+            fitlerAttributesName === "MAT")  ? "active" : ""}
           onClick={() => updateActiveColorOption("metallic")}
         >
          {dynamicsVals?.get('METALLIC') ?? 'Metallic'}   
         </div>
         <div
           data-sel="matte"
-          className={activeColorOption === "matte" ? "active" : ""}
+          className={activeColorOption === "matte"  && (
+            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "NORMAL" ||
+            fitlerAttributesName === "MAT")  ? "active" : ""}
           onClick={() => updateActiveColorOption("matte")}
         >
          {dynamicsVals?.get('MATTE') ?? 'Matte'}   
         </div>
         <div
           data-sel="fluorescent"
-          className={activeColorOption === "fluorescent" ? "active" : ""}
+          className={activeColorOption === "fluorescent"  && (
+            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "NORMAL" ||
+            fitlerAttributesName === "MAT") ? "active" : ""}
           onClick={() => updateActiveColorOption("fluorescent")}
         >
           {dynamicsVals?.get('FLUORESCENT') ?? 'Fluorescent'}   
@@ -57,11 +76,14 @@ export const ColorMenuSeleciton = ({
         selectedGroupName?.name === 'DEGET MARE EXTERIOR' || 
         selectedGroupName?.name === 'DEGET MARE INTERIOR' || 
         selectedGroupName?.name === 'PALMA INTERIOR'
-
-        
         ) && <div
           data-sel="knockX"
-          className={activeColorOption === "knockX" ? "active" : ""}
+          className={activeColorOption === "knockX" || (
+            fitlerAttributesName !== "METALIZAT" &&
+            fitlerAttributesName !== " FLUORESCENT" &&
+            fitlerAttributesName !== "NORMAL" &&
+            fitlerAttributesName !== "MAT" 
+            ) ? "active" : ""}
           onClick={() => updateActiveColorOption("knockX")}
         >
          {dynamicsVals?.get('KNOCK-X') ?? 'Knock-X'}  

@@ -639,8 +639,8 @@ pointer-events: none; */
   .menu_price {
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    padding: 20px;
+    width: 100%;
+    padding: 20px 3px;
     color: #00458c;
   }
 }

@@ -60,7 +60,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productCode,
     publicTranslations,
   } = useZakeke();
-// console.log(groups,'groups');
+  // console.log(groups, "groups");
 
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
@@ -128,7 +128,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedPersonalize, setSelectedPersonalize] = useState<any | null>(
     false
   );
-  
+
   // Filter logos and signature for tray
   const filteredAreas = null;
 
@@ -176,6 +176,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   });
 
   fitlerAttributes.filter((x) => x !== undefined);
+
+  // if (fitlerAttributes[0].name !== "METALIZAT" && fitlerAttributes[0].name !== "FLUORESCENT" &&
+  // fitlerAttributes[0].name !== "NORMAL" && fitlerAttributes[0].name !== "MAT"
+  // ) {
+  //   selectStepName("KNOCK-X");
+  // }
+  // console.log(fitlerAttributes, "fitlerAttributes");
 
   // select an attribute if selected step or group change
 
@@ -283,19 +290,19 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       fluorescent: 3,
       knockX: 4,
       "knock-X": 4,
-      "kNOCK-X": 4,
+      "KNOCK-X": 4,
     };
 
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
+      console.log(option, "option idddd");
 
-      if (option) { 
+      if (option) {
         selectOption(option.id);
         selectStepName(option.name);
-      }
-      else {
-        selectStepName('')
+      } else {
+        selectStepName("");
       }
     }
 
@@ -347,24 +354,25 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   const handleLeftClick = () => {
+    selectStepName("");
     const newIndex =
       (currentIndex - 1 + useActualGroups_.length) % useActualGroups_.length;
     const newGroup = useActualGroups_[newIndex];
-
     setSelectedTrayType(updateSelectedTray(newGroup.direction));
     setActiveColorOption("plain");
     selectColorName("");
     setCurrentIndex(newIndex);
     selectGroup(newGroup.id);
     if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
+  
   };
 
   const handleRightClick = () => {
+    selectStepName("");
     setSelectedGroupIDFromTray(null);
 
     const newIndex = (currentIndex + 1) % useActualGroups_.length;
     const group = useActualGroups_[newIndex];
-
     setSelectedGroupIDFromTray(null);
     setSelectedTrayType(updateSelectedTray(group.direction));
     setActiveColorOption("plain");
@@ -606,6 +614,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     updateActiveColorOption={updateActiveColorOption}
                     activeColorOption={activeColorOption}
                     currentAttributes={currentAttributes}
+                    fitlerAttributesName={fitlerAttributes[0]?.name}
                   />
                 )}
 
@@ -621,54 +630,61 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {fitlerAttributes[0]?.code === "OPTIUNI IMPRIMARE" && (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        alignContent: "center",
-                      }}
-                    >
-                      <div className="mchead">
-                      {dynamicsVals?.get("Overlay Type") ??
-                            "Overlay Type"}
-                            </div>
-                      <div className="infsel">
-                        <div className="custom-dropdown">
-                          <button
-                            className="custom-dropdown-button"
-                            onClick={() =>
-                              setIsCustomDropDownOpen(!isCustomDropDownOpen)
-                            }
-                          >
-                            {selectedOptionName}{" "}
-                            <span className="dropdown-arrow"> ▼</span>
-                          </button>
-                          {isCustomDropDownOpen && (
-                            <div className="custom-dropdown-list">
-                              {fitlerAttributes[0]?.options.map((option) => (
-                                <div
-                                  key={option.id}
-                                  className="custom-dropdown-option"
-                                  onClick={() => {
-                                    selectOptionId(option.id);
-                                    selectOptionName(option.name);
-                                    setIsCustomDropDownOpen(
-                                      !isCustomDropDownOpen
-                                    );
-                                  }}
-                                >
-                                  {option.name}
-                                </div>
-                              ))}
-                            </div>
-                          )}
+                  {(fitlerAttributes[0].name === "METALIZAT" ||
+                    fitlerAttributes[0].name === " FLUORESCENT" ||
+                    fitlerAttributes[0].name === "NORMAL" ||
+                    fitlerAttributes[0].name === "MAT") &&
+                    fitlerAttributes[0]?.code === "OPTIUNI IMPRIMARE" && (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                          alignContent: "center",
+                        }}
+                      >
+                        <div className="mchead">
+                          {dynamicsVals?.get("Overlay Type") ?? "Overlay Type"}
+                        </div>
+                        <div className="infsel">
+                          <div className="custom-dropdown">
+                            <button
+                              className="custom-dropdown-button"
+                              onClick={() =>
+                                setIsCustomDropDownOpen(!isCustomDropDownOpen)
+                              }
+                            >
+                              {selectedOptionName}{" "}
+                              <span className="dropdown-arrow"> ▼</span>
+                            </button>
+                            {isCustomDropDownOpen && (
+                              <div className="custom-dropdown-list">
+                                {fitlerAttributes[0]?.options.map((option) => (
+                                  <div
+                                    key={option.id}
+                                    className="custom-dropdown-option"
+                                    onClick={() => {
+                                      selectOptionId(option.id);
+                                      selectOptionName(option.name);
+                                      setIsCustomDropDownOpen(
+                                        !isCustomDropDownOpen
+                                      );
+                                    }}
+                                  >
+                                    {option.name}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )}
+                    )}
 
-                  {fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
+                  {(fitlerAttributes[0].name === "METALIZAT" ||
+                    fitlerAttributes[0].name === " FLUORESCENT" ||
+                    fitlerAttributes[0].name === "NORMAL" ||
+                    fitlerAttributes[0].name === "MAT") && 
+                    fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
@@ -690,8 +706,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                         const indexForGroupTip =
                                           groups.findIndex(
                                             (obj) =>
-                                              obj.name ===
-                                              "OPTIUNI IMPRIMARE"
+                                              obj.name === "OPTIUNI IMPRIMARE"
                                           );
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
@@ -743,9 +758,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     )}
 
                   <div>
-                    {/* <h1>Patters</h1> */}
-
-                    {selectedStepName === "KNOCK-X" ? (
+                    {fitlerAttributes[0].name !== "METALIZAT" &&
+                    fitlerAttributes[0].name !== " FLUORESCENT" &&
+                    fitlerAttributes[0].name !== "NORMAL" &&
+                    fitlerAttributes[0].name !== "MAT" ||
+                    selectedStepName === "KNOCK-X" ? (
                       <div>
                         <div className="knockXlabel">
                           {dynamicsVals?.get("SELECT DESIGN THEME") ??
