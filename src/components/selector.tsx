@@ -60,7 +60,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     productCode,
     publicTranslations,
   } = useZakeke();
-  // console.log(groups, "groups");
+
 
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
@@ -296,7 +296,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
-      console.log(option, "option idddd");
 
       if (option) {
         selectOption(option.id);
@@ -618,7 +617,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   />
                 )}
 
-              {!selectedTrayPreviewOpenButton && (
+              {fitlerAttributes[0] && !selectedTrayPreviewOpenButton && (
                 <div
                   style={{
                     width: "100%",
@@ -630,10 +629,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {(fitlerAttributes[0].name === "METALIZAT" ||
-                    fitlerAttributes[0].name === " FLUORESCENT" ||
-                    fitlerAttributes[0].name === "NORMAL" ||
-                    fitlerAttributes[0].name === "MAT") &&
+                  {/* {(fitlerAttributes[0]?.name === "METALIZAT" ||
+                    fitlerAttributes[0]?.name === "FLUORESCENT" ||
+                    fitlerAttributes[0]?.name === "NORMAL" ||
+                    fitlerAttributes[0]?.name === "MAT") || */
                     fitlerAttributes[0]?.code === "OPTIUNI IMPRIMARE" && (
                       <div
                         style={{
@@ -681,10 +680,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     )}
 
                   {(fitlerAttributes[0].name === "METALIZAT" ||
-                    fitlerAttributes[0].name === " FLUORESCENT" ||
+                    fitlerAttributes[0].name === "FLUORESCENT" ||
                     fitlerAttributes[0].name === "NORMAL" ||
                     fitlerAttributes[0].name === "MAT") && 
-                    fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
+                     fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
@@ -759,9 +758,11 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
                   <div>
                     {fitlerAttributes[0].name !== "METALIZAT" &&
-                    fitlerAttributes[0].name !== " FLUORESCENT" &&
+                    fitlerAttributes[0].name !== "FLUORESCENT" &&
                     fitlerAttributes[0].name !== "NORMAL" &&
-                    fitlerAttributes[0].name !== "MAT" ||
+                    fitlerAttributes[0].name !== "MAT" &&
+                    fitlerAttributes[0].name !== "OPTIUNI IMPRIMARE" 
+                    ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
                         <div className="knockXlabel">

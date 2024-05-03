@@ -23,7 +23,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
           data-sel="plain"
           className={(activeColorOption === "plain" && (
           fitlerAttributesName === "METALIZAT" ||
-          fitlerAttributesName === " FLUORESCENT" ||
+          fitlerAttributesName === "FLUORESCENT" ||
           fitlerAttributesName === "NORMAL" ||
           fitlerAttributesName === "MAT") 
           ) ? "active" : ""}
@@ -38,7 +38,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
           data-sel="metallic"
           className={activeColorOption === "metallic" && (
             fitlerAttributesName === "METALIZAT" ||
-            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
             fitlerAttributesName === "MAT")  ? "active" : ""}
           onClick={() => updateActiveColorOption("metallic")}
@@ -49,7 +49,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
           data-sel="matte"
           className={activeColorOption === "matte"  && (
             fitlerAttributesName === "METALIZAT" ||
-            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
             fitlerAttributesName === "MAT")  ? "active" : ""}
           onClick={() => updateActiveColorOption("matte")}
@@ -60,7 +60,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
           data-sel="fluorescent"
           className={activeColorOption === "fluorescent"  && (
             fitlerAttributesName === "METALIZAT" ||
-            fitlerAttributesName === " FLUORESCENT" ||
+            fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
             fitlerAttributesName === "MAT") ? "active" : ""}
           onClick={() => updateActiveColorOption("fluorescent")}
@@ -80,7 +80,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
           data-sel="knockX"
           className={activeColorOption === "knockX" || (
             fitlerAttributesName !== "METALIZAT" &&
-            fitlerAttributesName !== " FLUORESCENT" &&
+            fitlerAttributesName !== "FLUORESCENT" &&
             fitlerAttributesName !== "NORMAL" &&
             fitlerAttributesName !== "MAT" 
             ) ? "active" : ""}
