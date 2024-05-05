@@ -203,9 +203,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupIDFromTray, useActualGroups_]);
 
-  // const selectedTemplateGroup = currentTemplateGroups
-  // 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
-  // 	: null;
 
   // removed test
   let indexToRemove = groups.findIndex((obj) => obj.id === -1);
@@ -236,10 +233,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
-      //   setHeight(window.innerHeight);
     };
 
-    //window.addEventListener('resize', handleResize);
+
     window.addEventListener("resize", handleResize);
 
     return () => {
