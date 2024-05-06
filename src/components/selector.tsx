@@ -203,6 +203,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedGroupIDFromTray, useActualGroups_]);
 
+  // const selectedTemplateGroup = currentTemplateGroups
+  // 	? currentTemplateGroups.find((templGr) => templGr.templateGroupID === selectedTemplateGroupId)
+  // 	: null;
 
   // removed test
   let indexToRemove = groups.findIndex((obj) => obj.id === -1);
@@ -233,9 +236,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
+      //   setHeight(window.innerHeight);
     };
 
-
+    //window.addEventListener('resize', handleResize);
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -678,7 +682,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                   {(fitlerAttributes[0].name === "METALIZAT" ||
                     fitlerAttributes[0].name === "FLUORESCENT" ||
                     fitlerAttributes[0].name === "NORMAL" ||
-                    fitlerAttributes[0].name === "MAT") && 
+                    fitlerAttributes[0].name === "MAT"||
+                    fitlerAttributes[0].name === "CULOARE") && 
                      fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
@@ -757,7 +762,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     fitlerAttributes[0].name !== "FLUORESCENT" &&
                     fitlerAttributes[0].name !== "NORMAL" &&
                     fitlerAttributes[0].name !== "MAT" &&
-                    fitlerAttributes[0].name !== "OPTIUNI IMPRIMARE" 
+                    fitlerAttributes[0].name !== "OPTIUNI IMPRIMARE" &&
+                    fitlerAttributes[0].name !== "CULOARE"
                     ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
