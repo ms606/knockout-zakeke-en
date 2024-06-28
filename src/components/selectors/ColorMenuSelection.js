@@ -14,18 +14,16 @@ export const ColorMenuSeleciton = ({
 	const staticsVals = publicTranslations?.statics; 
   const dynamicsVals  = publicTranslations?.dynamics;
 
-console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
-
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
         <div
           data-sel="plain"
           className={(activeColorOption === "plain" && (
-          fitlerAttributesName === "METALIZAT" ||
+          fitlerAttributesName === "METALLIC" ||
           fitlerAttributesName === "FLUORESCENT" ||
           fitlerAttributesName === "NORMAL" ||
-          fitlerAttributesName === "MAT") 
+          fitlerAttributesName === "MATTE") 
           ) ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
         >
@@ -37,10 +35,10 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
         <div
           data-sel="metallic"
           className={activeColorOption === "metallic" && (
-            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === "METALLIC" ||
             fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
-            fitlerAttributesName === "MAT")  ? "active" : ""}
+            fitlerAttributesName === "MATTE")  ? "active" : ""}
           onClick={() => updateActiveColorOption("metallic")}
         >
          {dynamicsVals?.get('METALLIC') ?? 'Metallic'}   
@@ -48,10 +46,10 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
         <div
           data-sel="matte"
           className={activeColorOption === "matte"  && (
-            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === "METALLIC" ||
             fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
-            fitlerAttributesName === "MAT")  ? "active" : ""}
+            fitlerAttributesName === "MATTE")  ? "active" : ""}
           onClick={() => updateActiveColorOption("matte")}
         >
          {dynamicsVals?.get('MATTE') ?? 'Matte'}   
@@ -59,10 +57,10 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
         <div
           data-sel="fluorescent"
           className={activeColorOption === "fluorescent"  && (
-            fitlerAttributesName === "METALIZAT" ||
+            fitlerAttributesName === "METALLIC" ||
             fitlerAttributesName === "FLUORESCENT" ||
             fitlerAttributesName === "NORMAL" ||
-            fitlerAttributesName === "MAT") ? "active" : ""}
+            fitlerAttributesName === "MATTE") ? "active" : ""}
           onClick={() => updateActiveColorOption("fluorescent")}
         >
           {dynamicsVals?.get('FLUORESCENT') ?? 'Fluorescent'}   
@@ -70,7 +68,7 @@ console.log(activeColorOption,fitlerAttributesName,'fitlerAttributesName');
        </> 
        } 
 
-        {productCode === "8870692454734" && (selectedGroupName?.name === 'PALMA EXTERIOR' || 
+        {productCode === "8870692454734" && (selectedGroupName?.name.toUpperCase() === 'PALMA BACK' || 
         selectedGroupName?.name === 'INCHEIETURA EXTERIOR' || 
         selectedGroupName?.name === 'CUREA' || 
         selectedGroupName?.name === 'DEGET MARE EXTERIOR' || 

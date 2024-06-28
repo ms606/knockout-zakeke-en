@@ -61,7 +61,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations,
   } = useZakeke();
 
-
+  console.log(groups, 'groups');
+  
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
@@ -167,6 +168,9 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (attribute) => attribute.id === selectedAttributeId
   );
 
+
+  console.log(attributes,'attributes');
+
   const fitlerAttributes = attributes.filter((x) => {
     // console.log(x);
 
@@ -175,16 +179,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     }
   });
 
+  console.log(fitlerAttributes,'attributes');
+
   fitlerAttributes.filter((x) => x !== undefined);
 
-  // if (fitlerAttributes[0].name !== "METALIZAT" && fitlerAttributes[0].name !== "FLUORESCENT" &&
-  // fitlerAttributes[0].name !== "NORMAL" && fitlerAttributes[0].name !== "MAT"
-  // ) {
-  //   selectStepName("KNOCK-X");
-  // }
-  // console.log(fitlerAttributes, "fitlerAttributes");
-
-  // select an attribute if selected step or group change
 
   useEffect(() => {
     if (selectedGroupIDFromTray) {
@@ -456,6 +454,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     setSelectedPersonalize(!selectedPersonalize);
   };
 
+  console.log(fitlerAttributes,'fitlerAttributes');
+  
   const containerStyles = {
     // overflow: "auto",
     width: "100%",
@@ -463,7 +463,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-
+  console.log(groupNameText,selectedTrayType,'groupNameText');
+  
   return (
     <>
       <div className="top-nav">
@@ -590,7 +591,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
           {(selectedTrayType === "" ||
             selectedTrayType === "null" ||
-            selectedTrayType === "colors") && (
+            selectedTrayType.toLowerCase() === "colors") && (
             <div className={`animate-wrapper${isTrayOpen ? "-2 show" : ""}`}>
               {isTrayOpen && !selectedTrayPreviewOpenButton && (
                 <Tray
@@ -606,7 +607,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
 
               {!isTrayOpen &&
                 !selectedTrayPreviewOpenButton &&
-                groupNameText !== "Optiuni Imprimare" && (
+                groupNameText.toUpperCase() !== "OVERLAY TYPE" && (
                   <ColorMenuSeleciton
                     productCode={productCode}
                     selectedGroupName={selectedGroup}
@@ -633,7 +634,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     fitlerAttributes[0]?.name === "FLUORESCENT" ||
                     fitlerAttributes[0]?.name === "NORMAL" ||
                     fitlerAttributes[0]?.name === "MAT") || */
-                    fitlerAttributes[0]?.code === "OPTIUNI IMPRIMARE" && (
+                    fitlerAttributes[0]?.code === "OVERLAY" && (
                       <div
                         style={{
                           display: "flex",
@@ -679,12 +680,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       </div>
                     )}
 
-                  {(fitlerAttributes[0].name === "METALIZAT" ||
+                  {(fitlerAttributes[0].name === "METALLIC" ||
                     fitlerAttributes[0].name === "FLUORESCENT" ||
                     fitlerAttributes[0].name === "NORMAL" ||
-                    fitlerAttributes[0].name === "MAT"||
-                    fitlerAttributes[0].name === "CULOARE") && 
-                     fitlerAttributes[0]?.code != "OPTIUNI IMPRIMARE" &&
+                    fitlerAttributes[0].name === "MATTE"||
+                    fitlerAttributes[0].name.toUpperCase() === "COLORS") && 
+                     fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
@@ -700,13 +701,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                     {
                                       if (
                                         option.name === "BRODAT" ||
-                                        option.name === "TIPARIT" ||
-                                        option.name === "PRINTAT"
+                                        option.name === "EMBROIDERED" ||
+                                        option.name === "PRINTED"
                                       ) {
                                         const indexForGroupTip =
                                           groups.findIndex(
                                             (obj) =>
-                                              obj.name === "OPTIUNI IMPRIMARE"
+                                              obj.name === "OVERLAY TYPE"
                                           );
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
@@ -715,7 +716,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                           if (
                                             groups[groups?.length - 1]
                                               .attributes[0].code ===
-                                            "OPTIUNI IMPRIMARE"
+                                              "OVERLAY TYPE"
                                           ) {
                                             selectOption(option.id);
                                           }
@@ -758,12 +759,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     )}
 
                   <div>
-                    {fitlerAttributes[0].name !== "METALIZAT" &&
+                  { fitlerAttributes[0].name !== "METALLIC" &&
                     fitlerAttributes[0].name !== "FLUORESCENT" &&
                     fitlerAttributes[0].name !== "NORMAL" &&
-                    fitlerAttributes[0].name !== "MAT" &&
-                    fitlerAttributes[0].name !== "OPTIUNI IMPRIMARE" &&
-                    fitlerAttributes[0].name !== "CULOARE"
+                    fitlerAttributes[0].name !== "MATTE" &&
+                    fitlerAttributes[0].name !== "OVERLAY TYPE" &&
+                    fitlerAttributes[0].name !== "COLOR"
                     ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
