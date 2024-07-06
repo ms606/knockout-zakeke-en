@@ -81,31 +81,24 @@ const ProgressBar = ({ bgColor, completed }) => {
         </LoadingPercentageandIconContainer>
       </LoaderContainer>
       <div style={{paddingTop: "32px", fontSize: '13px'}}>
-      <strong>Bun venit la singurul personalizator 3D de echipamente din România!</strong>
+      <strong>Welcome to the unique 3D equipment customizer! 🎨✨</strong>
         <ul>
           <li>
-            <strong>Personalizare Perfectă:</strong> Creează-ți singur echipamentul perfect
-            pentru tine.
+          Perfect Customization: Create the perfect gear for yourself. 🛠️
           </li>
           <li>
-          <strong>Comandă Cu Încredere:</strong> Produsul tău va fi realizat la comanda exact
-            după preferințele tale.
+          Order with Confidence: Your product will be made to order exactly to your preferences. 🛒
           </li>
           <li>
-          <strong>Livrare Rapidă:</strong> Primește-ți comanda în doar 20 de zile lucrătoare.
+          Fast Delivery: Receive your order under 20 working days. 🚚
+          </li>
+          <li>Pre-select Size: Choose your size before customizing. 📏 </li>
+          <li>Simple Payment: Easily pay with multiple payment options. 💳</li>
+          <li>
+          No Regrets: For customized equipment, there is no exchange or return option. ❌🔄
           </li>
           <li>
-          <strong>Alege Marimea in Prealabil:</strong> Stabilește mărimea înainte de a
-            personaliza.
-          </li>
-          <li><strong>Plată Simplă: </strong>Plătește cu ușurință prin card bancar.</li>
-          <li>
-          <strong>Fără Regrete: </strong>Pentru echipamentele personalizate, nu există opțiune
-            de schimb sau retur.
-          </li>
-          <li>
-          <strong>Înaintează cu Inspiratie:</strong> Hai să fii creativ și să creezi ceva
-            unic!
+          Move Forward with Inspiration: Let's be creative and make something unique! 🌟💡
           </li>
         </ul>
       </div>

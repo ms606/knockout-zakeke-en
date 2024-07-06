@@ -10,30 +10,30 @@ import {
 } from "zakeke-configurator-react";
 
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray, selectStepName }) => {
-  const { setItemTextOnPath, addItemText, fonts, defaultColor, items, groups, publicTranslations } = useZakeke();
+  const { addItemText, fonts, defaultColor, items, groups, publicTranslations } = useZakeke();
 	const staticsVals = publicTranslations?.statics; 
   const dynamicsVals = publicTranslations?.dynamics; 
   
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
   const tipIndex_ = groupNameList.findIndex(
-    (x) => x.name === "OPTIUNI IMPRIMARE"
+    (x) => x.name === "OVERLAY TYPE"
   );
 
   if (items && !itemAvailable) {
       const tipIndex_ = groupNameList.findIndex(
-        (x) => x.name === "OPTIUNI IMPRIMARE"
+        (x) => x.name === "OVERLAY TYPE"
       );
       if (tipIndex_ > 0) groupNameList.splice(tipIndex_, 1);
     }
 
     else {
       const checkIfNull = groupNameList.findIndex(
-        (x) => x.name === "OPTIUNI IMPRIMARE"                          
+        (x) => x.name === "OVERLAY TYPE"                          
       );
 
       if (checkIfNull < 0) {
         const tipIndex_ = groups.findIndex(
-          (x) => x.name === "OPTIUNI IMPRIMARE"
+          (x) => x.name === "OVERLAY TYPE"
         );
   
         const acopName = groups[tipIndex_];

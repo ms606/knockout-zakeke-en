@@ -373,7 +373,7 @@ export function useActualGroups() {
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
 
   if (items && !itemAvailable) {
-    const tipIndex_ = actualGroups.findIndex((x) => x.name === "OPTIUNI IMPRIMARE");
+    const tipIndex_ = actualGroups.findIndex((x) => x.name === "OVERLAY TYPE");
     if (tipIndex_ > 0) actualGroups.splice(tipIndex_, 1);
   }
 

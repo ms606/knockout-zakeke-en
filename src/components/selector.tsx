@@ -61,7 +61,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     publicTranslations,
   } = useZakeke();
 
-  console.log(groups, 'groups');
+  console.log(productCode, groups, 'groups');
   
   const staticsVals = publicTranslations?.statics;
   const dynamicsVals = publicTranslations?.dynamics;
@@ -172,11 +172,17 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   console.log(attributes,'attributes');
 
   const fitlerAttributes = attributes.filter((x) => {
-    // console.log(x);
-
-    if (x.name === x.name.toUpperCase()) {
+     console.log(x.name, 'nameee');
+   
+     if (x.name === x.name.toUpperCase() && x.name != 'Select Color') {
       return x;
     }
+
+    if (x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
+      return x.name.toUpperCase();
+    }
+
+    // if (x.name === )
   });
 
   console.log(fitlerAttributes,'attributes');
@@ -454,7 +460,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     setSelectedPersonalize(!selectedPersonalize);
   };
 
-  console.log(fitlerAttributes,'fitlerAttributes');
+  console.log(fitlerAttributes,selectedTrayType,'fitlerAttributes');
   
   const containerStyles = {
     // overflow: "auto",
@@ -463,8 +469,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-  console.log(groupNameText,selectedTrayType,'groupNameText');
-  
+console.log(selectedTrayType, groupNameText,'groupNameText');
+
   return (
     <>
       <div className="top-nav">
@@ -634,7 +640,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     fitlerAttributes[0]?.name === "FLUORESCENT" ||
                     fitlerAttributes[0]?.name === "NORMAL" ||
                     fitlerAttributes[0]?.name === "MAT") || */
-                    fitlerAttributes[0]?.code === "OVERLAY" && (
+                    (fitlerAttributes[0]?.code === "OVERLAY TYPE" || fitlerAttributes[0]?.code === "OVERLAY")&& (
                       <div
                         style={{
                           display: "flex",
@@ -680,10 +686,10 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                       </div>
                     )}
 
-                  {(fitlerAttributes[0].name === "METALLIC" ||
-                    fitlerAttributes[0].name === "FLUORESCENT" ||
-                    fitlerAttributes[0].name === "NORMAL" ||
-                    fitlerAttributes[0].name === "MATTE"||
+                  {(fitlerAttributes[0].name.toUpperCase() === "METALLIC" ||
+                    fitlerAttributes[0].name.toUpperCase() === "FLUORESCENT" ||
+                    fitlerAttributes[0].name.toUpperCase() === "NORMAL" ||
+                    fitlerAttributes[0].name.toUpperCase() === "MATTE"||
                     fitlerAttributes[0].name.toUpperCase() === "COLORS") && 
                      fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
                     selectedStepName !== "KNOCK-X" && (
@@ -759,12 +765,12 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                     )}
 
                   <div>
-                  { fitlerAttributes[0].name !== "METALLIC" &&
-                    fitlerAttributes[0].name !== "FLUORESCENT" &&
-                    fitlerAttributes[0].name !== "NORMAL" &&
-                    fitlerAttributes[0].name !== "MATTE" &&
-                    fitlerAttributes[0].name !== "OVERLAY TYPE" &&
-                    fitlerAttributes[0].name !== "COLOR"
+                  { fitlerAttributes[0].name.toUpperCase() !== "METALLIC" &&
+                    fitlerAttributes[0].name.toUpperCase() !== "FLUORESCENT" &&
+                    fitlerAttributes[0].name.toUpperCase() !== "NORMAL" &&
+                    fitlerAttributes[0].name.toUpperCase() !== "MATTE" &&
+                    fitlerAttributes[0].name.toUpperCase() !== "OVERLAY TYPE" &&
+                    fitlerAttributes[0].name.toUpperCase() !== "COLOR"
                     ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
