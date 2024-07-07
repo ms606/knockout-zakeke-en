@@ -21,11 +21,11 @@ export const ColorMenuSeleciton = ({
       <div className="colsgrid">
         <div
           data-sel="plain"
-          className={(activeColorOption === "plain" && (
-          fitlerAttributesName.toUpperCase() === "METALLIC" ||
-          fitlerAttributesName.toUpperCase() === "FLUORESCENT" ||
-          fitlerAttributesName.toUpperCase() === "NORMAL" ||
-          fitlerAttributesName.toUpperCase() === "MATTE") 
+          className={((activeColorOption === "plain" || activeColorOption === "Plain" )  && (
+          fitlerAttributesName?.toUpperCase() === "METALLIC" ||
+          fitlerAttributesName?.toUpperCase() === "FLUORESCENT" ||
+          fitlerAttributesName?.toUpperCase() === "NORMAL" ||
+          fitlerAttributesName?.toUpperCase() === "MATTE") 
           ) ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
         >
@@ -71,10 +71,10 @@ export const ColorMenuSeleciton = ({
        } 
 
         {productCode === "9266869076293" && (selectedGroupName?.name.toUpperCase() === 'PALM BACK' || 
-        selectedGroupName?.name === 'INCHEIETURA EXTERIOR' || 
-        selectedGroupName?.name === 'CUREA' || 
-        selectedGroupName?.name === 'DEGET MARE EXTERIOR' || 
-        selectedGroupName?.name === 'DEGET MARE INTERIOR' || 
+        selectedGroupName?.name === 'WRIST BACK' || 
+        selectedGroupName?.name === 'STRAP' || 
+        selectedGroupName?.name === 'THUMB IN' || 
+        selectedGroupName?.name === 'PALM' || 
         selectedGroupName?.name === 'PALMA INTERIOR'
         ) && <div
           data-sel="knockX"

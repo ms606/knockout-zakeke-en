@@ -169,17 +169,26 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   );
 
 
-  console.log(attributes,'attributes');
+  console.log(selectedGroup, attributes,'attributes');
 
   const fitlerAttributes = attributes.filter((x) => {
-     console.log(x.name, 'nameee');
    
-     if (x.name === x.name.toUpperCase() && x.name != 'Select Color') {
-      return x;
-    }
+    if (productCode != '9266869076293') { 
+      if (x.name === x.name.toUpperCase() && x.name != 'Select Color' ) {
+       return x;
+      }
 
-    if (x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
-      return x.name.toUpperCase();
+      if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
+        return x.name.toUpperCase();
+      }
+    } 
+    else {
+
+      if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' 
+       || x.name === x.name.toUpperCase() ) {
+        return x.name.toUpperCase();
+      }
+
     }
 
     // if (x.name === )
@@ -297,6 +306,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       "KNOCK-X": 4,
     };
 
+    console.log(activeColorOption,selectedGroup, 'colorMenuAttributeMap');
+    
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
@@ -690,7 +701,8 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                     fitlerAttributes[0].name.toUpperCase() === "FLUORESCENT" ||
                     fitlerAttributes[0].name.toUpperCase() === "NORMAL" ||
                     fitlerAttributes[0].name.toUpperCase() === "MATTE"||
-                    fitlerAttributes[0].name.toUpperCase() === "COLORS") && 
+                    fitlerAttributes[0].name.toUpperCase() === "COLORS" || 
+                    fitlerAttributes[0].name.toUpperCase() === "PLAIN" ) && 
                      fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
@@ -770,7 +782,8 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                     fitlerAttributes[0].name.toUpperCase() !== "NORMAL" &&
                     fitlerAttributes[0].name.toUpperCase() !== "MATTE" &&
                     fitlerAttributes[0].name.toUpperCase() !== "OVERLAY TYPE" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "COLOR"
+                    fitlerAttributes[0].name.toUpperCase() !== "COLOR" && 
+                    fitlerAttributes[0].name.toUpperCase() !== 'PLAIN'
                     ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
@@ -804,7 +817,7 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                             );
                           })} */}
 
-                          {selectedGroup?.attributes[1]?.options.map(
+                          {selectedGroup?.attributes[2]?.options.map(
                             (attribute) => {
                               return (
                                 <SwiperSlide>
