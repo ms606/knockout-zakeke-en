@@ -15,16 +15,17 @@ export const ColorMenuSeleciton = ({
   const dynamicsVals  = publicTranslations?.dynamics;
 
 
-  console.log(activeColorOption,selectedGroupName,fitlerAttributesName,'selectedGroupName selectedGroupName');
+  console.log(currentAttributes,activeColorOption,selectedGroupName,fitlerAttributesName,'selectedGroupName selectedGroupName');
   return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
         <div
           data-sel="plain"
-          className={((activeColorOption === "plain" || activeColorOption === "Plain" )  && (
+          className={((activeColorOption === "plain" || activeColorOption === "Plain" || activeColorOption === "PLAIN"  )  && (
           fitlerAttributesName?.toUpperCase() === "METALLIC" ||
           fitlerAttributesName?.toUpperCase() === "FLUORESCENT" ||
           fitlerAttributesName?.toUpperCase() === "NORMAL" ||
+          fitlerAttributesName?.toUpperCase() === "PLAIN" ||
           fitlerAttributesName?.toUpperCase() === "MATTE") 
           ) ? "active" : ""}
           onClick={() => updateActiveColorOption("plain")}
@@ -32,7 +33,7 @@ export const ColorMenuSeleciton = ({
          {currentAttributes.length === 1 ?   currentAttributes[0].name : dynamicsVals?.get('PLAIN') ?? 'Plain'}  
 
         </div>                   
-       {(productCode != "9266869076293" && productCode != '8427835162958') && 
+       {(productCode != "9266890211653" && productCode != '9355839471941') && 
        <>
         <div
           data-sel="metallic"

@@ -76,7 +76,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   const [selectedAttributeId, selectAttribute] = useState<number | null>(null);
   const [selectedOptionId, selectOptionId] = useState<number | null>(null);
   const [selectedOptionName, selectOptionName] = useState<string | null>(
-    "PRINTAT"
+    "PRINTED"
   );
   const [selectedGroupIDFromTray, setSelectedGroupIDFromTray] = useState<
     number | null
@@ -169,25 +169,25 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   );
 
 
-  console.log(selectedGroup, attributes,'attributes');
+  // console.log(selectedGroup, attributes,'attributes');
 
   const fitlerAttributes = attributes.filter((x) => {
    
-    if (productCode != '9266869076293') { 
+    // if (productCode != '9266869076293') { 
       if (x.name === x.name.toUpperCase() && x.name != 'Select Color' ) {
        return x;
-      }
+      // }
 
-      if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
-        return x.name.toUpperCase();
-      }
-    } 
-    else {
+    //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
+    //     return x.name.toUpperCase();
+    //   }
+    // } 
+    // else {
 
-      if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' 
-       || x.name === x.name.toUpperCase() ) {
-        return x.name.toUpperCase();
-      }
+    //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' 
+    //    || x.name === x.name.toUpperCase() ) {
+    //     return x.name.toUpperCase();
+    //   }
 
     }
 
@@ -297,7 +297,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   useEffect(() => {
     const colorMenuAttributeMap: { [key: string]: number } = {
       plain: 0,
-      Culoare: 0,
+      color: 0,
       metallic: 1,
       matte: 2,
       fluorescent: 3,
@@ -306,8 +306,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
       "KNOCK-X": 4,
     };
 
-    console.log(activeColorOption,selectedGroup, 'colorMenuAttributeMap');
-    
     if (selectedGroup && activeColorOption in colorMenuAttributeMap) {
       const optionIndex = colorMenuAttributeMap[activeColorOption];
       const option = selectedGroup.attributes[0]?.options[optionIndex];
@@ -348,6 +346,8 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // -- -- attributes
   // -- -- -- options
 
+  console.log(fitlerAttributes[0],'fitlerAttributes[0]');
+  
   const handleScreenShotClick = async () => {
     try {
       const url = await getOnlineScreenshot(800, 800);
@@ -377,8 +377,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex(newIndex);
     selectGroup(newGroup.id);
-    if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
-  
+    if (newGroup.steps) selectStep(newGroup.steps[0]?.id);  
   };
 
   const handleRightClick = () => {
@@ -393,7 +392,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex(newIndex);
     selectGroup(group.id);
-    if (group.steps) selectStep(group.steps[0]?.id);
+    if (group.steps) selectStep(group.steps[0]?.id);   
   };
 
   const toggleTray = (trayName: string) => {
@@ -480,7 +479,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-console.log(selectedTrayType, groupNameText,'groupNameText');
 
   return (
     <>
@@ -647,10 +645,7 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {/* {(fitlerAttributes[0]?.name === "METALIZAT" ||
-                    fitlerAttributes[0]?.name === "FLUORESCENT" ||
-                    fitlerAttributes[0]?.name === "NORMAL" ||
-                    fitlerAttributes[0]?.name === "MAT") || */
+                  {
                     (fitlerAttributes[0]?.code === "OVERLAY TYPE" || fitlerAttributes[0]?.code === "OVERLAY")&& (
                       <div
                         style={{
@@ -701,7 +696,7 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                     fitlerAttributes[0].name.toUpperCase() === "FLUORESCENT" ||
                     fitlerAttributes[0].name.toUpperCase() === "NORMAL" ||
                     fitlerAttributes[0].name.toUpperCase() === "MATTE"||
-                    fitlerAttributes[0].name.toUpperCase() === "COLORS" || 
+                    fitlerAttributes[0].name.toUpperCase() === "COLOR" || 
                     fitlerAttributes[0].name.toUpperCase() === "PLAIN" ) && 
                      fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
                     selectedStepName !== "KNOCK-X" && (
@@ -718,15 +713,10 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                                   onClick={() => {
                                     {
                                       if (
-                                        option.name === "BRODAT" ||
                                         option.name === "EMBROIDERED" ||
                                         option.name === "PRINTED"
                                       ) {
-                                        const indexForGroupTip =
-                                          groups.findIndex(
-                                            (obj) =>
-                                              obj.name === "OVERLAY TYPE"
-                                          );
+                                        const indexForGroupTip = groups.findIndex((obj) => obj.name === "OVERLAY TYPE");
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
                                             groups[indexForGroupTip].id
@@ -738,16 +728,18 @@ console.log(selectedTrayType, groupNameText,'groupNameText');
                                           ) {
                                             selectOption(option.id);
                                           }
+
+                                          
                                           // selectOption(option.id);
                                           selectOptionId(option.id);
-                                          selectOptionName(option.name);
+                                     //     selectOptionName(option.name);
                                         }
                                       } else {
                                         // console.log(option.id);
                                         // setSelectedAttributeId()
                                         selectOption(option.id);
                                         selectOptionId(option.id);
-                                        selectOptionName(option.name);
+                                    //   selectOptionName(option.name);
                                       }
                                     }
                                   }}
