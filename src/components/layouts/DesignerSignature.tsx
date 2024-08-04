@@ -1,5 +1,5 @@
 import {
-  Image,
+  ZakekeImage as Image,
   ImageItem,
   Item,
   ProductArea,
@@ -209,7 +209,7 @@ const DesignerSignature: FC<{
     setItemFontFamily,
     setItemTextOnPath,
     addItemText,
-    publicTranslations,
+    translations,
     fonts,
     defaultColor 
   } = useZakeke();
@@ -242,8 +242,8 @@ const DesignerSignature: FC<{
       backgroundColor: 'rgb(235, 237, 242)'
   })
 
-  const dynamicVals = publicTranslations?.dynamics;
-  const staticsVals = publicTranslations?.statics; 
+  const dynamicVals = translations?.dynamics;
+  const staticsVals = translations?.statics; 
   
   const customizerRef = useRef<any | null>(null);
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);

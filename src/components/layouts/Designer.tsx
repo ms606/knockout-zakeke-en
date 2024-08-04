@@ -1,5 +1,5 @@
 import {
-  Image,
+  ZakekeImage as Image,
   ImageItem,
   Item,
   ProductArea,
@@ -240,7 +240,7 @@ const Designer: FC<{
     eventMessages,
     setCopyrightMessageAccepted,
     getCopyrightMessageAccepted,
-    publicTranslations,
+    translations,
     fonts,
     defaultColor 
   } = useZakeke();
@@ -259,7 +259,7 @@ const Designer: FC<{
     backgroundColor: string
 }
 
-const staticsVals = publicTranslations?.statics;
+const staticsVals = translations?.statics;
 
    const [item, setItem] = useState<EditTextItem_1>({
       guid: '',
@@ -276,7 +276,7 @@ const staticsVals = publicTranslations?.statics;
   })
 
 
-  const dynamicVals = publicTranslations?.dynamics;
+  const dynamicVals = translations?.dynamics;
   
   const customizerRef = useRef<any | null>(null);
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);

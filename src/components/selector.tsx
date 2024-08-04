@@ -58,13 +58,13 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     items,
     getOnlineScreenshot,
     productCode,
-    publicTranslations,
+    translations,
   } = useZakeke();
 
   console.log(productCode, groups, 'groups');
   
-  const staticsVals = publicTranslations?.statics;
-  const dynamicsVals = publicTranslations?.dynamics;
+  const staticsVals = translations?.statics;
+  const dynamicsVals = translations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
 
   const useActualGroups_ = useActualGroups();

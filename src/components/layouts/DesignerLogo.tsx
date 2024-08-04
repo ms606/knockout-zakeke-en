@@ -1,5 +1,5 @@
 import {
-  Image,
+  ZakekeImage as Image,
   ImageItem,
   Item,
   ProductArea,
@@ -251,7 +251,7 @@ const DesignerLogo: FC<{
     eventMessages,
     setCopyrightMessageAccepted,
     getCopyrightMessageAccepted,
-    publicTranslations,
+    translations,
     fonts,
     defaultColor 
   } = useZakeke();
@@ -285,7 +285,7 @@ const DesignerLogo: FC<{
   })
 
 
-  const dynamicVals = publicTranslations?.dynamics;
+  const dynamicVals = translations?.dynamics;
   
   const customizerRef = useRef<any | null>(null);
   const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);

@@ -104,7 +104,7 @@ const FooterMobile = () => {
 		saveComposition,
 		createQuote,
 		nftSettings,
-		publicTranslations
+		translations
 	} = useZakeke();
 
 	const {
@@ -125,7 +125,7 @@ const FooterMobile = () => {
 		isMobile
 	} = useStore();
 
-	const dynamicsVals  = publicTranslations?.dynamics;
+	const dynamicsVals  = translations?.dynamics;
 
 	const { showDialog, closeDialog } = useDialogManager();
 	const isOutOfStock = false;

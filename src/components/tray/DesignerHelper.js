@@ -84,7 +84,7 @@ export function DesignerHelper() {
     eventMessages,
     setCopyrightMessageAccepted,
     getCopyrightMessageAccepted,
-    publicTranslations,
+    translations,
     fonts,
     defaultColor,
   } = useZakeke();
@@ -117,7 +117,7 @@ export function DesignerHelper() {
   //     backgroundColor: 'rgb(235, 237, 242)'
   // })
 
-  const dynamicVals = publicTranslations?.dynamics;
+  const dynamicVals = translations?.dynamics;
 
   // const customizerRef = useRef<any | null>(null);
   // const [selectedCarouselSlide, setSelectedCarouselSlide] = useState<number>(0);

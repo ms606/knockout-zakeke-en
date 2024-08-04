@@ -10,9 +10,9 @@ export const ColorMenuSeleciton = ({
   fitlerAttributesName
 }) => {
 
-  const { publicTranslations } = useZakeke();
-	const staticsVals = publicTranslations?.statics; 
-  const dynamicsVals  = publicTranslations?.dynamics;
+  const { translations } = useZakeke();
+	const staticsVals = translations?.statics; 
+  const dynamicsVals  = translations?.dynamics;
 
 
   console.log(currentAttributes,activeColorOption,selectedGroupName,fitlerAttributesName,'selectedGroupName selectedGroupName');
@@ -32,7 +32,8 @@ export const ColorMenuSeleciton = ({
         >
          {currentAttributes.length === 1 ?   currentAttributes[0].name : dynamicsVals?.get('PLAIN') ?? 'Plain'}  
 
-        </div>                   
+        </div>     
+                      
        {(productCode != "9266890211653" && productCode != '9355839471941') && 
        <>
         <div
@@ -70,7 +71,7 @@ export const ColorMenuSeleciton = ({
         </div>
        </> 
        } 
-
+       
         {productCode === "9266869076293" && (selectedGroupName?.name.toUpperCase() === 'PALM BACK' || 
         selectedGroupName?.name === 'WRIST BACK' || 
         selectedGroupName?.name === 'STRAP' || 

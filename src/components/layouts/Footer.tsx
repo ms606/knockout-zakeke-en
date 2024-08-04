@@ -57,11 +57,11 @@ const Footer = () => {
 		saveComposition,
 		createQuote,
 		nftSettings, 
-		publicTranslations, 
+		translations, 
 		groups
 	} = useZakeke();
 	
-	const dynamicsVals  = publicTranslations?.dynamics;   
+	const dynamicsVals  = translations?.dynamics;   
 	const {
 		setIsLoading,
 		priceFormatter,
@@ -77,10 +77,10 @@ const Footer = () => {
 	 const handleAddToCart = () => {
 		
 		const cartMessage = eventMessages?.find((message) => message.eventID === 4);
-		const staticsVals = publicTranslations?.statics; 
+		const staticsVals = translations?.statics; 
 		const findSizeIndex = groups.findIndex((obj) => obj.name.toLowerCase() === 'marime');
 		const isSizeNotSelected = groups[findSizeIndex]?.attributes[0].options[0].selected === true;
-		const dynamicsVals  = publicTranslations?.dynamics;
+		const dynamicsVals  = translations?.dynamics;
 		if (cartMessage && cartMessage.visible && !isDraftEditor && !isEditorMode && !isSizeNotSelected)
 			showDialog(
 				'question',
