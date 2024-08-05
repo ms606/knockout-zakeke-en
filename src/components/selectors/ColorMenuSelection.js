@@ -71,7 +71,7 @@ export const ColorMenuSeleciton = ({
         </div>
        </> 
        } 
-       
+                    
         {productCode === "9266869076293" && (selectedGroupName?.name.toUpperCase() === 'PALM BACK' || 
         selectedGroupName?.name === 'WRIST BACK' || 
         selectedGroupName?.name === 'STRAP' || 

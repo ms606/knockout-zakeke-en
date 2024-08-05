@@ -93,14 +93,13 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
 
   ${(props) =>
     props.isMobile &&
-    `
-        position:fixed;
-        top:0;
-        left:0;
+    `   height: 9em !important;
+        // position:fixed;
+        // top:0;
+        // left:0;
         width:100%;
-        height:100%;
-        z-index:11;
-        background-color:#ffffff;
+        // z-index:11;
+        // background-color:#ffffff;
         overflow-y:scroll;
     `}
 `;
@@ -612,7 +611,7 @@ const DesignerLogo: FC<{
   return (
     <>
       {!moveElements && (
-        <DesignerContainer isMobile={false}>
+        <DesignerContainer isMobile={isMobile}>
           {/* Templates */}
           {templates.length > 1 && (
             <TemplatesContainer>

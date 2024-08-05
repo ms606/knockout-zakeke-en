@@ -301,63 +301,7 @@ const ItemText: FC<{
           item={item}
         />
 
-        {(!disableTextColors ||
-          !(disableTextColors && textColors.length === 1)) && (
-         <div style={{width: '21%'}}>
-          <FormControl label="">
-            <ColorsContainer>
-              {!disableTextColors && (
-                <ColorPickerContainer>
-                  <ColorPicker
-                    color={fillColor}
-                    onChange={(color) => {
-                      handleFillColorChange(color);
-                      setFillColor(color);
-                    }}
-                  />
-                </ColorPickerContainer>
-              )}
-
-              {/* {!disableTextColors && (
-                <TextColorsContainer isDefaultPalette>
-                  {defaultColorsPalette.map((hex) => (
-                    <SinglePaletteItem
-                      key={hex}
-                      onClick={() => {
-                        handleItemPropChange(item, "font-color", hex);
-                        setFillColor(hex);
-                      }}
-                      selected={hex === fillColor}
-                      color={hex}
-                    />
-                  ))}
-                </TextColorsContainer>
-              )} */}
-
-              {disableTextColors && (
-                <TextColorsContainer>
-                  {textColors.map((textColor) => (
-                    <SinglePaletteItem
-                      key={textColor.colorCode}
-                      onClick={() => {
-                        handleItemPropChange(
-                          item,
-                          "font-color",
-                          textColor.colorCode
-                        );
-                        setFillColor(textColor.colorCode);
-                      }}
-                      selected={textColor.colorCode === fillColor}
-                      color={textColor.colorCode}
-                    />
-                  ))}
-                </TextColorsContainer>
-              )}
-            </ColorsContainer>
-          </FormControl>
-
-         </div> 
-        )}
+       
       </ItemTextContainer>
     );
   else return null;

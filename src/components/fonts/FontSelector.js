@@ -3,13 +3,13 @@ import React from 'react'
 import {useZakeke } from 'zakeke-configurator-react';
 
 export const FontSelector = ({fontSelectorVisible, togglerFontSelectorVisible, item}) => {
-    const { setItemFontFamily, fonts, publicTranslations} = useZakeke();
-    const dynamicsVals = publicTranslations?.dynamics; 
+    const { setItemFontFamily, fonts, translations} = useZakeke();
+    const dynamicsVals = translations?.dynamics; 
     return(
        <div className='fselector' style={{display: fontSelectorVisible ? 'block' : 'none' }}>
         <div className="donebut fsclose" onClick={() => togglerFontSelectorVisible(fontSelectorVisible)}>{dynamicsVals?.get("Done") ?? "Done"}</div>
 
-        <div id='fontList'>
+        {/* <div id='fontList'>
             <div className='chead'>
              Select
              <span style={{color: "rgb(255, 255, 255)", fontWeight: "500", paddingLeft: "8px"}}>Font</span>
@@ -25,7 +25,7 @@ export const FontSelector = ({fontSelectorVisible, togglerFontSelectorVisible, i
                 </div>    
              )}
             </div>
-        </div>
+        </div> */}
        </div> 
     )
 }

@@ -610,7 +610,9 @@ export function DesignerSignature() {
     isSceneLoading,
   } = useZakeke();
 
-  if (!isSceneLoading && templates && product) {
+  console.log(product, templates, 'temp');
+  
+  if (!isSceneLoading  && product) {
     const filteredAreas =
       product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 
@@ -645,7 +647,7 @@ export function DesignerLogo() {
     isSceneLoading,
   } = useZakeke();
 
-  if (!isSceneLoading && templates && product) {
+  if (!isSceneLoading && product) {
     const filteredAreas =
       product?.areas.filter((area) => isAreaVisible(area.id)) ?? [];
 

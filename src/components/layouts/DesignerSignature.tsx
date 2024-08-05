@@ -93,6 +93,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   ${(props) =>
     props.isMobile &&
     `
+    height: 9em;
     overflow-y: auto;
         // position:fixed;
         // top:0;
