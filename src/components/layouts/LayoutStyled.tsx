@@ -159,8 +159,8 @@ export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
 	background: linear-gradient(to bottom, rgb(56 177 162 / 0%) 0%, rgb(233 229 229) 100%);
 	${(props) =>
 		props.isMobile &&
-		`
-		position:fixed;
+	   `position:fixed;
+	    background: white !important;
         inset:0;
         z-index:13;
 		height: 94%;
