@@ -10,9 +10,9 @@ import {
 } from "zakeke-configurator-react";
 
 const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurrentIndex, selectedTray, selectStepName }) => {
-  const { addItemText, fonts, defaultColor, items, groups, publicTranslations } = useZakeke();
-	const staticsVals = publicTranslations?.statics; 
-  const dynamicsVals = publicTranslations?.dynamics; 
+  const { addItemText, fonts, defaultColor, items, groups, translations } = useZakeke();
+	const staticsVals = translations?.statics; 
+  const dynamicsVals = translations?.dynamics; 
   
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
   const tipIndex_ = groupNameList.findIndex(

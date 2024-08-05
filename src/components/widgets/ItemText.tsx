@@ -199,8 +199,8 @@ const ItemText: FC<{
   fonts?: FontFamily[];
   hideRemoveButton?: boolean;
 }> = ({ item, handleItemPropChange, hideRemoveButton }) => {
-  const { removeItem, fonts, disableTextColors, textColors, publicTranslations } = useZakeke();
-  const dynamicsVals  = publicTranslations?.dynamics;
+  const { removeItem, fonts, disableTextColors, textColors, translations } = useZakeke();
+  const dynamicsVals  = translations?.dynamics;
   const constraints = item.constraints;
   const canEdit = constraints?.canEdit ?? true;
   const hasCurvedText = item.isTextOnPath;

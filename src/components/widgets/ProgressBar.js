@@ -54,8 +54,8 @@ const LoaderFill = styled.div`
 `;
 
 const ProgressBar = ({ bgColor, completed }) => {
-  const { isSceneLoading, publicTranslations } = useZakeke();
-  const dynamicVals = publicTranslations?.dynamics;
+  const { isSceneLoading, translations } = useZakeke();
+  const dynamicVals = translations?.dynamics;
   return (
     <div>
       <LoadingLabel>
