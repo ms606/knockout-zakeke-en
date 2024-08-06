@@ -37,6 +37,7 @@ const Layout = styled.div`
   overflow: hidden;
 
   @media screen and (max-width: 568px) {
+  grid-template-rows: 75% auto auto !important;
     overflow: auto;
   }
 `;
@@ -99,14 +100,14 @@ const App: FunctionComponent<{}> = () => {
             <Layout>
               <div style={{ 
                 // background: "linear-gradient(to top, rgb(244, 247, 249) 20%, rgb(213, 225, 231) 40%, rgb(223, 232, 237))" , 
-                width: "100%", border: "0px solid", height: "57%"}}>
+                width: "100%", border: "0px solid", height: "100%"}}>
                 <div
                   className="ThreeDRenderer"
                   style={
                     selectedTrayPreviewOpenButton3D
                       ? { width: "20vw", height: "20vh" }
                       : { 
-                        aspectRatio: "1 / 1",
+                         aspectRatio: "1 / 1",
                         width: "100%",  
                         height: "100%",
                         position: "absolute", 

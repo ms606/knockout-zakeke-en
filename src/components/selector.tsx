@@ -61,7 +61,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     translations,
   } = useZakeke();
 
-  console.log(productCode, groups, 'groups');
   
   const staticsVals = translations?.statics;
   const dynamicsVals = translations?.dynamics;
@@ -478,6 +477,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
+console.log(selectedGroup,'selectedGroup');
 
   return (
     <>
@@ -808,7 +808,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                             );
                           })} */}
 
-                          {selectedGroup?.attributes[2]?.options.map(
+                          {selectedGroup?.attributes[1]?.options.map(
                             (attribute) => {
                               return (
                                 <SwiperSlide>

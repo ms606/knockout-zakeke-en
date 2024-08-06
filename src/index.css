@@ -174,7 +174,7 @@ button:focus {
 
 .empty-space-div {
   position: absolute;
-    background: #ffff;
+    background: transparent;
     z-index: 2222222;
     /* bottom: 0; */
     width: 100%;
@@ -183,7 +183,13 @@ button:focus {
 }
 
 @media screen and (max-width: 568px){
-
+  .ThreeDRenderer{
+    aspect-ratio: auto !important;
+    position: relative !important;
+    width: 84vw;
+    height: 100%;
+  }
+  
 
   .tray-trigger-preview-button {
     border-radius: 100%;

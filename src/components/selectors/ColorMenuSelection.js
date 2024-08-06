@@ -14,9 +14,7 @@ export const ColorMenuSeleciton = ({
 	const staticsVals = translations?.statics; 
   const dynamicsVals  = translations?.dynamics;
 
-
-  console.log(currentAttributes,activeColorOption,selectedGroupName,fitlerAttributesName,'selectedGroupName selectedGroupName');
-  return (
+return (
     <div style={{ width: "100%" }}>
       <div className="colsgrid">
         <div

@@ -256,8 +256,6 @@ const DesignerSignature: FC<{
 
   const [moveElements, setMoveElements] = useState(false);
 
-  console.log(templates,'templates');
-  
   let translatedTemplates = templates.map((template) => {
     return { id: template.id, name: template.name, areas: template.areas };
   });
@@ -616,7 +614,7 @@ const DesignerSignature: FC<{
          
           <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />
                    
-         <div style={{position: "relative", top: "29px"}}>
+         <div style={{position: "absolute", top: "29px", width: "20%", height: "100%", right: "17px"}}>
          <Button  isFullWidth primary onClick={() => setMoveElements(false)}>
             <span>{"OK"} </span>
           </Button>

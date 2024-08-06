@@ -853,8 +853,8 @@ const DesignerLogo: FC<{
           {/* </IconsAndDesignerContainer> */}
          <div style={{position: "relative", top: "26px"}}>
          <Button isFullWidth primary onClick={() => setMoveElements(false)}>
-            <span>{"OK"} </span>
-          </Button>
+          <span>{"OK"} </span>
+         </Button>
          </div>   
         </ZakekeDesignerContainer>
       )}
