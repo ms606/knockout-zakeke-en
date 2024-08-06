@@ -194,7 +194,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     // if (x.name === )
   });
 
-  console.log(fitlerAttributes,'attributes');
+  // console.log(fitlerAttributes,'attributes');
 
   fitlerAttributes.filter((x) => x !== undefined);
 
@@ -346,7 +346,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // -- -- attributes
   // -- -- -- options
 
-  console.log(fitlerAttributes[0],'fitlerAttributes[0]');
+  // console.log(fitlerAttributes[0],'fitlerAttributes[0]');
   
   const handleScreenShotClick = async () => {
     try {
@@ -470,7 +470,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     setSelectedPersonalize(!selectedPersonalize);
   };
 
-  console.log(fitlerAttributes,selectedTrayType,'fitlerAttributes');
   
   const containerStyles = {
     // overflow: "auto",
@@ -888,8 +887,15 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
           {/* </button> */}
         </div>
 
+
+        <div className="empty-space-div">
+
+</div>
+
         {width <= 460 && <FooterMobile />}
       </div>
+
+      
 
       {width > 460 && <Footer />}
     </>

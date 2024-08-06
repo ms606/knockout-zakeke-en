@@ -172,6 +172,15 @@ button:focus {
   top: 44px;
 }
 
+.empty-space-div {
+  position: absolute;
+    background: #ffff;
+    z-index: 2222222;
+    /* bottom: 0; */
+    width: 100%;
+    height: 74px;
+    bottom: -140px;
+}
 
 @media screen and (max-width: 568px){
 
