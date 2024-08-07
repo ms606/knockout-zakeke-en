@@ -61,7 +61,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     translations,
   } = useZakeke();
 
-  
   const staticsVals = translations?.statics;
   const dynamicsVals = translations?.dynamics;
   const { setIsLoading, isMobile } = useStore();
@@ -167,27 +166,24 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     (attribute) => attribute.id === selectedAttributeId
   );
 
-
   // console.log(selectedGroup, attributes,'attributes');
 
   const fitlerAttributes = attributes.filter((x) => {
-   
-    // if (productCode != '9266869076293') { 
-      if (x.name === x.name.toUpperCase() && x.name != 'Select Color' ) {
-       return x;
+    // if (productCode != '9266869076293') {
+    if (x.name === x.name.toUpperCase() && x.name != "Select Color") {
+      return x;
       // }
 
-    //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
-    //     return x.name.toUpperCase();
-    //   }
-    // } 
-    // else {
+      //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' ) {
+      //     return x.name.toUpperCase();
+      //   }
+      // }
+      // else {
 
-    //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent' 
-    //    || x.name === x.name.toUpperCase() ) {
-    //     return x.name.toUpperCase();
-    //   }
-
+      //   if (x.name === 'Plain' || x.name === 'Normal' || x.name === 'Metallic' || x.name === 'Matte' || x.name === 'Fluorescent'
+      //    || x.name === x.name.toUpperCase() ) {
+      //     return x.name.toUpperCase();
+      //   }
     }
 
     // if (x.name === )
@@ -196,7 +192,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // console.log(fitlerAttributes,'attributes');
 
   fitlerAttributes.filter((x) => x !== undefined);
-
 
   useEffect(() => {
     if (selectedGroupIDFromTray) {
@@ -346,7 +341,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   // -- -- -- options
 
   // console.log(fitlerAttributes[0],'fitlerAttributes[0]');
-  
+
   const handleScreenShotClick = async () => {
     try {
       const url = await getOnlineScreenshot(800, 800);
@@ -376,7 +371,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex(newIndex);
     selectGroup(newGroup.id);
-    if (newGroup.steps) selectStep(newGroup.steps[0]?.id);  
+    if (newGroup.steps) selectStep(newGroup.steps[0]?.id);
   };
 
   const handleRightClick = () => {
@@ -391,7 +386,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     selectColorName("");
     setCurrentIndex(newIndex);
     selectGroup(group.id);
-    if (group.steps) selectStep(group.steps[0]?.id);   
+    if (group.steps) selectStep(group.steps[0]?.id);
   };
 
   const toggleTray = (trayName: string) => {
@@ -469,7 +464,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
     setSelectedPersonalize(!selectedPersonalize);
   };
 
-  
   const containerStyles = {
     // overflow: "auto",
     width: "100%",
@@ -477,7 +471,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-console.log(selectedGroup,'selectedGroup');
+  console.log(selectedGroup, "selectedGroup");
 
   return (
     <>
@@ -644,60 +638,60 @@ console.log(selectedGroup,'selectedGroup');
                     display: isTrayOpen ? "none" : "block",
                   }}
                 >
-                  {
-                    (fitlerAttributes[0]?.code === "OVERLAY TYPE" || fitlerAttributes[0]?.code === "OVERLAY")&& (
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-around",
-                          alignContent: "center",
-                        }}
-                      >
-                        <div className="mchead">
-                          {dynamicsVals?.get("Overlay Type") ?? "Overlay Type"}
-                        </div>
-                        <div className="infsel">
-                          <div className="custom-dropdown">
-                            <button
-                              className="custom-dropdown-button"
-                              onClick={() =>
-                                setIsCustomDropDownOpen(!isCustomDropDownOpen)
-                              }
-                            >
-                              {selectedOptionName}{" "}
-                              <span className="dropdown-arrow"> ▼</span>
-                            </button>
-                            {isCustomDropDownOpen && (
-                              <div className="custom-dropdown-list">
-                                {fitlerAttributes[0]?.options.map((option) => (
-                                  <div
-                                    key={option.id}
-                                    className="custom-dropdown-option"
-                                    onClick={() => {
-                                      selectOptionId(option.id);
-                                      selectOptionName(option.name);
-                                      setIsCustomDropDownOpen(
-                                        !isCustomDropDownOpen
-                                      );
-                                    }}
-                                  >
-                                    {option.name}
-                                  </div>
-                                ))}
-                              </div>
-                            )}
-                          </div>
+                  {(fitlerAttributes[0]?.code === "OVERLAY TYPE" ||
+                    fitlerAttributes[0]?.code === "OVERLAY") && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-around",
+                        alignContent: "center",
+                      }}
+                    >
+                      <div className="mchead">
+                        {dynamicsVals?.get("Overlay Type") ?? "Overlay Type"}
+                      </div>
+                      <div className="infsel">
+                        <div className="custom-dropdown">
+                          <button
+                            className="custom-dropdown-button"
+                            onClick={() =>
+                              setIsCustomDropDownOpen(!isCustomDropDownOpen)
+                            }
+                          >
+                            {selectedOptionName}{" "}
+                            <span className="dropdown-arrow"> ▼</span>
+                          </button>
+                          {isCustomDropDownOpen && (
+                            <div className="custom-dropdown-list">
+                              {fitlerAttributes[0]?.options.map((option) => (
+                                <div
+                                  key={option.id}
+                                  className="custom-dropdown-option"
+                                  onClick={() => {
+                                    selectOptionId(option.id);
+                                    selectOptionName(option.name);
+                                    setIsCustomDropDownOpen(
+                                      !isCustomDropDownOpen
+                                    );
+                                  }}
+                                >
+                                  {option.name}
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
-                    )}
+                    </div>
+                  )}
 
                   {(fitlerAttributes[0].name.toUpperCase() === "METALLIC" ||
                     fitlerAttributes[0].name.toUpperCase() === "FLUORESCENT" ||
                     fitlerAttributes[0].name.toUpperCase() === "NORMAL" ||
-                    fitlerAttributes[0].name.toUpperCase() === "MATTE"||
-                    fitlerAttributes[0].name.toUpperCase() === "COLOR" || 
-                    fitlerAttributes[0].name.toUpperCase() === "PLAIN" ) && 
-                     fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
+                    fitlerAttributes[0].name.toUpperCase() === "MATTE" ||
+                    fitlerAttributes[0].name.toUpperCase() === "COLOR" ||
+                    fitlerAttributes[0].name.toUpperCase() === "PLAIN") &&
+                    fitlerAttributes[0]?.code != "OVERLAY TYPE" &&
                     selectedStepName !== "KNOCK-X" && (
                       <List>
                         {!selectedTrayPreviewOpenButton &&
@@ -715,7 +709,10 @@ console.log(selectedGroup,'selectedGroup');
                                         option.name === "EMBROIDERED" ||
                                         option.name === "PRINTED"
                                       ) {
-                                        const indexForGroupTip = groups.findIndex((obj) => obj.name === "OVERLAY TYPE");
+                                        const indexForGroupTip =
+                                          groups.findIndex(
+                                            (obj) => obj.name === "OVERLAY TYPE"
+                                          );
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
                                             groups[indexForGroupTip].id
@@ -723,22 +720,21 @@ console.log(selectedGroup,'selectedGroup');
                                           if (
                                             groups[groups?.length - 1]
                                               .attributes[0].code ===
-                                              "OVERLAY TYPE"
+                                            "OVERLAY TYPE"
                                           ) {
                                             selectOption(option.id);
                                           }
 
-                                          
                                           // selectOption(option.id);
                                           selectOptionId(option.id);
-                                     //     selectOptionName(option.name);
+                                          //     selectOptionName(option.name);
                                         }
                                       } else {
                                         // console.log(option.id);
                                         // setSelectedAttributeId()
                                         selectOption(option.id);
                                         selectOptionId(option.id);
-                                    //   selectOptionName(option.name);
+                                        //   selectOptionName(option.name);
                                       }
                                     }
                                   }}
@@ -768,14 +764,15 @@ console.log(selectedGroup,'selectedGroup');
                     )}
 
                   <div>
-                  { fitlerAttributes[0].name.toUpperCase() !== "METALLIC" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "FLUORESCENT" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "NORMAL" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "MATTE" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "OVERLAY TYPE" &&
-                    fitlerAttributes[0].name.toUpperCase() !== "COLOR" && 
-                    fitlerAttributes[0].name.toUpperCase() !== 'PLAIN'
-                    ||
+                    {(fitlerAttributes[0].name.toUpperCase() !== "METALLIC" &&
+                      fitlerAttributes[0].name.toUpperCase() !==
+                        "FLUORESCENT" &&
+                      fitlerAttributes[0].name.toUpperCase() !== "NORMAL" &&
+                      fitlerAttributes[0].name.toUpperCase() !== "MATTE" &&
+                      fitlerAttributes[0].name.toUpperCase() !==
+                        "OVERLAY TYPE" &&
+                      fitlerAttributes[0].name.toUpperCase() !== "COLOR" &&
+                      fitlerAttributes[0].name.toUpperCase() !== "PLAIN") ||
                     selectedStepName === "KNOCK-X" ? (
                       <div>
                         <div className="knockXlabel">
@@ -887,15 +884,10 @@ console.log(selectedGroup,'selectedGroup');
           {/* </button> */}
         </div>
 
-
-        <div className="empty-space-div">
-
-</div>
+        <div className="empty-space-div"></div>
 
         {width <= 460 && <FooterMobile />}
       </div>
-
-      
 
       {width > 460 && <Footer />}
     </>

@@ -38,7 +38,7 @@ const Layout = styled.div`
 
   @media screen and (max-width: 568px) {
   grid-template-rows: 75% auto auto !important;
-    overflow: auto;
+  overflow: auto;
   }
 `;
 

@@ -517,6 +517,14 @@ pointer-events: none; */
 }
 
 @media screen and (max-width: 568px) {
+
+  .wrapper {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+  }
+
+
   .top-nav {
     padding: 16px 8px;
   }
