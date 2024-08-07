@@ -97,8 +97,8 @@ body {
 
 .active-marketing-component-name {
   display: flex;
-  align-items: center;
-  justify-content: end;
+  align-items: flex-center;
+  justify-content: flex-end;
   font-size: 18px;
   font-size: 18px;
   line-height: 18px;
@@ -522,6 +522,9 @@ pointer-events: none; */
     position: relative;
     width: 90vw;
     height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
 

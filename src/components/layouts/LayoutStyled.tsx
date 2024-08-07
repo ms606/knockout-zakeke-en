@@ -1,5 +1,3 @@
-import { EditTextItem } from '../widgets/ItemText';
-import { EditImageItem } from '../widgets/ItemImage';
 import { DialogWindow } from '../dialog/Dialogs';
 import styled from 'styled-components/macro';
 import { Icon } from '../Atomic';
@@ -161,6 +159,8 @@ export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
 		props.isMobile &&
 	   `position:fixed;
 	    background: white !important;
+		justify-content: center;
+		align-items: center;
         inset:0;
         z-index:13;
 		height: 94%;
