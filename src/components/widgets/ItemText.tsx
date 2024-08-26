@@ -101,7 +101,7 @@ const SinglePaletteItem = styled.div<{ color: string; selected: boolean }>`
     opacity: 0.6;
   }
 
-  @media screen and (max-width: 568px){
+  @media screen and (max-width: 568px) {
     width: 39px;
     height: 22px;
   }
@@ -115,14 +115,12 @@ const TextColorsContainer = styled.div<{ isDefaultPalette?: boolean }>`
     grid-template-columns: repeat(auto-fill,minmax(20px,1fr));
     grid-gap: 7px;
     `};
-    width: 220px;
-  
+  width: 220px;
+
   @media screen and (max-width: 568px) {
     width: 82vw;
     grid-gap: 10px 22px;
-  }  
-    
-
+  }
 `;
 
 const OptionContainer = styled(components.Option)`
@@ -199,8 +197,9 @@ const ItemText: FC<{
   fonts?: FontFamily[];
   hideRemoveButton?: boolean;
 }> = ({ item, handleItemPropChange, hideRemoveButton }) => {
-  const { removeItem, fonts, disableTextColors, textColors, translations } = useZakeke();
-  const dynamicsVals  = translations?.dynamics;
+  const { removeItem, fonts, disableTextColors, textColors, translations } =
+    useZakeke();
+  const dynamicsVals = translations?.dynamics;
   const constraints = item.constraints;
   const canEdit = constraints?.canEdit ?? true;
   const hasCurvedText = item.isTextOnPath;
@@ -254,7 +253,7 @@ const ItemText: FC<{
           <Cusimg_embu
             onClick={() => togglerFontSelectorVisible(fontSelectorVisible)}
           >
-            {dynamicsVals?.get('Font') ?? 'Font'}  
+            {dynamicsVals?.get("Font") ?? "Font"}
           </Cusimg_embu>
 
           <TextArea
@@ -301,6 +300,63 @@ const ItemText: FC<{
           item={item}
         />
 
+
+        {(!disableTextColors ||
+          !(disableTextColors && textColors.length === 1)) &&
+          !!item.constraints?.canChangeFontColor && (
+            <FormControl label="Color">
+              <ColorsContainer>
+                {!disableTextColors && (
+                  <ColorPickerContainer>
+                    <ColorPicker
+                      color={fillColor}
+                      onChange={(color) => {
+                        // handleFillColorChange(color);
+                        handleItemPropChange(item, "font-color", color);
+                        setFillColor(color);
+                      }}
+                    />
+                  </ColorPickerContainer>
+                )}
+
+                {!disableTextColors && (
+                  <TextColorsContainer>
+                    {defaultColorsPalette.map((hex) => (
+                      <SinglePaletteItem
+                        key={hex}
+                        onClick={() => {
+                          handleItemPropChange(item, "font-color", hex);
+                          setFillColor(hex);
+                        }}
+                        selected={hex === fillColor}
+                        color={hex}
+                      />
+                    ))}
+                  </TextColorsContainer>
+                )}
+
+                {disableTextColors && (
+                  <TextColorsContainer>
+                    {textColors.map((textColor) => (
+                      <SinglePaletteItem
+                        key={textColor.colorCode}
+                        onClick={() => {
+                          handleItemPropChange(
+                            item,
+                            "font-color",
+                            textColor.colorCode
+                          );
+                          setFillColor(textColor.colorCode);
+                        }}
+                        selected={textColor.colorCode === fillColor}
+                        color={textColor.colorCode}
+                      />
+                    ))}
+                  </TextColorsContainer>
+                )}
+              </ColorsContainer>
+            </FormControl>
+          )}
       </ItemTextContainer>
     );
   else return null;

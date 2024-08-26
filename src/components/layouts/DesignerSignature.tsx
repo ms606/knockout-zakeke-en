@@ -49,6 +49,7 @@ import {
   Template,
   TemplatesContainer,
   ZakekeDesignerContainer,
+  ZakekeDesignerContainer_button,
   ZoomInIcon,
   ZoomOutIcon,
 } from "./LayoutStyled";
@@ -93,7 +94,7 @@ const DesignerContainer = styled.div<{ isMobile?: boolean }>`
   ${(props) =>
     props.isMobile &&
     `
-    height: 9em;
+    height: 15em;
     overflow-y: auto;
         // position:fixed;
         // top:0;
@@ -613,15 +614,15 @@ const DesignerSignature: FC<{
         >         
           {/* <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />                    */}
 
-          <div className="wrapper">
+          <div className="wrapper" style={{height: "100%"}}>
           <ZakekeDesigner ref={customizerRef} areaId={actualAreaId} />
          </div>
 
-         <div style={{position: "absolute", top: "29px", width: "18%", height: "100%", right: "17px"}}>
+         <ZakekeDesignerContainer_button isMobile={isMobile}>
           <Button  isFullWidth primary onClick={() => setMoveElements(false)}>
             <span>{"X"} </span>
-          </Button>
-         </div>   
+          </Button>         
+         </ZakekeDesignerContainer_button>
         </ZakekeDesignerContainer>
       )}
     </>

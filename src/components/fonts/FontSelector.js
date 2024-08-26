@@ -7,7 +7,7 @@ export const FontSelector = ({fontSelectorVisible, togglerFontSelectorVisible, i
     const dynamicsVals = translations?.dynamics; 
     return(
        <div className='fselector' style={{display: fontSelectorVisible ? 'block' : 'none' }}>
-        <div className="donebut fsclose" onClick={() => togglerFontSelectorVisible(fontSelectorVisible)}>{dynamicsVals?.get("Done") ?? "Done"}</div>
+        <div className="donebut fsclose" onClick={() => togglerFontSelectorVisible(fontSelectorVisible)}>{dynamicsVals?.get("Close") ?? "Close"} X</div>
 
         <div id='fontList'>
             <div className='chead'>

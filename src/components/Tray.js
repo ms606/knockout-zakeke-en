@@ -16,7 +16,7 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
   
   const itemAvailable = items?.filter((item) => item.type === 0).length > 0;
   const tipIndex_ = groupNameList.findIndex(
-    (x) => x.name === "OVERLAY TYPE"
+    (x) => x.name.toUpperCase() === "OVERLAY TYPE"
   );
 
   if (items && !itemAvailable) {
@@ -28,12 +28,12 @@ const Tray = ({ groupNameList, filteredAreas, toggleFunc, UpdateGroupId, updCurr
 
     else {
       const checkIfNull = groupNameList.findIndex(
-        (x) => x.name === "OVERLAY TYPE"                          
+        (x) => x.name.toUpperCase() === "OVERLAY TYPE"                          
       );
 
       if (checkIfNull < 0) {
         const tipIndex_ = groups.findIndex(
-          (x) => x.name === "OVERLAY TYPE"
+          (x) => x.name.toUpperCase() === "OVERLAY TYPE"
         );
   
         const acopName = groups[tipIndex_];

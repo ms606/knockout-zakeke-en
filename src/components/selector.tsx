@@ -471,7 +471,6 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
   };
 
   let groupNameText = makeFirstLetterCaps(useActualGroups_[currentIndex]?.name);
-  console.log(selectedGroup, "selectedGroup");
 
   return (
     <>
@@ -711,7 +710,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                       ) {
                                         const indexForGroupTip =
                                           groups.findIndex(
-                                            (obj) => obj.name === "OVERLAY TYPE"
+                                            (obj) => obj.name.toUpperCase() === "OVERLAY TYPE"
                                           );
                                         if (indexForGroupTip > 0) {
                                           selectGroup(
@@ -719,7 +718,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                           );
                                           if (
                                             groups[groups?.length - 1]
-                                              .attributes[0].code ===
+                                              .attributes[0].code.toUpperCase() ===
                                             "OVERLAY TYPE"
                                           ) {
                                             selectOption(option.id);
