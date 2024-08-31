@@ -667,6 +667,7 @@ const Selector: FunctionComponent<TrayPreviewOpenButton3DProps> = ({
                                   key={option.id}
                                   className="custom-dropdown-option"
                                   onClick={() => {
+                                    selectOption(option.id)
                                     selectOptionId(option.id);
                                     selectOptionName(option.name);
                                     setIsCustomDropDownOpen(
