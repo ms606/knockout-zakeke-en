@@ -169,12 +169,12 @@ export const ZakekeDesignerContainer = styled.div<{ isMobile?: boolean }>`
 `;
 
 export const ZakekeDesignerContainer_button = styled.div<{isMobile: boolean}>`
-	border: 1px solid #1387efbd;
+	// border: 1px solid #1387efbd;
 ${(props) =>
 	props.isMobile &&
 	`position: absolute; 
 	 top: 29px;
-	 width: 18%; 
+	 width: 19%; 
 	 height: 12%; 
 	 right: 17px;
 	
