@@ -620,7 +620,7 @@ const DesignerSignature: FC<{
 
          <ZakekeDesignerContainer_button isMobile={isMobile}>
           <Button  isFullWidth primary onClick={() => setMoveElements(false)}>
-            {dynamicsVals?.get('Close') ?? 'Close X'}  
+            Close X
           </Button>         
          </ZakekeDesignerContainer_button>
         </ZakekeDesignerContainer>
